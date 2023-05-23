@@ -1,0 +1,75 @@
+.navbar {
+    height: 17vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 100;
+}
+
+.nav {
+    padding: 20px 85px;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left {
+    flex: 6;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.nav-left-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-logo {
+    height: 60px;
+    margin-top: 10px;
+}
+
+.nav-right {
+    flex: 6;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.nav-right-item {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-account-name {
+    font-family: 'Zilla Slab';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    letter-spacing: 4px;
+    /* text-transform: capitalize; */
+    color: #101010;
+}
+
+.logout {
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.hr-nav {
+    border: none;
+    height: 1px;
+    background-color: #e2e2e2;
+    margin-top: 10px;
+}

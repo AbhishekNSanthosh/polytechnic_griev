@@ -1,0 +1,69 @@
+.opt-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.opt-login-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    justify-content: center;
+}
+
+.poly-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.poly-title-name {
+    font-family: 'Zilla Slab';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 30px;
+    text-align: center;
+    letter-spacing: 4px;
+    text-transform: capitalize;
+    color: #101010;
+}
+
+.opt-login-button-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.opt-login-action-button {
+    padding: 15px;
+    width: 300px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-family: 'Zilla Slab';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    letter-spacing: 4px;
+    text-transform: capitalize;
+}
+
+.admin-button {
+    background-color: #14541A;
+}
+
+.faculty-button {
+    background-color: #940303;
+}
+
+.student-button {
+    background-color: #3658CF;
+}
