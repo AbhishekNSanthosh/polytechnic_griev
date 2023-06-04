@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Dashboard.css'
 import DataTable from '../../Components/DataTable/DataTable'
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
 
@@ -58,10 +60,19 @@ const Dashboard = () => {
         // Add more data objects as needed
     ];
 
+    const Token = Cookies.get('access_token')
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (!Token) {
+            navigate('/')
+        }
+    }, [])
+
+
     return (
         <div className='dashboard'>
             <div className="table-row">
-            <DataTable data={tableData}/>
+                <DataTable data={tableData} />
             </div>
         </div>
     )

@@ -19,7 +19,7 @@ function OptLogin({getLoginPerson}) {
                             <button className="opt-login-action-button admin-button" onClick={()=>getLoginPerson('admin')}>ADMIN LOGIN</button>
                         </div>
                         <div className="opt-login-actions">
-                            <button className="opt-login-action-button faculty-button" onClick={()=>getLoginPerson('faculty')}>FACULTY LOGIN</button>
+                            <button className="opt-login-action-button faculty-button" onClick={()=>getLoginPerson('teacher')}>FACULTY LOGIN</button>
                         </div>
                         <div className="opt-login-actions">
                             <button className="opt-login-action-button student-button" onClick={()=>getLoginPerson('student')}>STUDENT LOGIN</button>

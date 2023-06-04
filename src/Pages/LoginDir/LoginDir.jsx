@@ -5,16 +5,62 @@ import OptLogin from '../../Components/OptLogin/OptLogin'
 import AdminLogin from '../../Components/AdminLogin/AdminLogin';
 import FacultyLogin from '../../Components/FacultyLogin/FacultyLogin';
 import StudentLogin from '../../Components/StudentLogin/StudentLogin';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import Cookies from 'js-cookie';
 
 function LoginDir() {
 
-  const [loginPerson, setLoginPerson] = useState('noOne');
+  const [loginPerson, setLoginPerson] = useState("noOne");
+  const [user, setUser] = useState(null)
+  const navigate = useNavigate()
+
 
   const getLoginPerson = (data) => {
     setLoginPerson(data)
   }
 
-  console.log(loginPerson)
+  console.log(user)
+
+  const handleLogin = async (email, password) => {
+    try {
+
+      axios.post('https://flask-production-37b2.up.railway.app/' + loginPerson + '_login/', {
+        email, password
+      }).then((res) => {
+        console.log(res.data.role)
+        setUser(res.data.role)
+        navigate('/dashboard')
+        localStorage.setItem('usertype',res.data.role)
+        Cookies.set('access_token', res.data.token);
+        toast.success('Logged in successfully.', {
+          position: 'bottom-center',
+          style: {
+            backgroundColor: 'black',
+            color: '#fff'
+          }
+        })
+      }).catch((err) => {
+        console.log(err)
+        toast.error('Ivalid Credentials', {
+          position: 'bottom-center',
+          style: {
+            backgroundColor: 'black',
+            color: '#fff'
+          }
+        })
+      })
+    } catch (error) {
+      toast.error('Something went wrong', {
+        position: 'bottom-center',
+        style: {
+          backgroundColor: 'black',
+          color: '#fff'
+        }
+      })
+    }
+  }
 
   return (
     <div className='loginDir'>
@@ -27,9 +73,9 @@ function LoginDir() {
         <div className="login-right">
           <div className="login-right-container">
             {loginPerson === 'noOne' && <OptLogin getLoginPerson={getLoginPerson} />}
-            {loginPerson === 'admin' && <AdminLogin getLoginPerson={getLoginPerson}/>}
-            {loginPerson === 'faculty' && <FacultyLogin getLoginPerson={getLoginPerson}/>}
-            {loginPerson === 'student' && <StudentLogin getLoginPerson={getLoginPerson}/>}
+            {loginPerson === 'admin' && <AdminLogin getLoginPerson={getLoginPerson} handleLogin={handleLogin} />}
+            {loginPerson === 'teacher' && <FacultyLogin getLoginPerson={getLoginPerson} handleLogin={handleLogin}/>}
+            {loginPerson === 'student' && <StudentLogin getLoginPerson={getLoginPerson} handleLogin={handleLogin}/>}
           </div>
         </div>
       </div>

@@ -25,7 +25,7 @@ const DataTable = ({ data }) => {
                             <td><button className="read-status">{item.readStatus}</button></td>
                             <td>
                                 <div className="table-action">
-                                    <span class="material-symbols-outlined delete">
+                                    <span className="material-symbols-outlined delete">
                                         delete
                                     </span>
                                 </div>
