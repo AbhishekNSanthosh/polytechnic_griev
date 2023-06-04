@@ -1,0 +1,12 @@
+.addgriev{
+    margin-top: 100px;
+    padding: 30px 85px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-title{
+    font-size: 30px;
+}

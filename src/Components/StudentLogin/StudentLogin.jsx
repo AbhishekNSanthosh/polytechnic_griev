@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './StudentLogin.css'
 import { TextField } from '@mui/material'
 import { motion } from "framer-motion"
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom'
 
-const StudentLogin = ({ getLoginPerson }) => {
+const StudentLogin = ({ getLoginPerson, handleLogin }) => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("")
+
+    const callLogin = () => {
+        handleLogin(email, password)
+    }
+
+    const navigate = useNavigate()
+
+    const token = Cookies.get('access_token')
+    useEffect(() => {
+        if (token) {
+            navigate('/dashboard')
+        }
+    }, [])
+
+
     return (
         <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -33,13 +52,13 @@ const StudentLogin = ({ getLoginPerson }) => {
                     <div className="student-login-row">
                         <div className="student-login-input-col">
                             <div className="student-login-input-row">
-                                <TextField className='student-login-input' label='Username' type='text' />
+                                <TextField className='student-login-input' label='Username' type='text' onChange={(e) => { setEmail(e.target.value) }} />
                             </div>
                             <div className="student-login-input-row">
-                                <TextField className='student-login-input' label='Password' type='password' />
+                                <TextField className='student-login-input' label='Password' type='password' onChange={(e) => { setPassword(e.target.value) }} />
                             </div>
                             <div className="student-login-input-row">
-                                <button className="student-login-button">LOGIN</button>
+                                <button className="student-login-button" onClick={callLogin}>LOGIN</button>
                             </div>
                         </div>
                     </div>

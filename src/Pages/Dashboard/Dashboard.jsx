@@ -3,6 +3,7 @@ import './Dashboard.css'
 import DataTable from '../../Components/DataTable/DataTable'
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import AddTool from '../../Components/AddTool/AddTool';
 
 const Dashboard = () => {
 

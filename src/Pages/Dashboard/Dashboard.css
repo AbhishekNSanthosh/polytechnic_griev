@@ -1,11 +1,10 @@
 .dashboard {
     padding: 10px 115px;
     margin-top:80px;
+    /* height: 100vh; */
 }
 
-/* .table-row{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 700px;
-} */
+.table-row{
+  height: 70vh;
+      overflow-y:scroll;
+}

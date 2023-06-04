@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './FacultyLogin.css'
 import { TextField } from '@mui/material'
 import { motion } from 'framer-motion'
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom'
 
 const FacultyLogin = ({ getLoginPerson, handleLogin }) => {
 
@@ -11,6 +13,15 @@ const FacultyLogin = ({ getLoginPerson, handleLogin }) => {
     const callLogin = () => {
         handleLogin(email, password)
     }
+
+    const navigate = useNavigate()
+
+    const token = Cookies.get('access_token')
+    useEffect(() => {
+        if (token) {
+            navigate('/dashboard')
+        }
+    }, [])
 
     return (
         <motion.div

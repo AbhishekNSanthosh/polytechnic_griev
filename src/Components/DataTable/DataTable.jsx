@@ -1,7 +1,10 @@
 import React from 'react'
 import './DataTable.css'
+import { useNavigate } from 'react-router-dom'
 
 const DataTable = ({ data }) => {
+
+    const navigate = useNavigate()
 
     return (
         <div className='table-container'>
@@ -18,7 +21,7 @@ const DataTable = ({ data }) => {
                 </thead>
                 <tbody>
                     {data.map((item, index) => (
-                        <tr key={index}>
+                        <tr key={index} onClick={()=>navigate('/dashboard/view')} style={{cursor:'pointer'}}>
                             <td>{index + 1}</td>
                             <td>{item.subject}</td>
                             <td>{item.date}</td>

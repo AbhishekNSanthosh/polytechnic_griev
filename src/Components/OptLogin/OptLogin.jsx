@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './OptLogin.css'
+import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 function OptLogin({getLoginPerson}) {
+
+    const navigate = useNavigate()
+
+    const token = Cookies.get('access_token')
+    useEffect(() => {
+        if (token) {
+            navigate('/dashboard')
+        }
+    }, [])
+
     return (
         <div className='opt-login'>
             <div className="opt-login-col">
