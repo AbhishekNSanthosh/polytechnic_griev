@@ -21,7 +21,7 @@ function LoginDir() {
     setLoginPerson(data)
   }
 
-  console.log(user)
+
 
   const handleLogin = async (email, password) => {
     try {
@@ -29,10 +29,8 @@ function LoginDir() {
       axios.post('https://flask-production-37b2.up.railway.app/' + loginPerson + '_login/', {
         email, password
       }).then((res) => {
-        console.log(res.data.role)
         setUser(res.data.role)
-        navigate('/dashboard')
-        localStorage.setItem('usertype',res.data.role)
+        localStorage.setItem('usertype', res.data.role)
         Cookies.set('access_token', res.data.token);
         toast.success('Logged in successfully.', {
           position: 'bottom-center',
@@ -40,9 +38,11 @@ function LoginDir() {
             backgroundColor: 'black',
             color: '#fff'
           }
-        })
+        });
+        setTimeout(() => {
+          navigate('/dashboard')
+        }, 900);
       }).catch((err) => {
-        console.log(err)
         toast.error('Ivalid Credentials', {
           position: 'bottom-center',
           style: {
@@ -74,8 +74,8 @@ function LoginDir() {
           <div className="login-right-container">
             {loginPerson === 'noOne' && <OptLogin getLoginPerson={getLoginPerson} />}
             {loginPerson === 'admin' && <AdminLogin getLoginPerson={getLoginPerson} handleLogin={handleLogin} />}
-            {loginPerson === 'teacher' && <FacultyLogin getLoginPerson={getLoginPerson} handleLogin={handleLogin}/>}
-            {loginPerson === 'student' && <StudentLogin getLoginPerson={getLoginPerson} handleLogin={handleLogin}/>}
+            {loginPerson === 'teacher' && <FacultyLogin getLoginPerson={getLoginPerson} handleLogin={handleLogin} />}
+            {loginPerson === 'student' && <StudentLogin getLoginPerson={getLoginPerson} handleLogin={handleLogin} />}
           </div>
         </div>
       </div>

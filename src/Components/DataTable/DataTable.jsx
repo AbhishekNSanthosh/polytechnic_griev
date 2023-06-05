@@ -21,11 +21,11 @@ const DataTable = ({ data }) => {
                 </thead>
                 <tbody>
                     {data.map((item, index) => (
-                        <tr key={index} onClick={()=>navigate('/dashboard/view')} style={{cursor:'pointer'}}>
+                        <tr key={index} onClick={() => navigate('/dashboard/view')} style={{ cursor: 'pointer' }}>
                             <td>{index + 1}</td>
-                            <td>{item.subject}</td>
-                            <td>{item.date}</td>
-                            <td><button className="read-status">{item.readStatus}</button></td>
+                            <td>{item?.body.slice(0,15)}</td>
+                            <td>{item?.created_on}</td>
+                            <td><button className="read-status">UNREAD</button></td>
                             <td>
                                 <div className="table-action">
                                     <span className="material-symbols-outlined delete">

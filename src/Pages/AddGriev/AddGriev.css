@@ -1,4 +1,4 @@
-.addgriev{
+.addgriev {
     margin-top: 100px;
     padding: 30px 85px;
     display: flex;
@@ -8,36 +8,49 @@
     justify-content: center;
 }
 
-.add-title{
+.add-title {
     font-size: 30px;
 }
 
-.add-box{
+.add-box {
     width: 900px;
     border-radius: 15px;
     box-shadow: 0px 2px 2px 2px rgb(158, 158, 158);
 }
 
-.add-box-row{
+.add-box-row {
     display: flex;
     padding: 30px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 20px;
 }
 
 
-.subject{
+.subject {
     width: 500px;
 }
 
-.date{
+.date {
     width: 300px;
 }
 
-.add-box-item-row{
+.add-box-item-row {
     width: 100%;
 }
 
-.desc{
+.desc {
     width: 100%;
+}
+
+.submit {
+    padding: 15px;
+    background-color: red;
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+    width: 100px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
 }
