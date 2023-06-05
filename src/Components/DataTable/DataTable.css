@@ -56,3 +56,16 @@ justify-content: center;
     transform: scale(1.06);
     color: red;
 }
+
+.loading{
+    height:230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px;
+}
+
+.loader{
+    display: flex;
+    text-align: center;
+}

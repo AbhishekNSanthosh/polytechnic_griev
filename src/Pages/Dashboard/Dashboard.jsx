@@ -7,7 +7,7 @@ import AddTool from '../../Components/AddTool/AddTool';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
-const Dashboard = ({ user, getCall }) => {
+const Dashboard = ({ user, reload }) => {
 
     const tableData = [
         {
@@ -64,6 +64,7 @@ const Dashboard = ({ user, getCall }) => {
     ];
 
     const [letters, setLetters] = useState([])
+    const [loading, setLoading] = useState(false)
 
     const Token = Cookies.get('access_token')
     const navigate = useNavigate()
@@ -77,42 +78,53 @@ const Dashboard = ({ user, getCall }) => {
     const userObj = localStorage.getItem('user')
     const userData = JSON.parse(userObj);
 
-    
-    
+
+
     const getAllLetters = () => {
-        axios.get('https://flask-production-37b2.up.railway.app/all_letters/', {
-            headers: {
-                'x-access-token': Token
+        setLoading(true)
+        try {
+            axios.get('https://flask-production-37b2.up.railway.app/all_letters/', {
+                headers: {
+                    'x-access-token': Token
+                }
+            }).then((res) => {
+                setTimeout(() => {
+                    setLoading(false);
+                }, 900);
+                setLetters(res.data)
+            }).catch((err) => {
+                setLoading(false);
+                if (err.response.status === 401) {
+                    localStorage.clear()
+                }
+            })
+        } catch (error) {
+            setLoading(false)
+            if (error.response.status === 401) {
+                localStorage.clear();
             }
-        }).then((res) => {
-            setLetters(res.data)
-        }).catch((err) => {
-            if (err.response.status === 401) {
-                localStorage.clear()
-            }
-        })
+        }
     }
 
     const getUserLetter = () => {
-        axios.get('https://flask-production-37b2.up.railway.app/student_letters/' + userData?.id + "/", {
-            headers: {
-                'x-access-token': Token
+        try {
+            axios.get('https://flask-production-37b2.up.railway.app/student_letters/' + userData?.id + "/", {
+                headers: {
+                    'x-access-token': Token
+                }
+            }).then((res) => {
+                setLetters(res.data)
+            }).catch((err) => {
+                if (err.response.status === 401) {
+                    localStorage.clear()
+                }
+            })
+        } catch (error) {
+            if (error.response.status === 401) {
+                localStorage.clear();
             }
-        }).then((res) => {
-            setLetters(res.data)
-        }).catch((err) => {
-            if (err.response.status === 401) {
-                localStorage.clear()
-            }
-        })
+        }
     }
-    
-    // useEffect(() => {
-    //     if (!userObj) {
-    //         localStorage.clear();
-    //         Cookies.remove('access_token');
-    //     }
-    // }, [getUserLetter,getAllLetters])
 
     useEffect(() => {
         if (userType === 'Admin') {
@@ -120,12 +132,12 @@ const Dashboard = ({ user, getCall }) => {
         } else if (userType === 'Student') {
             getUserLetter();
         }
-    }, [getCall])
+    }, [reload])
 
     return (
         <div className='dashboard'>
             <div className="table-row">
-                <DataTable data={letters} />
+                <DataTable data={letters} loading={loading} />
             </div>
         </div>
     )

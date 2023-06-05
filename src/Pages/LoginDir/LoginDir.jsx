@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import Cookies from 'js-cookie';
 
-function LoginDir() {
+function LoginDir({getCall2}) {
 
   const [loginPerson, setLoginPerson] = useState("noOne");
   const [user, setUser] = useState(null)
@@ -31,6 +31,7 @@ function LoginDir() {
       }).then((res) => {
         setUser(res.data.role)
         localStorage.setItem('usertype', res.data.role)
+        getCall2(true)
         Cookies.set('access_token', res.data.token);
         toast.success('Logged in successfully.', {
           position: 'bottom-center',

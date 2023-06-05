@@ -18,6 +18,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -35,6 +36,7 @@ const theme = createTheme({
 function App() {
   const [user, setUser] = useState(null)
   const [reload, setReload] = useState(false);
+  const [callUser, setCallUser] = useState(false);
 
   const token = Cookies.get('access_token');
 
@@ -79,11 +81,15 @@ function App() {
     if (token) {
       getUserDetails()
     }
-  }, [])
+  }, [callUser])
 
 
   const getCall = (data) => {
     setReload(data)
+  }
+
+  const getCall2 = (data) => {
+    setCallUser(data)
   }
 
   return (
@@ -91,8 +97,8 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<LoginDir />} />
-          <Route path="/dashboard" element={<Dashboard user={user} getCall={getCall} />} />
+          <Route path="/" element={<LoginDir getCall2={getCall2}/>} />
+          <Route path="/dashboard" element={<Dashboard user={user} reload={reload} />} />
           <Route path="/dashboard/view" element={<ViewGriev user={user} />} />
           <Route path="/dashboard/add-griev" element={<AddGriev user={user} getCall={getCall} />} />
           {/* <Route path="/404" element={<NotFoundPage />} />
