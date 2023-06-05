@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import './OptLogin.css'
 import { useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
+import {motion} from 'framer-motion';
 
 function OptLogin({getLoginPerson}) {
 
@@ -15,6 +16,11 @@ function OptLogin({getLoginPerson}) {
     }, [])
 
     return (
+        <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
         <div className='opt-login'>
             <div className="opt-login-col">
                 <div className="poly-title-row">
@@ -40,6 +46,7 @@ function OptLogin({getLoginPerson}) {
                 </div>
             </div>
         </div>
+        </motion.div>
     )
 }
 
