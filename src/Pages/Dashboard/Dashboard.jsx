@@ -107,19 +107,25 @@ const Dashboard = ({ user, reload }) => {
     }
 
     const getUserLetter = () => {
+        setLoading(true)
         try {
             axios.get('https://flask-production-37b2.up.railway.app/student_letters/' + userData?.id + "/", {
                 headers: {
                     'x-access-token': Token
                 }
             }).then((res) => {
+                setTimeout(() => {
+                    setLoading(false);
+                }, 900);
                 setLetters(res.data)
             }).catch((err) => {
+                setLoading(false);
                 if (err.response.status === 401) {
                     localStorage.clear()
                 }
             })
         } catch (error) {
+            setLoading(false);
             if (error.response.status === 401) {
                 localStorage.clear();
             }

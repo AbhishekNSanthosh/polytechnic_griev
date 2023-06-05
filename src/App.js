@@ -17,7 +17,7 @@ import AddGriev from "./Pages/AddGriev/AddGriev";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import { motion } from 'framer-motion'
 
 const theme = createTheme({
   palette: {
@@ -97,10 +97,41 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<LoginDir getCall2={getCall2}/>} />
-          <Route path="/dashboard" element={<Dashboard user={user} reload={reload} />} />
-          <Route path="/dashboard/view" element={<ViewGriev user={user} />} />
-          <Route path="/dashboard/add-griev" element={<AddGriev user={user} getCall={getCall} />} />
+          <Route path="/" element={
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <LoginDir getCall2={getCall2} />
+            </motion.div>}
+          />
+          <Route path="/dashboard" element={
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <Dashboard user={user} reload={reload} />
+            </motion.div>
+          } />
+          <Route path="/dashboard/view" element={
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <ViewGriev user={user} />
+            </motion.div>
+          } />
+          <Route path="/dashboard/add-griev" element={
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <AddGriev user={user} getCall={getCall} />
+            </motion.div>} />
           {/* <Route path="/404" element={<NotFoundPage />} />
       <Route path="*" element={<Navigate to="/404" />} /> */}
         </Routes>
