@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import Cookies from 'js-cookie';
 
-function LoginDir({getCall2}) {
+function LoginDir({ getCall2 }) {
 
   const [loginPerson, setLoginPerson] = useState("noOne");
   const [user, setUser] = useState(null)
@@ -37,11 +37,21 @@ function LoginDir({getCall2}) {
           position: 'bottom-center',
           style: {
             backgroundColor: 'black',
-            color: '#fff'
+            color: 'green'
           }
         });
         setTimeout(() => {
           navigate('/dashboard')
+          toast('Welcome ' + email.toUpperCase(),
+            {
+              icon: '👏',
+              style: {
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+              },
+            }
+          );
         }, 900);
       }).catch((err) => {
         toast.error('Ivalid Credentials', {

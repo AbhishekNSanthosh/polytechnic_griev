@@ -18,6 +18,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { motion } from 'framer-motion'
+import Loader from "./Components/Loader/Loader";
 
 const theme = createTheme({
   palette: {
@@ -37,6 +38,14 @@ function App() {
   const [user, setUser] = useState(null)
   const [reload, setReload] = useState(false);
   const [callUser, setCallUser] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  // Simulating data loading using useEffect hook
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
 
   const token = Cookies.get('access_token');
 
@@ -116,22 +125,35 @@ function App() {
             </motion.div>
           } />
           <Route path="/dashboard/view" element={
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-            >
-              <ViewGriev user={user} />
-            </motion.div>
+            <>
+              {loading ?
+                <Loader />
+                :
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1 }}
+                >
+                  <ViewGriev user={user} />
+                </motion.div>
+              }
+            </>
           } />
           <Route path="/dashboard/add-griev" element={
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-            >
-              <AddGriev user={user} getCall={getCall} />
-            </motion.div>} />
+            <>
+              {loading ?
+                <Loader />
+                :
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1 }}
+                >
+                  <AddGriev user={user} getCall={getCall} />
+                </motion.div>
+              }
+            </>
+          } />
           {/* <Route path="/404" element={<NotFoundPage />} />
       <Route path="*" element={<Navigate to="/404" />} /> */}
         </Routes>
