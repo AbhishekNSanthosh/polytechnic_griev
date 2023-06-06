@@ -29,6 +29,7 @@ function LoginDir({ getCall2 }) {
       axios.post('https://flask-production-37b2.up.railway.app/' + loginPerson + '_login/', {
         email, password
       }).then((res) => {
+        console.log(res)
         setUser(res.data.role)
         localStorage.setItem('usertype', res.data.role)
         getCall2(true)
