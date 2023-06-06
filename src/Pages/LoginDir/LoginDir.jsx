@@ -24,8 +24,8 @@ function LoginDir({ getCall2 }) {
 
 
   const handleLogin = async (email, password) => {
+    console.log('login called')
     try {
-
       axios.post('https://flask-production-37b2.up.railway.app/' + loginPerson + '_login/', {
         email, password
       }).then((res) => {
