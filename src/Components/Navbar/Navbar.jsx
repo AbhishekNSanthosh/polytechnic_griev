@@ -30,7 +30,7 @@ const Navbar = () => {
                         <div className="nav-right">
                             <div className="nav-right-item">
                                 <div className="nav-account">
-                                    <span className="nav-account-name">Welcome, {userData?.email.toUpperCase()}</span>
+                                    <span className="nav-account-name">Welcome, {userData?.email}</span>
                                 </div>
                                 <div className="nav-account">
                                     <span className="material-symbols-outlined logout" onClick={() => {
