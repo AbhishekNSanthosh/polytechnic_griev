@@ -74,4 +74,5 @@ justify-content: center;
 .t-data-body{
     font-size: 19px;
     font-weight: 400;
+    text-transform: uppercase;
 }
