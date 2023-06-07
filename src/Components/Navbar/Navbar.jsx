@@ -13,6 +13,10 @@ const Navbar = () => {
     if (hideNavbar.includes(location.pathname)) {
         return null; // Return null to hide the navbar component
     }
+
+    const userObj = localStorage.getItem('user')
+    const userData = JSON.parse(userObj);
+
     return (
         <>
             <div className='navbar'>
@@ -26,7 +30,7 @@ const Navbar = () => {
                         <div className="nav-right">
                             <div className="nav-right-item">
                                 <div className="nav-account">
-                                    <span className="nav-account-name">Welcome, ARNOLD</span>
+                                    <span className="nav-account-name">Welcome, {userData?.email.toUpperCase()}</span>
                                 </div>
                                 <div className="nav-account">
                                     <span className="material-symbols-outlined logout" onClick={() => {
