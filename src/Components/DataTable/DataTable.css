@@ -36,10 +36,10 @@ justify-content: center;
     font-family: 'Zilla Slab';
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 30px;
     text-align: center;
-    letter-spacing: 2.4px;
+    letter-spacing: 1.5px;
     text-transform: capitalize;
     color: #fff;
     border: none;
@@ -47,8 +47,9 @@ justify-content: center;
 }
 
 .delete {
-    font-size: 28px;
+    font-size: 26px;
     cursor: pointer;
+    color: #525252;
     transition: all ease 0.09s;
 }
 
@@ -68,4 +69,9 @@ justify-content: center;
 .loader{
     display: flex;
     text-align: center;
+}
+
+.t-data-body{
+    font-size: 19px;
+    font-weight: 400;
 }

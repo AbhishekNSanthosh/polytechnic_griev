@@ -31,8 +31,8 @@ const DataTable = ({ data, loading }) => {
                             {data.map((item, index) => (
                                 <tr key={index} onClick={() => navigate('/dashboard/view')} style={{ cursor: 'pointer' }}>
                                     <td>{index + 1}</td>
-                                    <td>{item?.body.slice(0, 15)}</td>
-                                    <td>{item?.created_on}</td>
+                                    <td className='t-data-body'>{item?.body.slice(0, 15)}</td>
+                                    <td>{item?.created_on.slice(0, 10)}</td>
                                     <td><button className="read-status">UNREAD</button></td>
                                     <td>
                                         <div className="table-action">
