@@ -15,7 +15,7 @@ function LoginDir({ getCall2 }) {
   const [loginPerson, setLoginPerson] = useState("noOne");
   const [user, setUser] = useState(null)
   const navigate = useNavigate()
-
+  console.log(user)
 
   const getLoginPerson = (data) => {
     setLoginPerson(data)
