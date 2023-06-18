@@ -1,0 +1,70 @@
+.modal-box {
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-box-col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.modal-box-row{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+    justify-content:center;
+}
+
+.modal-box-row-admin{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+}
+
+.modal-box-row-left{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+    justify-content:start;
+}
+
+.modal-box-row-item{
+    display: flex;
+}
+
+.modal-box-title{
+    font-size: 24px;
+    text-transform: uppercase;
+    display: flex;
+    color: #8b8b8b;
+}
+
+
+.add-submit{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 20px;
+    border: none;
+    background-color:#ffe3e3;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.add-submit:hover{
+    color: #fff;
+    background-color: red;
+}

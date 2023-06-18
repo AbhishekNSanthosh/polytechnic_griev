@@ -1,0 +1,23 @@
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.nav-btn{
+    font-size: 17px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgb(255, 185, 185);
+    color: #555555;
+    background-color: #fff;
+    font-weight: 500;
+    letter-spacing:1.8px;
+    cursor: pointer;
+}
+
+.nav-btn:hover{
+    background-color: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
+}

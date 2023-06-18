@@ -121,7 +121,7 @@ function App() {
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              <Dashboard user={user} reload={reload} />
+              <Dashboard user={user} reload={reload} Token={token}/>
             </motion.div>
           } />
           <Route path="/dashboard/view" element={

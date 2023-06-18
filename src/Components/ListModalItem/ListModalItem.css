@@ -1,0 +1,31 @@
+.list-item{
+    width: 20rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+
+.item-row{
+    display: flex;
+    margin-right: 10px;
+}
+
+.-item-col{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.name-index{
+    font-size: 9px;
+    text-transform: capitalize;
+}
+
+.name{
+    font-size: 20px;
+    text-transform: capitalize;
+}
+.dep{
+    text-transform: uppercase;
+}
