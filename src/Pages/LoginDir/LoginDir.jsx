@@ -38,7 +38,7 @@ function LoginDir({ getCall2 }) {
           position: 'bottom-center',
           style: {
             backgroundColor: 'black',
-            color: 'green'
+            color: '#fff'
           }
         });
         setTimeout(() => {

@@ -121,29 +121,22 @@ function App() {
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              <Dashboard user={user} reload={reload} />
+              <Dashboard user={user} reload={reload} Token={token}/>
             </motion.div>
           } />
           <Route path="/dashboard/view" element={
             <>
-              {loading ?
-                <Loader />
-                :
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 1 }}
                 >
-                  <ViewGriev user={user} />
+                  <ViewGriev user={user} Token={token}/>
                 </motion.div>
-              }
             </>
           } />
           <Route path="/dashboard/add-griev" element={
             <>
-              {loading ?
-                <Loader />
-                :
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -151,7 +144,6 @@ function App() {
                 >
                   <AddGriev user={user} getCall={getCall} />
                 </motion.div>
-              }
             </>
           } />
           {/* <Route path="/404" element={<NotFoundPage />} />

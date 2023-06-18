@@ -12,7 +12,7 @@ justify-content: center;
 
 .product-table th,
 .product-table td {
-    padding: 30px 0px 30px 40px;
+    padding: 20px 0px 20px 20px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
@@ -32,7 +32,7 @@ justify-content: center;
     padding: 3px;
     border-radius: 8px;
     width: 100px;
-    background-color: #1dac03;
+    background-color: rgb(201, 0, 0);
     font-family: 'Zilla Slab';
     font-style: normal;
     font-weight: 400;
@@ -44,6 +44,32 @@ justify-content: center;
     color: #fff;
     border: none;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.light{
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 227, 227);
+    color: red;
+    border: 1px solid rgb(255, 132, 132);
+}
+
+.done{
+    font-size: 32px;
+    color: rgb(102, 102, 102);
+    margin-right: 5px;
+    display: flex;
+}
+
+.undone{
+        font-size: 32px;
+    color: red;
+    margin-right: 5px;
+    display: flex;
 }
 
 .delete {
@@ -74,4 +100,5 @@ justify-content: center;
 .t-data-body{
     font-size: 19px;
     font-weight: 400;
+    text-transform: uppercase;
 }
