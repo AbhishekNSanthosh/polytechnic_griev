@@ -1,14 +1,38 @@
 .dashboard {
     padding: 10px 90px;
-    margin-top:80px;
+    margin-top: 80px;
     /* height: 100vh; */
 }
 
-.buttons-row{
+.buttons-row {
     padding: 40px 0;
 }
 
-.table-row{
-  height: 60vh;
-      overflow-y:scroll;
+.table-row {
+    height: 60vh;
+    overflow-y: scroll;
+}
+
+.not-found {
+    padding: 40px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.not-found-img {
+    margin-top: 1rem;
+    height: 13rem;
+}
+
+.not-found-tag{
+    margin-top: 1rem;
+    font-size: 2em;
+    color: rgb(92, 92, 92);
+}
+
+.info{
+    font-size: 1em;
 }

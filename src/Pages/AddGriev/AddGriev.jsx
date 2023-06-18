@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './AddGriev.css'
 import { TextField } from '@mui/material'
 import axios from 'axios';
@@ -15,6 +15,23 @@ function AddGriev({ user, getCall }) {
 
     const Token = Cookies.get('access_token')
     const userType = localStorage.getItem('usertype');
+
+    useEffect(() => {
+        if (!Token) {
+            localStorage.clear()
+            Cookies.remove('access_token')
+            toast.error('Session Expired!.', {
+                position: 'bottom-center',
+                style: {
+                    backgroundColor: 'black',
+                    color: '#fff'
+                }
+            })
+            setTimeout(() => {
+                navigate('/')
+            }, 2000)
+        }
+    }, [])
 
 
     const handleSubmit = () => {
@@ -35,6 +52,11 @@ function AddGriev({ user, getCall }) {
                     navigate('/dashboard')
                 }, 300);
             }).catch((err) => {
+                if (err.response.status === 401) {
+                    localStorage.clear()
+                    Cookies.remove('access_token')
+                    navigate('/')
+                }
                 toast.error('Something went wrong!.', {
                     position: 'bottom-center',
                     style: {
@@ -54,26 +76,19 @@ function AddGriev({ user, getCall }) {
             <div className="add-row">
                 <div className="add-box">
                     <div className="add-box-row">
-                        <div className="add-box-col">
-                            <div className="add-box-item-row">
-                                <TextField className='add-griev-input subject' label='Subject' type='text' onChange={(e) => { setTitle(e.target.value) }} />
-                            </div>
-                        </div>
-                        <div className="add-box-col">
-                            <div className="add-box-item-row">
-                                <TextField className='add-griev-input date' label='Date' type='text' />
-                            </div>
+                        <div className="add-box-item-row">
+                            <TextField className='add-griev-input subject' label='Subject' type='text' onChange={(e) => { setTitle(e.target.value) }} />
                         </div>
                     </div>
                     <div className="add-box-row">
                         <div className="add-box-item-row">
                             <TextField className='add-griev-input desc' multiline
-                                rows={8}
-                                maxRows={8} label='Description' type='text' onChange={(e) => { setBody(e.target.value) }} />
+                                rows={4}
+                                maxRows={4} label='Description' type='text' onChange={(e) => { setBody(e.target.value) }} />
                         </div>
                     </div>
                 </div>
-                <div className="add-box-row">
+                <div className="add-box-row-submit">
                     <button className="submit" onClick={e => {
                         e.preventDefault();
                         if (body === "" && title === "") {
@@ -84,8 +99,8 @@ function AddGriev({ user, getCall }) {
                                     color: '#fff'
                                 }
                             })
-                        }else{
-                            handleSubmit(); 
+                        } else {
+                            handleSubmit();
                             getCall(true)
                         }
                     }}>Submit</button>

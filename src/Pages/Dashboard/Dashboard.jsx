@@ -7,15 +7,17 @@ import axios from 'axios';
 import Buttons from '../../Components/Buttons/Buttons';
 import AddModal from '../../Components/AddModal/AddModal';
 import ListModal from '../../Components/ListModal/ListModal';
+import notfoundimg from '../../Assets/notfound1.svg'
 
 const Dashboard = ({ user, reload, Token }) => {
     const [letters, setLetters] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [modalLoading, setModalLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState('');
     const [modalOpenBy, setModalOpenBy] = useState("");
-    const [students,setStudents] = useState([])
-    const [teachers,setTeachers] = useState([])
-    const [admins,setAdmins] = useState([])
+    const [students, setStudents] = useState([])
+    const [teachers, setTeachers] = useState([])
+    const [admins, setAdmins] = useState([])
 
     const navigate = useNavigate()
     useEffect(() => {
@@ -29,64 +31,78 @@ const Dashboard = ({ user, reload, Token }) => {
     const userData = JSON.parse(userObj);
 
     const getAllStudents = () => {
+        setModalLoading(true)
         try {
             axios.get('https://flask-production-37b2.up.railway.app/all_students/', {
                 headers: {
                     'x-access-token': Token
                 }
             }).then((res) => {
-                console.log(res?.data)
+                setModalLoading(false)
                 setStudents(res?.data)
             }).catch((err) => {
+                setModalLoading(false)
                 if (err.response.status === 401) {
                     localStorage.clear()
+                    Cookies.remove('access_token')
                 }
             })
         } catch (error) {
+            setModalLoading(false)
             if (error.response.status === 401) {
-                localStorage.clear();
+                localStorage.clear()
+                Cookies.remove('access_token')
             }
         }
     }
 
     const getAllTeachers = () => {
+        setModalLoading(true);
         try {
             axios.get('https://flask-production-37b2.up.railway.app/all_teachers/', {
                 headers: {
                     'x-access-token': Token
                 }
             }).then((res) => {
-                console.log('teachers', res?.data)
                 setTeachers(res?.data)
+                setModalLoading(false)
             }).catch((err) => {
+                setModalLoading(false)
                 if (err.response.status === 401) {
                     localStorage.clear()
+                    Cookies.remove('access_token')
                 }
             })
         } catch (error) {
             if (error.response.status === 401) {
-                localStorage.clear();
+                localStorage.clear()
+                Cookies.remove('access_token')
             }
         }
     }
 
     const getAllAdmins = () => {
+        setModalLoading(true)
         try {
             axios.get('https://flask-production-37b2.up.railway.app/all_admins/', {
                 headers: {
                     'x-access-token': Token
                 }
             }).then((res) => {
-                console.log('teachers', res?.data)
+                setModalLoading(false)
                 setAdmins(res?.data)
             }).catch((err) => {
+                setModalLoading(false)
                 if (err.response.status === 401) {
                     localStorage.clear()
+                    Cookies.remove('access_token')
                 }
             })
         } catch (error) {
+            setModalLoading(false)
             if (error.response.status === 401) {
-                localStorage.clear();
+                localStorage.clear()
+                Cookies.remove('access_token')
             }
         }
     }
@@ -108,12 +124,14 @@ const Dashboard = ({ user, reload, Token }) => {
                 setLoading(false);
                 if (err.response.status === 401) {
                     localStorage.clear()
+                    Cookies.remove('access_token')
                 }
             })
         } catch (error) {
             setLoading(false)
             if (error.response.status === 401) {
-                localStorage.clear();
+                localStorage.clear()
+                Cookies.remove('access_token')
             }
         }
     }
@@ -128,30 +146,46 @@ const Dashboard = ({ user, reload, Token }) => {
             }).then((res) => {
                 setTimeout(() => {
                     setLoading(false);
-                }, 900);
-                setLetters(res.data)
+                }, 2000);
+                setLetters(res.data);
             }).catch((err) => {
                 setLoading(false);
                 if (err.response.status === 401) {
                     localStorage.clear()
+                    Cookies.remove('access_token')
+                    navigate('/')
                 }
             })
         } catch (error) {
             setLoading(false);
             if (error.response.status === 401) {
-                localStorage.clear();
+                localStorage.clear()
+                Cookies.remove('access_token')
+                navigate('/')
             }
         }
     }
 
     useEffect(() => {
-        if (userType === 'Admin') {
-            getAllLetters();
-            // if (modalOpenBy === 'list-teachers') {
-            //     getAllTeachers();
-            // }
-        } else if (userType === 'Student') {
-            getUserLetter();
+        if (!Token) {
+            localStorage.clear()
+            Cookies.remove('access_token');
+            navigate('/')
+        }
+    }, [])
+
+
+    useEffect(() => {
+        if (Token) {
+            if (userType === 'Admin') {
+                getAllLetters();
+            } else if (userType === 'Student') {
+                getUserLetter();
+            }
+        } else {
+            localStorage.clear()
+            Cookies.remove('access_token');
+            navigate('/')
         }
     }, [reload])
 
@@ -163,16 +197,28 @@ const Dashboard = ({ user, reload, Token }) => {
         setModalOpenBy(data)
     }
 
+
     return (
         <div className='dashboard'>
-            <div className="buttons-row">
-                <Buttons getAllAdmins={getAllAdmins} getAllTeachers={getAllTeachers} getAllStudents={getAllStudents} getModalStatus={getModalStatus} getModalStatusOpenBy={getModalStatusOpenBy} Token={Token} />
-            </div>
-            <div className="table-row">
-                <DataTable data={letters} loading={loading} />
-            </div>
-            <AddModal modalOpen={modalOpen} getModalStatus={getModalStatus} modalOpenBy={modalOpenBy} Token={Token} students={students}/>
-            <ListModal modalOpen={modalOpen} getModalStatus={getModalStatus} modalOpenBy={modalOpenBy} Token={Token} teachers={teachers} students={students} admins={admins}/>
+            {userType === 'Admin' &&
+                <div className="buttons-row">
+                    <Buttons getAllAdmins={getAllAdmins} getAllTeachers={getAllTeachers} getAllStudents={getAllStudents} getModalStatus={getModalStatus} getModalStatusOpenBy={getModalStatusOpenBy} Token={Token} />
+                </div>}
+            {letters.length === 0 ?
+                <>
+                    <div className="not-found">
+                        <img src={notfoundimg} alt="" className="not-found-img" />
+                        <span className="not-found-tag">No messages yet!</span>
+                        {userType === 'Student' && <span className="not-found-tag info">To add a new grievence , click on button on your right.</span>}
+                    </div>
+                </>
+                :
+                <div className="table-row">
+                    <DataTable data={letters} loading={loading} Token={Token} />
+                </div>
+            }
+            <AddModal modalOpen={modalOpen} getModalStatus={getModalStatus} modalOpenBy={modalOpenBy} Token={Token} students={students} />
+            <ListModal loading={loading} modalOpen={modalOpen} getModalStatus={getModalStatus} modalOpenBy={modalOpenBy} Token={Token} teachers={teachers} students={students} admins={admins} />
         </div>
     )
 }

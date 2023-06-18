@@ -7,6 +7,8 @@ import './AddModal.css'
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const style = {
     position: 'absolute',
@@ -32,7 +34,7 @@ export default function AddModal({ modalOpen, getModalStatus, modalOpenBy, Token
     const [semester, setSemester] = React.useState("");
     const [department, setDepartment] = React.useState("");
 
-    console.log(name, password, email, semester, department, Token)
+    const navigate = useNavigate();
 
     const handleAdd = () => {
         if (modalOpenBy === 'add-student') {
@@ -67,6 +69,11 @@ export default function AddModal({ modalOpen, getModalStatus, modalOpenBy, Token
                             color: '#fff'
                         }
                     })
+                    if (err.response.status === 401) {
+                        localStorage.clear()
+                        Cookies.remove('access_token')
+                        navigate('/')
+                    }
                 })
             } catch (error) {
                 toast.error('Something went wrong!', {
@@ -76,6 +83,11 @@ export default function AddModal({ modalOpen, getModalStatus, modalOpenBy, Token
                         color: '#fff'
                     }
                 })
+                if (error.response.status === 401) {
+                    localStorage.clear()
+                    Cookies.remove('access_token')
+                    navigate('/')
+                }
             }
         }
 
@@ -112,6 +124,11 @@ export default function AddModal({ modalOpen, getModalStatus, modalOpenBy, Token
                         },
                         iconTheme: '#fff'
                     })
+                    if (err.response.status === 401) {
+                        localStorage.clear()
+                        Cookies.remove('access_token')
+                        navigate('/')
+                    }
                 })
             } catch (error) {
                 toast.error('Something went wrong!', {
@@ -121,6 +138,11 @@ export default function AddModal({ modalOpen, getModalStatus, modalOpenBy, Token
                         color: '#fff'
                     }
                 })
+                if (error.response.status === 401) {
+                    localStorage.clear()
+                    Cookies.remove('access_token')
+                    navigate('/')
+                }
             }
         }
 
@@ -164,6 +186,11 @@ export default function AddModal({ modalOpen, getModalStatus, modalOpenBy, Token
                         color: '#fff'
                     }
                 })
+                if (error.response.status === 401) {
+                    localStorage.clear()
+                    Cookies.remove('access_token')
+                    navigate('/')
+                }
             }
         }
 

@@ -16,10 +16,17 @@
     justify-content: center;
 }
 
+.loader-view {
+    display: flex;
+    height: 65vh;
+    align-items: center;
+    justify-content: center;
+}
+
 .title-name {
     font-size: 25px;
     letter-spacing: 2.1;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .view-bottom {
@@ -40,19 +47,28 @@
     display: flex;
     flex-direction: column;
     align-items: start;
+    justify-content: start;
     gap: 10px;
 }
 
-.item-title {
-    font-size: 18px;
-    letter-spacing: 1.9px;
+.name {
+    margin-top: 33px;
 }
 
+.item-title,
 .item-title-sub {
-    font-size: 19px;
-    letter-spacing: 2.5px;
-    line-height: 1.5rem;
+    font-size: 20px;
+    letter-spacing: 1.1px;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: rgb(49, 49, 49);
 }
+
+.left {
+    font-size: 19px;
+    font-weight: normal;
+}
+
 
 .actions-container {
     display: flex;
@@ -81,6 +97,6 @@
     font-size: 18px;
 }
 
-.actions{
+.actions {
     margin-top: 20px;
 }
