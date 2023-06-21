@@ -23,7 +23,7 @@ const style = {
 };
 
 
-export default function ListModal({ modalOpen, getModalStatus, modalOpenBy, Token,students,teachers,admins }) {
+export default function ListModal({ modalOpen, getModalStatus, modalOpenBy, Token,students,teachers,admins,loading }) {
     const [open, setOpen] = React.useState(false);
     const handleClose = () => getModalStatus(false);
 
@@ -59,7 +59,7 @@ export default function ListModal({ modalOpen, getModalStatus, modalOpenBy, Toke
                                 </div>
                                 <div className="modal-box-row">
                                     <div className="modal-box-row-item">
-                                        <ListModalList students={students} teachers={teachers} modalOpenBy={modalOpenBy} admins={admins}/>
+                                        <ListModalList loading={loading} students={students} teachers={teachers} modalOpenBy={modalOpenBy} admins={admins}/>
                                     </div>
                                 </div>
                             </div>

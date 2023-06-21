@@ -54,8 +54,8 @@ const Navbar = () => {
                         </div>
                     </div>
                 </div>
+                <hr className='hr-nav'/>
             </div>
-            <hr className='hr-nav' />
         </>
     )
 }

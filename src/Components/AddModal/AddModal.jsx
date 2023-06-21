@@ -46,21 +46,31 @@ export default function AddModal({ modalOpen, getModalStatus, modalOpenBy, Token
                         'x-access-token': Token
                     },
                 }).then((res) => {
-                    setDepartment('')
-                    setEmail('')
-                    setName('')
-                    setSemester('')
-                    setPassword('')
-                    toast.success('New Student created.', {
-                        position: 'bottom-center',
-                        style: {
-                            backgroundColor: 'black',
-                            color: '#fff'
-                        }
-                    })
-                    setTimeout(() => {
-                        handleClose()
-                    }, 300);
+                    console.log(res.data.error);
+                    if(!res.data?.error){              setDepartment('')
+                        setEmail('')
+                        setName('')
+                        setSemester('')
+                        setPassword('')
+                        toast.success('New Student created.', {
+                            position: 'bottom-center',
+                            style: {
+                                backgroundColor: 'black',
+                                color: '#fff'
+                            }
+                        })
+                        setTimeout(() => {
+                            handleClose()
+                        }, 300);
+                    }else{
+                        toast.error(res.data?.error, {
+                            position: 'bottom-center',
+                            style: {
+                                backgroundColor: 'black',
+                                color: '#fff'
+                            }
+                        })
+                    }
                 }).catch((err) => {
                     toast.error('Something went wrong!', {
                         position: 'bottom-center',
