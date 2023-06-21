@@ -1,31 +1,32 @@
 .list-item{
-    width: 20rem;
-    height: 4rem;
     display: flex;
     align-items: center;
-    justify-content:space-between;
+    justify-content: space-between;
+    width: 300px;
+    padding: 20px 20px;
+    margin-bottom: 3px;
+    border-radius: 9px;
+    border-bottom: 1px solid rgb(209, 209, 209);
 }
 
 .item-row{
-    display: flex;
-    margin-right: 10px;
-}
-
-.-item-col{
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.name-index{
-    font-size: 9px;
-    text-transform: capitalize;
+.index{
+    font-size: 19px;
+    margin-right: 5px;
 }
 
-.name{
-    font-size: 20px;
-    text-transform: capitalize;
+.item-col{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.dep{
+
+.list-name{
+    font-size: 22px;
     text-transform: uppercase;
 }

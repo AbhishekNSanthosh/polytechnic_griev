@@ -64,8 +64,10 @@ const Dashboard = ({ user, reload, Token }) => {
                     'x-access-token': Token
                 }
             }).then((res) => {
+                setTimeout(() => {
+                    setModalLoading(false)
+                }, 900);
                 setTeachers(res?.data)
-                setModalLoading(false)
             }).catch((err) => {
                 setModalLoading(false)
                 if (err.response.status === 401) {

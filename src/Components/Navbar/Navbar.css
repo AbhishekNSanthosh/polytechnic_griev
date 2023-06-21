@@ -1,5 +1,4 @@
 .navbar {
-    height: 17vh;
     position: fixed;
     top: 0;
     left: 0;
@@ -70,6 +69,5 @@
 .hr-nav {
     border: none;
     height: 1px;
-    background-color: #e2e2e2;
-    margin-top: 10px;
+    background-color: #eeeeee;
 }
