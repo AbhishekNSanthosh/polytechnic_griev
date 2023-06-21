@@ -4,6 +4,15 @@
     width: 100vw;
 }
 
+@media only screen and (max-width: 767px) {
+    .loginDir {
+        flex-direction: column;
+    }
+    .login-container{
+        flex-direction: column;
+    }
+  }
+
 .login-container {
     display: flex;
     height: 100vh;
@@ -17,6 +26,12 @@
     align-items: center;
     justify-content: center;
 }
+
+@media only screen and (max-width: 767px) {
+    .login-left{
+        display: none
+    }
+  }
 
 .login-right {
     flex: 5;
