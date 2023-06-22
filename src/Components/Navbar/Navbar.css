@@ -11,6 +11,12 @@
     padding: 20px 85px;
 }
 
+@media only screen and (max-width: 767px) {
+    .nav {
+         padding: 20px 20px;
+    }
+  }
+
 .navbar-container {
     display: flex;
     justify-content: space-between;
@@ -34,6 +40,7 @@
     height: 60px;
     margin-top: 10px;
 }
+
 
 .nav-right {
     flex: 6;
@@ -71,3 +78,19 @@
     height: 1px;
     background-color: #eeeeee;
 }
+
+@media only screen and (max-width: 767px) {
+    .title{
+        display: none;
+    }
+
+    .logout{
+        font-size: 22px;
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .nav-logo {
+        height: 30px;
+    }
+  }

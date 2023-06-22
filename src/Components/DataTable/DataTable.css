@@ -1,13 +1,20 @@
 .table-container {
     display: flex;
     flex-direction: column;
-align-items: center;
-justify-content: center;
+    align-items: center;
+    justify-content: center;
 }
 
 .product-table {
     width: 100%;
     border-collapse: collapse;
+}
+
+
+@media only screen and (max-width: 767px) {
+    .product-table {
+        display: none;
+    }
 }
 
 .product-table th,
@@ -49,8 +56,8 @@ justify-content: center;
     justify-content: center;
 }
 
-.light{
-        display: flex;
+.light {
+    display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgb(255, 227, 227);
@@ -58,15 +65,15 @@ justify-content: center;
     border: 1px solid rgb(255, 132, 132);
 }
 
-.done{
+.done {
     font-size: 32px;
     color: rgb(102, 102, 102);
     margin-right: 5px;
     display: flex;
 }
 
-.undone{
-        font-size: 32px;
+.undone {
+    font-size: 32px;
     color: red;
     margin-right: 5px;
     display: flex;
@@ -84,21 +91,105 @@ justify-content: center;
     color: red;
 }
 
-.loading{
-    height:230px;
+.loading {
+    height: 230px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 100px;
 }
 
-.loader{
+
+@media only screen and (max-width: 767px) {
+    .loading {
+        display: none;
+    }
+}
+
+.loader {
     display: flex;
     text-align: center;
 }
 
-.t-data-body{
+.t-data-body {
     font-size: 19px;
     font-weight: 400;
     text-transform: uppercase;
+}
+
+.mobile-container {
+    display: none;
+}
+
+@media only screen and (max-width: 767px) {
+    .mobile-container {
+        display: flex;
+        width: 100%;
+        padding: 20px 0px;
+        border-top: 1px solid #f0f0f0;
+    }
+
+    .mobile-div {
+        display: flex;
+        width: 100%;
+        padding: 0px 19px;
+        gap: 10px;
+    }
+
+    .mobile-row-left {
+        display: flex;
+        flex-direction: column;
+        flex: 9;
+        gap: 10px;
+    }
+
+    .mobile-row-right {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        flex: 3;
+        display: flex;
+        align-items: center;
+    }
+
+    .left {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+    }
+
+    .data {
+        font-size: 17px;
+        display: flex;
+        font-weight: 400;
+    }
+
+    .data-date {
+        font-size: 12px;
+        display: flex;
+        font-weight: 400;
+    }
+
+    .green {
+        color: green;
+    }
+
+    .icon {
+        color: #757575;
+    }
+}
+
+.mobile-loading {
+    display: none;
+}
+
+@media only screen and (max-width: 767px) {
+    .mobile-loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height:70vh;
+    }
 }

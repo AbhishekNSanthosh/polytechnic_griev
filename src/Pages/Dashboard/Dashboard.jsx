@@ -9,7 +9,7 @@ import AddModal from '../../Components/AddModal/AddModal';
 import ListModal from '../../Components/ListModal/ListModal';
 import notfoundimg from '../../Assets/notfound1.svg'
 
-const Dashboard = ({ user, reload, Token }) => {
+const Dashboard = ({user, reload, Token }) => {
     const [letters, setLetters] = useState([]);
     const [loading, setLoading] = useState(false);
     const [modalLoading, setModalLoading] = useState(false);
@@ -216,11 +216,11 @@ const Dashboard = ({ user, reload, Token }) => {
                 </>
                 :
                 <div className="table-row">
-                    <DataTable data={letters} loading={loading} Token={Token} />
+                    <DataTable userType={userType} data={letters} loading={loading} Token={Token} />
                 </div>
             }
-            <AddModal modalOpen={modalOpen} getModalStatus={getModalStatus} modalOpenBy={modalOpenBy} Token={Token} students={students} />
-            <ListModal loading={loading} modalOpen={modalOpen} getModalStatus={getModalStatus} modalOpenBy={modalOpenBy} Token={Token} teachers={teachers} students={students} admins={admins} />
+            <AddModal userType={userType} modalOpen={modalOpen} getModalStatus={getModalStatus} modalOpenBy={modalOpenBy} Token={Token} students={students} />
+            <ListModal userType={userType} loading={loading} modalOpen={modalOpen} getModalStatus={getModalStatus} modalOpenBy={modalOpenBy} Token={Token} teachers={teachers} students={students} admins={admins} />
         </div>
     )
 }
