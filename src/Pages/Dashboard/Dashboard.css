@@ -4,13 +4,36 @@
     /* height: 100vh; */
 }
 
+@media only screen and (max-width: 767px) {
+    .dashboard {
+        padding: 10px 0px;
+        margin-top: 70px;
+    }
+
+    .buttons-row {
+        padding: 10px;
+    }
+}
+
 .buttons-row {
     padding: 29px 0;
+}
+
+@media only screen and (max-width: 767px) {
+    .buttons-row {
+        padding: 20px 0px;
+    }
 }
 
 .table-row {
     height: 62vh;
     overflow-y: scroll;
+}
+
+@media only screen and (max-width: 767px) {
+    .table-row {
+        height: 100vh;
+    }
 }
 
 .not-found {
@@ -27,12 +50,12 @@
     height: 13rem;
 }
 
-.not-found-tag{
+.not-found-tag {
     margin-top: 1rem;
     font-size: 2em;
     color: rgb(92, 92, 92);
 }
 
-.info{
+.info {
     font-size: 1em;
 }

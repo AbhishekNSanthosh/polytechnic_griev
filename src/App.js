@@ -5,8 +5,6 @@ import {
   HashRouter as Router,
   Routes,
   Route,
-  Link,
-  Navigate,
 } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Navbar from "./Components/Navbar/Navbar";
@@ -18,7 +16,6 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { motion } from 'framer-motion'
-import Loader from "./Components/Loader/Loader";
 
 const theme = createTheme({
   palette: {
@@ -121,7 +118,7 @@ function App() {
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              <Dashboard user={user} reload={reload} Token={token}/>
+              <Dashboard user={user} reload={reload} Token={token} z/>
             </motion.div>
           } />
           <Route path="/dashboard/view" element={
