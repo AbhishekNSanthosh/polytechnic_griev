@@ -14,11 +14,12 @@ function ViewGriev({ Token, userType }) {
 
     const [letter, setLetter] = useState({});
     const [loading, setLoading] = useState(false);
+    const [updateStatus, setUpdateStatus] = useState("")
 
     const location = useLocation();
     const receivedData = location.state;
 
-
+    console.log(letter?.issue_stat)
     const getLetter = () => {
         setLoading(true);
         console.log(Token)
@@ -32,6 +33,7 @@ function ViewGriev({ Token, userType }) {
                 setLoading(false)
             }, 1000)
             setLetter(res?.data)
+            setUpdateStatus(res?.data?.issue_stat)
         }).catch((err) => {
             setLoading(true);
             if (err.response.status === 401) {
@@ -82,6 +84,23 @@ function ViewGriev({ Token, userType }) {
         month: "long",
         year: "numeric",
     });
+
+
+    const handleUpdateStatus = () => {
+        axios.put(`https://flask-production-37b2.up.railway.app/issue_status_update/${receivedData}/`, {
+            status: updateStatus
+        }, {
+            headers: {
+                'x-access-token': Token
+            }
+        }).then((res) => {
+            console.log(res)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
+    console.log(updateStatus)
 
     return (
         <div className='view-griev'>
@@ -165,19 +184,19 @@ function ViewGriev({ Token, userType }) {
                                                 <Select
                                                     labelId="demo-simple-select-autowidth-label"
                                                     id="demo-simple-select-autowidth"
-                                                    // value={age}
-                                                    // onChange={handleChange}
+                                                    value={updateStatus}
+                                                    onChange={(e) => { setUpdateStatus(e.target.value) }}
                                                     fullWidth
                                                     label="Status"
                                                 >
-                                                    <MenuItem value="">
-                                                        <em>None</em>
-                                                    </MenuItem>
                                                     <MenuItem value="Pending">Pending</MenuItem>
                                                     <MenuItem value="Approved">Approved</MenuItem>
                                                     <MenuItem value="Rejected">Rejected</MenuItem>
                                                 </Select>
                                             </FormControl>
+                                            <button className="update-status" onClick={() => {
+                                                handleUpdateStatus()
+                                            }}>Update Status</button>
                                         </div>
                                     </div>
                                 </div>
