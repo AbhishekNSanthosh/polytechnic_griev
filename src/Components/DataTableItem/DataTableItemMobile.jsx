@@ -55,13 +55,13 @@ function DataTableItemMobile({ index, item, userType, Token, getletterCall }) {
             <div className="mobile-container" key={index}>
                 <div className="mobile-div">
                     <div className="mobile-row-left" onClick={() => navigate('/dashboard/view', { state: item?.id })}>
-                        {userType === 'admin' ?
+                        {userType === 'Admin' ?
                             <div className="mobile-row-left-row">
                                 <span className='data'>{item?.body.slice(0, 25)}...</span>
                             </div>
                             :
                             <div className="mobile-row-left-row">
-                                <span className='data'>{item?.body.slice(0, 55)}...</span>
+                                <span className='data'>{item?.body.slice(0, 85)}...</span>
                             </div>
                         }
                         <div className="mobile-row-left-row">
