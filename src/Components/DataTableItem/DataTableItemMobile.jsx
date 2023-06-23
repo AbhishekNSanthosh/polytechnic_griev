@@ -61,7 +61,7 @@ function DataTableItemMobile({ index, item, userType, Token, getletterCall }) {
                             </div>
                             :
                             <div className="mobile-row-left-row">
-                                <span className='data'>{item?.body.slice(0, 95)}...</span>
+                                <span className='data'>{item?.body.slice(0, 55)}...</span>
                             </div>
                         }
                         <div className="mobile-row-left-row">
