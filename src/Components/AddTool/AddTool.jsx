@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 function AddTool() {
     const navigate = useNavigate()
-    const hideNavbar = ["/dashboard/add-griev"];
+    const hideNavbar = ["/dashboard/add-griev","/dashboard/view"];
 
     const location = useLocation()
 

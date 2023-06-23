@@ -9,7 +9,7 @@ import AddModal from '../../Components/AddModal/AddModal';
 import ListModal from '../../Components/ListModal/ListModal';
 import notfoundimg from '../../Assets/notfound1.svg'
 
-const Dashboard = ({user, reload, Token }) => {
+const Dashboard = ({ user, reload, Token ,logCall}) => {
     const [letters, setLetters] = useState([]);
     const [loading, setLoading] = useState(false);
     const [modalLoading, setModalLoading] = useState(false);
@@ -181,15 +181,12 @@ const Dashboard = ({user, reload, Token }) => {
         if (Token) {
             if (userType === 'Admin') {
                 getAllLetters();
-            } else if (userType === 'Student') {
-                getUserLetter();
             }
-        } else {
-            localStorage.clear()
-            Cookies.remove('access_token');
-            navigate('/')
+             if(userType === 'Student') {
+                getUserLetter(); 
+            }
         }
-    }, [reload])
+    }, [reload,logCall])
 
     const getModalStatus = (data) => {
         setModalOpen(data)

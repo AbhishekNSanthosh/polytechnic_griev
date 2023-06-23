@@ -21,8 +21,10 @@ const DataTable = ({ userType, data, loading, Token }) => {
                             <th>Sl. No</th>
                             <th>Subject</th>
                             <th>Date</th>
-                            <th>Read Status</th>
-                            <th>Actions</th>
+                            {userType === 'Admin' && <>
+                                <th>Read Status</th>
+                                <th>Actions</th>
+                            </>}
                         </tr>
                     </thead>
 
@@ -33,18 +35,20 @@ const DataTable = ({ userType, data, loading, Token }) => {
                                     <td>{index + 1}</td>
                                     <td className='t-data-body'>{item?.body.slice(0, 15)}</td>
                                     <td>{item?.created_on.slice(0, 10)}</td>
-                                    {item?.status === true ?
-                                        <td><span class="material-icons done">mark_email_read</span></td>
-                                        :
-                                        <td><span class="material-icons undone">mark_email_unread</span></td>
-                                    }
-                                    <td>
-                                        <div className="table-action">
-                                            <span className="material-symbols-outlined delete">
-                                                delete
-                                            </span>
-                                        </div>
-                                    </td>
+                                    {userType === 'Admin' && <>
+                                        {item?.status === true ?
+                                            <td><span class="material-icons done">mark_email_read</span></td>
+                                            :
+                                            <td><span class="material-icons undone">mark_email_unread</span></td>
+                                        }
+                                        <td>
+                                            <div className="table-action">
+                                                <span className="material-symbols-outlined delete">
+                                                    delete
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </>}
                                 </tr>
                             ))}
                         </>

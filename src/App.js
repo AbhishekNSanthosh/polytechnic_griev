@@ -36,6 +36,7 @@ function App() {
   const [reload, setReload] = useState(false);
   const [callUser, setCallUser] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [callReload,setCallReload]= useState(false)
 
   // Simulating data loading using useEffect hook
   useEffect(() => {
@@ -98,6 +99,10 @@ function App() {
     setCallUser(data)
   }
 
+  const getReloadCall = (data) => {
+    setCallReload(data)
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Router>
@@ -109,7 +114,7 @@ function App() {
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              <LoginDir getCall2={getCall2} />
+              <LoginDir getCall2={getCall2} getReloadCall={getReloadCall}/>
             </motion.div>}
           />
           <Route path="/dashboard" element={
@@ -118,7 +123,7 @@ function App() {
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              <Dashboard user={user} reload={reload} Token={token} z/>
+              <Dashboard user={user} logCall={callUser} reload={reload} Token={token} z/>
             </motion.div>
           } />
           <Route path="/dashboard/view" element={
@@ -128,7 +133,7 @@ function App() {
                   animate={{ opacity: 1 }}
                   transition={{ duration: 1 }}
                 >
-                  <ViewGriev user={user} Token={token}/>
+                  <ViewGriev user={user} Token={token} userType={userType}/>
                 </motion.div>
             </>
           } />

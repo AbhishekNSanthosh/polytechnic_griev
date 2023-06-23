@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { GridLoader } from 'react-spinners';
 
-function ViewGriev({ Token }) {
+function ViewGriev({ Token, userType }) {
 
     const [letter, setLetter] = useState({});
     const [loading, setLoading] = useState(false);
@@ -21,6 +21,7 @@ function ViewGriev({ Token }) {
 
     const getLetter = () => {
         setLoading(true);
+        console.log(Token)
         axios.get('https://flask-production-37b2.up.railway.app/get_letter/' + receivedData + '/', {
             headers: {
                 'x-access-token': Token
@@ -29,7 +30,7 @@ function ViewGriev({ Token }) {
             console.log(res.data);
             setTimeout(() => {
                 setLoading(false)
-            }, 2000)
+            }, 1000)
             setLetter(res?.data)
         }).catch((err) => {
             setLoading(true);
@@ -42,20 +43,12 @@ function ViewGriev({ Token }) {
     }
 
     useEffect(() => {
-        if (Token) {
-            if (receivedData != "" && receivedData != undefined) {
-                getLetter();
-            }else{
-                navigate('/dashboard')
-            }
+        if (receivedData != "" && receivedData != undefined) {
+            getLetter();
         } else {
-            localStorage.clear()
-            Cookies.remove('access_token')
-            navigate('/')
+            navigate('/dashboard')
         }
     }, [receivedData])
-
-    console.log(letter?.status)
 
     const updateRead = () => {
         axios.put('https://flask-production-37b2.up.railway.app/status_update/' + receivedData + '/', {
@@ -77,12 +70,8 @@ function ViewGriev({ Token }) {
 
     const navigate = useNavigate()
     useEffect(() => {
-        if (Token) {
+        if (Token && userType === 'Admin') {
             updateRead();
-        } else {
-            localStorage.clear()
-            Cookies.remove('access_token')
-            navigate('/')
         }
     }, [])
 
@@ -162,37 +151,39 @@ function ViewGriev({ Token }) {
                                 </div>
                             </div>
 
-                            <div className="view-item">
-                                <div className="view-item-left">
-                                    <div className="view-item-left-title">
-                                        <span className="item-title left">STATUS:</span>
+                            {userType === 'Admin' &&
+                                <div className="view-item">
+                                    <div className="view-item-left">
+                                        <div className="view-item-left-title">
+                                            <span className="item-title left">STATUS:</span>
+                                        </div>
+                                    </div>
+                                    <div className="view-item-right">
+                                        <div className="view-item-left-title">
+                                            <FormControl sx={{ m: 1, minWidth: 120 }}>
+                                                <InputLabel id="demo-simple-select-autowidth-label">Status</InputLabel>
+                                                <Select
+                                                    labelId="demo-simple-select-autowidth-label"
+                                                    id="demo-simple-select-autowidth"
+                                                    // value={age}
+                                                    // onChange={handleChange}
+                                                    fullWidth
+                                                    label="Status"
+                                                >
+                                                    <MenuItem value="">
+                                                        <em>None</em>
+                                                    </MenuItem>
+                                                    <MenuItem value="Pending">Pending</MenuItem>
+                                                    <MenuItem value="Approved">Approved</MenuItem>
+                                                    <MenuItem value="Rejected">Rejected</MenuItem>
+                                                </Select>
+                                            </FormControl>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="view-item-right">
-                                    <div className="view-item-left-title">
-                                        <FormControl sx={{ m: 1, minWidth: 120 }}>
-                                            <InputLabel id="demo-simple-select-autowidth-label">Status</InputLabel>
-                                            <Select
-                                                labelId="demo-simple-select-autowidth-label"
-                                                id="demo-simple-select-autowidth"
-                                                // value={age}
-                                                // onChange={handleChange}
-                                                fullWidth
-                                                label="Status"
-                                            >
-                                                <MenuItem value="">
-                                                    <em>None</em>
-                                                </MenuItem>
-                                                <MenuItem value="Pending">Pending</MenuItem>
-                                                <MenuItem value="Approved">Approved</MenuItem>
-                                                <MenuItem value="Rejected">Rejected</MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                    </div>
-                                </div>
-                            </div>
+                            }
 
-                            <div className="view-item">
+                            {userType === 'Admin' && <div className="view-item">
                                 <div className="view-item-left">
                                     <div className="view-item-left-title">
                                         <span className="item-title left">VIEW ACCESS:</span>
@@ -222,23 +213,46 @@ function ViewGriev({ Token }) {
                                     </div>
                                 </div>
                             </div>
-
+                            }
+                            <hr className='hr-view' />
                             <div className="actions-container">
                                 <div className="actions-left">
                                     <div className="actions">
-                                        <span className="item-title left">ACTIONS TAKEN</span>
+                                        <span className="item-title left">ACTIONS TAKEN:</span>
                                     </div>
-                                    <div className="actions">
-                                        <textarea className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
-                                    </div>
+                                    {userType === 'Admin' ?
+                                        <>
+                                            <div className="actions">
+                                                <textarea disabled={userType != 'Admin'} className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
+                                            </div>
+                                            <div className="actions">
+                                                <button className="action-submit">Add Action</button>
+                                            </div>
+                                        </>
+                                        :
+                                        <div className="actions">
+                                            <span className="action-taken">No actions taken yet!</span>
+                                        </div>
+                                    }
                                 </div>
                                 <div className="actions-right">
                                     <div className="actions">
-                                        <span className="item-title left">COMMENTS</span>
+                                        <span className="item-title left">COMMENTS:</span>
                                     </div>
-                                    <div className="actions">
-                                        <textarea className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
-                                    </div>
+                                    {userType === 'Admin' ?
+                                        <>
+                                            <div className="actions">
+                                                <textarea disabled={userType != 'Admin'} className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
+                                            </div>
+                                            <div className="actions">
+                                                <button className="action-submit">Add Action</button>
+                                            </div>
+                                        </>
+                                        :
+                                        <div className="actions">
+                                            <span className="action-taken">No actions taken yet!</span>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </>
