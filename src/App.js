@@ -123,7 +123,7 @@ function App() {
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              <Dashboard user={user} logCall={callUser} reload={reload} Token={token} z/>
+              <Dashboard user={user} logCall={callUser} reload={reload} Token={token} getCall={getCall}/>
             </motion.div>
           } />
           <Route path="/dashboard/view" element={

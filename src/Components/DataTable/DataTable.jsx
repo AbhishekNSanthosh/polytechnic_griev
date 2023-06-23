@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './DataTable.css'
 import { useNavigate } from 'react-router-dom'
 import { GridLoader, HashLoader } from 'react-spinners'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-const DataTable = ({ userType, data, loading, Token }) => {
+import Backdrop from '@mui/material/Backdrop';
+import axios from 'axios'
+import { Box, Fade, Modal } from '@mui/material'
+import DataTableItem from '../DataTableItem/DataTableItem';
+import DataTableItemMobile from '../DataTableItem/DataTableItemMobile';
 
-    const navigate = useNavigate()
+const DataTable = ({ userType, data, loading, Token ,getletterCall}) => {
+    const navigate = useNavigate();
+
+    console.log(data.length)
     return (
         <div className='table-container'>
-
+            {/* <span>{data.length}</span> */}
             {loading ?
                 <div className="loading">
                     <GridLoader size={30} color="red" />
@@ -28,31 +33,9 @@ const DataTable = ({ userType, data, loading, Token }) => {
                         </tr>
                     </thead>
 
-                    <tbody>
-                        <>
-                            {data.map((item, index) => (
-                                <tr key={index} onClick={() => navigate('/dashboard/view', { state: item?.id })} style={{ cursor: 'pointer' }}>
-                                    <td>{index + 1}</td>
-                                    <td className='t-data-body'>{item?.body.slice(0, 15)}</td>
-                                    <td>{item?.created_on.slice(0, 10)}</td>
-                                    {userType === 'Admin' && <>
-                                        {item?.status === true ?
-                                            <td><span class="material-icons done">mark_email_read</span></td>
-                                            :
-                                            <td><span class="material-icons undone">mark_email_unread</span></td>
-                                        }
-                                        <td>
-                                            <div className="table-action">
-                                                <span className="material-symbols-outlined delete">
-                                                    delete
-                                                </span>
-                                            </div>
-                                        </td>
-                                    </>}
-                                </tr>
-                            ))}
-                        </>
-                    </tbody>
+                    {data && data.map((item, index) => (
+                        <DataTableItem getletterCall={getletterCall} loading={loading} Token={Token} index={index} key={index} item={item} userType={userType} />
+                    ))}
                 </table>
 
             }
@@ -66,41 +49,11 @@ const DataTable = ({ userType, data, loading, Token }) => {
                 <>
                     {data && data.map((item, index) => (
 
-                        <div className="mobile-container" key={index}>
-                            <div className="mobile-div">
-                                <div className="mobile-row-left" onClick={() => navigate('/dashboard/view', { state: item?.id })}>
-                                    {userType === 'admin' ?
-                                        <div className="mobile-row-left-row">
-                                            <span className='data'>{item?.body.slice(0, 25)}...</span>
-                                        </div>
-                                        :
-                                        <div className="mobile-row-left-row">
-                                            <span className='data'>{item?.body.slice(0, 95)}...</span>
-                                        </div>
-                                    }
-                                    <div className="mobile-row-left-row">
-                                        <span className='data-date'>{item?.created_on.slice(0, 10)}</span>
-                                    </div>
-                                </div>
-                                {userType === 'admin' &&
-                                    <div className="mobile-row-right">
-                                        <div className="mobile-row-left-row">
-                                            {item?.status === true ?
-                                                <span class="material-icons icon">mark_chat_read</span>
-                                                :
-                                                <span class="material-icons green">mark_chat_unread</span>
-                                            }
-                                        </div>
-                                        <div className="mobile-row-left-row">
-                                            <span class="material-icons icon">delete_outline</span>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                        </div>
+                        <DataTableItemMobile getletterCall={getletterCall} item={item} key={index} Token={Token} index={index} userType={userType}/>
+
                     ))}
                 </>
-            }
+            } 
         </div>
     )
 }
