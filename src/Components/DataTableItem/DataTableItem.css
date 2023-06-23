@@ -1,0 +1,75 @@
+.tbody {
+    height: 100px;
+    overflow-y: scroll;
+}
+
+@media only screen and (max-width: 767px) {
+    .tbody {
+       display: none;
+    }
+    
+}
+
+.read-status {
+    padding: 3px;
+    border-radius: 8px;
+    width: 100px;
+    background-color: rgb(201, 0, 0);
+    font-family: 'Zilla Slab';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 30px;
+    text-align: center;
+    letter-spacing: 1.5px;
+    text-transform: capitalize;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.light {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 227, 227);
+    color: red;
+    border: 1px solid rgb(255, 132, 132);
+}
+
+.done {
+    font-size: 32px;
+    color: rgb(102, 102, 102);
+    margin-right: 5px;
+    display: flex;
+}
+
+.undone {
+    font-size: 32px;
+    color: red;
+    margin-right: 5px;
+    display: flex;
+}
+
+.delete {
+    font-size: 26px;
+    cursor: pointer;
+    color: #525252;
+    transition: all ease 0.09s;
+}
+
+.delete:hover {
+    transform: scale(1.06);
+    color: red;
+}
+
+.loading {
+    height: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px;
+}

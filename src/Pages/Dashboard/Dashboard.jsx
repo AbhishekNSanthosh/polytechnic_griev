@@ -9,7 +9,7 @@ import AddModal from '../../Components/AddModal/AddModal';
 import ListModal from '../../Components/ListModal/ListModal';
 import notfoundimg from '../../Assets/notfound1.svg'
 
-const Dashboard = ({ user, reload, Token ,logCall}) => {
+const Dashboard = ({ user, reload, Token, logCall }) => {
     const [letters, setLetters] = useState([]);
     const [loading, setLoading] = useState(false);
     const [modalLoading, setModalLoading] = useState(false);
@@ -17,14 +17,10 @@ const Dashboard = ({ user, reload, Token ,logCall}) => {
     const [modalOpenBy, setModalOpenBy] = useState("");
     const [students, setStudents] = useState([])
     const [teachers, setTeachers] = useState([])
-    const [admins, setAdmins] = useState([])
+    const [admins, setAdmins] = useState([]);
+    const [callLetter, setCallLetter] = useState(false);
 
-    const navigate = useNavigate()
-    useEffect(() => {
-        if (!Token) {
-            navigate('/');
-        }
-    }, [])
+    const navigate = useNavigate();
 
     const userType = localStorage.getItem('usertype')
     const userObj = localStorage.getItem('user')
@@ -182,11 +178,11 @@ const Dashboard = ({ user, reload, Token ,logCall}) => {
             if (userType === 'Admin') {
                 getAllLetters();
             }
-             if(userType === 'Student') {
-                getUserLetter(); 
+            if (userType === 'Student') {
+                getUserLetter();
             }
         }
-    }, [reload,logCall])
+    }, [reload, logCall,callLetter])
 
     const getModalStatus = (data) => {
         setModalOpen(data)
@@ -196,6 +192,14 @@ const Dashboard = ({ user, reload, Token ,logCall}) => {
         setModalOpenBy(data)
     }
 
+    const getletterCall = (data) => {
+        setCallLetter(data)
+    }
+    useEffect(() => {
+        if (!Token) {
+            navigate('/');
+        }
+    }, [getAllLetters, getAllAdmins, getAllStudents, getAllTeachers])
 
     return (
         <div className='dashboard'>
@@ -213,7 +217,7 @@ const Dashboard = ({ user, reload, Token ,logCall}) => {
                 </>
                 :
                 <div className="table-row">
-                    <DataTable userType={userType} data={letters} loading={loading} Token={Token} />
+                    <DataTable getletterCall={getletterCall} userType={userType} data={letters} loading={loading} Token={Token} />
                 </div>
             }
             <AddModal userType={userType} modalOpen={modalOpen} getModalStatus={getModalStatus} modalOpenBy={modalOpenBy} Token={Token} students={students} />
