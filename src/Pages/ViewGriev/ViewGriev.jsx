@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { GridLoader } from 'react-spinners';
 
-function ViewGriev({ Token }) {
+function ViewGriev({ Token ,userType}) {
 
     const [letter, setLetter] = useState({});
     const [loading, setLoading] = useState(false);
@@ -21,6 +21,7 @@ function ViewGriev({ Token }) {
 
     const getLetter = () => {
         setLoading(true);
+        console.log(Token)
         axios.get('https://flask-production-37b2.up.railway.app/get_letter/' + receivedData + '/', {
             headers: {
                 'x-access-token': Token
@@ -29,33 +30,25 @@ function ViewGriev({ Token }) {
             console.log(res.data);
             setTimeout(() => {
                 setLoading(false)
-            }, 2000)
+            }, 1000)
             setLetter(res?.data)
         }).catch((err) => {
             setLoading(true);
-            if (err.response.status === 401) {
-                localStorage.clear()
-                Cookies.remove('access_token')
-                navigate('/')
-            }
+            // if (err.response.status === 401) {
+            //     localStorage.clear()
+            //     Cookies.remove('access_token')
+            //     navigate('/')
+            // }
         })
     }
 
     useEffect(() => {
-        if (Token) {
             if (receivedData != "" && receivedData != undefined) {
                 getLetter();
             }else{
                 navigate('/dashboard')
             }
-        } else {
-            localStorage.clear()
-            Cookies.remove('access_token')
-            navigate('/')
-        }
     }, [receivedData])
-
-    console.log(letter?.status)
 
     const updateRead = () => {
         axios.put('https://flask-production-37b2.up.railway.app/status_update/' + receivedData + '/', {
@@ -77,12 +70,8 @@ function ViewGriev({ Token }) {
 
     const navigate = useNavigate()
     useEffect(() => {
-        if (Token) {
+        if (Token && userType === 'Admin') {
             updateRead();
-        } else {
-            localStorage.clear()
-            Cookies.remove('access_token')
-            navigate('/')
         }
     }, [])
 
