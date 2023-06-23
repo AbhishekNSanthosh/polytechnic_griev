@@ -1,6 +1,6 @@
 import React from 'react'
 import './Navbar.css'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../Assets/poly_logo.svg'
 import { toast } from 'react-hot-toast';
 import Cookies from 'js-cookie';
@@ -9,6 +9,7 @@ const Navbar = () => {
     const hideNavbar = ["/"];
 
     const location = useLocation()
+    const navigate = useNavigate()
 
     if (hideNavbar.includes(location.pathname)) {
         return null; // Return null to hide the navbar component
@@ -24,7 +25,7 @@ const Navbar = () => {
                     <div className="navbar-container">
                         <div className="nav-left">
                             <div className="nav-left-container">
-                                <img src={logo} alt="" className="nav-logo" />
+                                <img src={logo} alt="" className="nav-logo" onClick={()=>navigate('/dashboard')} />
                             </div>
                         </div>
                         <div className="nav-right">

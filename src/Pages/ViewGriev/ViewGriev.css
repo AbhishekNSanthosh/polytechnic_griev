@@ -1,6 +1,6 @@
 .view-griev {
     padding: 10px 115px;
-    margin-top: 100px;
+    margin-top: 110px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -124,8 +124,9 @@
 .actions-container {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 40px;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -133,26 +134,56 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: start;
         gap: 10px;
     }
 }
 
 .actions-left {
-    flex: 6;
+    flex: 5;
+    padding: 10px;
+    width: 100%;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
+}
+
+@media only screen and (max-width: 767px) {
+    .actions-left {
+        flex: 6;
+        width: 100%;
+        align-items: center;
+        gap: 20px;
+        justify-content: start;
+    }
 }
 
 .actions-right {
-    flex: 6;
+    flex: 5;
     align-items: center;
     gap: 20px;
+    width: 100%;
     justify-content: center;
 }
 
+@media only screen and (max-width: 767px) {
+    .actions-right {
+        flex: 6;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+        justify-content: start;
+    }
+}
+
+.hr-view{
+    border: none;
+    height: 1px;
+    background-color: #dfdfdf;
+
+}
+
 .textarea {
-    width: 100%;
+    width: 98%;
     border-radius: 8px;
     padding: 5px;
     font-size: 18px;
@@ -160,4 +191,18 @@
 
 .actions {
     margin-top: 20px;
+}
+
+.action-submit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: red;
+    border: none;
+    font-size: 19px;
+    color: #fff;
+    cursor: pointer;
 }
