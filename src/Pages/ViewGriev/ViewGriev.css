@@ -77,13 +77,19 @@
 .view-item-right {
     display: flex;
     flex-direction: column;
-    align-items: start;
-    justify-content: start;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
 }
 
 .name {
     margin-top: 33px;
+}
+
+.view-item-left-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -175,7 +181,7 @@
     }
 }
 
-.hr-view{
+.hr-view {
     border: none;
     height: 1px;
     background-color: #dfdfdf;
@@ -193,7 +199,7 @@
     margin-top: 20px;
 }
 
-.action-submit{
+.action-submit {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -205,4 +211,16 @@
     font-size: 19px;
     color: #fff;
     cursor: pointer;
+}
+
+.update-status{
+    display: flex;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    background-color: red;
+    font-size: 15px;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
 }
