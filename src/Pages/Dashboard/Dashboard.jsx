@@ -174,15 +174,16 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
 
 
     useEffect(() => {
-        if (Token) {
-            if (userType === 'Admin') {
-                getAllLetters();
-            }
-            if (userType === 'Student') {
-                getUserLetter();
-            }
+        if (userType === 'Admin') {
+            getAllLetters();
         }
-    }, [reload, logCall,callLetter])
+    }, [reload, logCall, callLetter])
+
+    useEffect(() => {
+        if (userType === 'Student') {
+            getUserLetter();
+        }
+    }, [reload, logCall, callLetter])
 
     const getModalStatus = (data) => {
         setModalOpen(data)
