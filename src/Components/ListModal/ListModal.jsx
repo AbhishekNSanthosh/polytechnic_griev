@@ -54,7 +54,7 @@ export default function ListModal({ modalOpen, getModalStatus, modalOpenBy, Toke
                                             <span className="modal-box-title">All teachers</span>
                                         }
                                           {modalOpenBy === 'list-students' &&
-                                            <span className="modal-box-title">All teachers</span>
+                                            <span className="modal-box-title">All Students</span>
                                         }
                                         <span className="modal-box-title">All Students</span>
                                     </div>
