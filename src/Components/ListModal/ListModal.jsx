@@ -56,7 +56,9 @@ export default function ListModal({ modalOpen, getModalStatus, modalOpenBy, Toke
                                           {modalOpenBy === 'list-students' &&
                                             <span className="modal-box-title">All Students</span>
                                         }
-                                        <span className="modal-box-title">All Students</span>
+                                          {modalOpenBy === 'list-admins' &&
+                                            <span className="modal-box-title">All Admins</span>
+                                        }
                                     </div>
                                 </div>
                                 <div className="modal-box-row">
