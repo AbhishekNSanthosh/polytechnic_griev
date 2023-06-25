@@ -243,7 +243,7 @@ function ViewGriev({ Token, userType }) {
                                 </div>
                             }
 
-                            {userType === 'Admin' &&
+                            {/* {userType === 'Admin' &&
                                 <div className="view-item">
                                     <div className="view-item-left">
                                         <div className="view-item-left-title">
@@ -263,7 +263,6 @@ function ViewGriev({ Token, userType }) {
                                                     </button>
                                                 ))}
                                             </div>
-                                            {/* <span className='access-name'>Customize the view access of this letter.</span> */}
                                             {access != "" &&
                                                 <div className="acces-row">
                                                     <span className='access-name'>{access}</span>
@@ -271,7 +270,7 @@ function ViewGriev({ Token, userType }) {
                                         </div>
                                     </div>
                                 </div>
-                            }
+                            } */}
                             <hr className='hr-view' />
                             <div className="actions-container">
                                 <div className="actions-left">
