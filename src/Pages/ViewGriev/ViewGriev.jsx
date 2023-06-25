@@ -15,9 +15,23 @@ function ViewGriev({ Token, userType }) {
     const [letter, setLetter] = useState({});
     const [loading, setLoading] = useState(false);
     const [updateStatus, setUpdateStatus] = useState("")
+    const [teachers, setTeachers] = useState([]);
+    const [access, setAccess] = useState("");
+    const [clicked, setClicked] = useState(false);
+    const [disabledButtons, setDisabledButtons] = useState([]);
+
+    const handleButtonClick = (index) => {
+        setDisabledButtons((prevDisabledButtons) => {
+            const updatedDisabledButtons = [...prevDisabledButtons];
+            updatedDisabledButtons[index] = true; // Disable the clicked button
+            return updatedDisabledButtons;
+        });
+    };
 
     const location = useLocation();
     const receivedData = location.state;
+
+    console.log(receivedData)
 
     console.log(letter?.issue_stat)
     const getLetter = () => {
@@ -44,6 +58,33 @@ function ViewGriev({ Token, userType }) {
         })
     }
 
+    const getAllTeachers = () => {
+        try {
+            axios.get('https://flask-production-37b2.up.railway.app/all_teachers/', {
+                headers: {
+                    'x-access-token': Token
+                }
+            }).then((res) => {
+                setTeachers(res.data);
+            }).catch((err) => {
+                if (err.response.status === 401) {
+                    localStorage.clear();
+                    Cookies.remove('access_token');
+                }
+            })
+        } catch (error) {
+            if (error.response.status === 401) {
+                localStorage.clear()
+                Cookies.remove('access_token')
+            }
+        }
+    }
+
+    useEffect(() => {
+        getAllTeachers();
+    }, [])
+
+
     useEffect(() => {
         if (receivedData != "" && receivedData != undefined) {
             getLetter();
@@ -61,6 +102,7 @@ function ViewGriev({ Token, userType }) {
             }
         }).then((res) => {
             console.log(res)
+            setTeachers(res.data)
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
@@ -100,8 +142,7 @@ function ViewGriev({ Token, userType }) {
         })
     }
 
-    console.log(updateStatus)
-
+    console.log(teachers)
     return (
         <div className='view-griev'>
             <div className="view-container">
@@ -171,7 +212,7 @@ function ViewGriev({ Token, userType }) {
                             </div>
 
                             {userType === 'Admin' &&
-                                <div className="view-item">
+                                <div className="view-item status">
                                     <div className="view-item-left">
                                         <div className="view-item-left-title">
                                             <span className="item-title left">STATUS:</span>
@@ -202,37 +243,34 @@ function ViewGriev({ Token, userType }) {
                                 </div>
                             }
 
-                            {userType === 'Admin' && <div className="view-item">
-                                <div className="view-item-left">
-                                    <div className="view-item-left-title">
-                                        <span className="item-title left">VIEW ACCESS:</span>
+                            {/* {userType === 'Admin' &&
+                                <div className="view-item">
+                                    <div className="view-item-left">
+                                        <div className="view-item-left-title">
+                                            <span className="item-title left">VIEW ACCESS:</span>
+                                        </div>
+                                    </div>
+                                    <div className="view-item-right">
+                                        <div className="view-item-left-title">
+                                            <div className="container-access">
+                                                {teachers && teachers.map((teacher, index) => (
+                                                    <button disabled={disabledButtons[index]} className="access-item">
+                                                        <span onClick={() => {
+                                                            handleButtonClick(index)
+                                                            setClicked(true)
+                                                            setAccess(access + teacher?.id + ',')
+                                                        }} className='access-name'>{teacher?.email}</span>
+                                                    </button>
+                                                ))}
+                                            </div>
+                                            {access != "" &&
+                                                <div className="acces-row">
+                                                    <span className='access-name'>{access}</span>
+                                                </div>}
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="view-item-right">
-                                    <div className="view-item-left-title">
-                                        <FormControl sx={{ m: 1, minWidth: 120 }}>
-                                            <InputLabel id="demo-simple-select-autowidth-label">Access</InputLabel>
-                                            <Select
-                                                labelId="demo-simple-select-autowidth-label"
-                                                id="demo-simple-select-autowidth"
-                                                // value={age}
-                                                // onChange={handleChange}
-                                                fullWidth
-                                                label="ACCESS"
-                                            >
-                                                <MenuItem value="">
-                                                    <em>None</em>
-                                                </MenuItem>
-                                                <MenuItem value="CSE">CSE</MenuItem>
-                                                <MenuItem value="CE">CE</MenuItem>
-                                                <MenuItem value="ME">ME</MenuItem>
-                                                <MenuItem value="EEE">EEE</MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                    </div>
-                                </div>
-                            </div>
-                            }
+                            } */}
                             <hr className='hr-view' />
                             <div className="actions-container">
                                 <div className="actions-left">
