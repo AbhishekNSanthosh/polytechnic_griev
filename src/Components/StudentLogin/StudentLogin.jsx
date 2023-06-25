@@ -4,6 +4,7 @@ import { TextField } from '@mui/material'
 import { motion } from "framer-motion"
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
 
 const StudentLogin = ({ getLoginPerson, handleLogin }) => {
     const [email, setEmail] = useState("");
@@ -58,7 +59,18 @@ const StudentLogin = ({ getLoginPerson, handleLogin }) => {
                                 <TextField className='student-login-input' label='Password' type='password' onChange={(e) => { setPassword(e.target.value) }} />
                             </div>
                             <div className="student-login-input-row">
-                                <button className="student-login-button" onClick={callLogin}>LOGIN</button>
+                                <button className="student-login-button" onClick={()=>{
+                                    if(email === "" || password === ""){
+                                        toast.error('Fields cannot be empty..', {
+                                            position: 'bottom-center',
+                                            style: {
+                                                backgroundColor: 'black',
+                                                color: '#fff'
+                                            }
+                                        })
+                                    }
+                                    callLogin();
+                                }}>LOGIN</button>
                             </div>
                         </div>
                     </div>
