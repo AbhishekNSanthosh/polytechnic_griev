@@ -271,7 +271,7 @@ function ViewGriev({ Token, userType }) {
                                     </div>
                                 </div>
                             } */}
-                            <hr className='hr-view' />
+                            <hr className='hr-view'/>
                             <div className="actions-container">
                                 <div className="actions-left">
                                     <div className="actions">

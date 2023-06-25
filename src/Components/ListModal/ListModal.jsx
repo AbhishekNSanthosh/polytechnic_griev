@@ -23,7 +23,7 @@ const style = {
 };
 
 
-export default function ListModal({ modalOpen, getModalStatus, modalOpenBy, Token,students,teachers,admins,loading }) {
+export default function ListModal({ modalOpen, getModalStatus, modalOpenBy, Token, students, teachers, admins, loading }) {
     const [open, setOpen] = React.useState(false);
     const handleClose = () => getModalStatus(false);
 
@@ -50,16 +50,20 @@ export default function ListModal({ modalOpen, getModalStatus, modalOpenBy, Toke
                             <div className="modal-box-col">
                                 <div className="modal-box-row">
                                     <div className="modal-box-row-item">
-                                        {modalOpenBy === 'list-teachers' ?
+                                        {modalOpenBy === 'list-teachers' &&
                                             <span className="modal-box-title">All teachers</span>
-                                            :
+                                        }
+                                          {modalOpenBy === 'list-students' &&
                                             <span className="modal-box-title">All Students</span>
+                                        }
+                                          {modalOpenBy === 'list-admins' &&
+                                            <span className="modal-box-title">All Admins</span>
                                         }
                                     </div>
                                 </div>
                                 <div className="modal-box-row">
                                     <div className="modal-box-row-item">
-                                        <ListModalList loading={loading} students={students} teachers={teachers} modalOpenBy={modalOpenBy} admins={admins}/>
+                                        <ListModalList loading={loading} students={students} teachers={teachers} modalOpenBy={modalOpenBy} admins={admins} />
                                     </div>
                                 </div>
                             </div>
