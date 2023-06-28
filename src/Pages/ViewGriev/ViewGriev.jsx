@@ -279,7 +279,7 @@ function ViewGriev({ Token, userType }) {
                 <div className="view-bottom">
                     {loading ?
                         <div className="loader-view">
-                            <GridLoader size={30} color="red" />
+                            <GridLoader size={22} color="red" />
                         </div>
                         :
                         <>
