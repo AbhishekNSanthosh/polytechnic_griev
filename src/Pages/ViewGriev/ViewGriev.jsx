@@ -188,6 +188,32 @@ function ViewGriev({ Token, userType }) {
         })
     }
 
+    const handledDeleteCommet = () => {
+        axios.put(`https://flask-production-37b2.up.railway.app/comment_update/${receivedData}/`, {
+            comments: null
+        }, {
+            headers: {
+                'x-access-token': Token
+            }
+        }).then((res) => {
+            if (res) {
+                toast.success('Comment deleted successfully', {
+                    style: {
+                        backgroundColor: "black",
+                        color: '#fff'
+                    }
+                })
+            }
+            setUpdatedComments(null)
+        }).catch((err) => {
+            if (err.response.status === 401) {
+                localStorage.clear()
+                Cookies.remove('access_token')
+                navigate('/')
+            }
+        })
+    }
+
     const handleAction = () => {
         axios.put(`https://flask-production-37b2.up.railway.app/action_update/${receivedData}/`, {
             actions
@@ -196,6 +222,7 @@ function ViewGriev({ Token, userType }) {
                 'x-access-token': Token
             }
         }).then((res) => {
+           if(res){
             toast.success('Commented successfully', {
                 style: {
                     backgroundColor: "black",
@@ -203,6 +230,7 @@ function ViewGriev({ Token, userType }) {
                 }
             })
             setUpdatedActions(actions)
+           }
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
@@ -345,36 +373,40 @@ function ViewGriev({ Token, userType }) {
                                     <div className="actions">
                                         <span className="item-title left">ACTIONS TAKEN:</span>
                                     </div>
-                                        <>
-                                            {updatedActions === "" || updatedActions === null ?
-                                                <div className="actions">
-                                                    <span className="action-taken">No Actions added yet!</span>
-                                                </div>
-                                                :
-                                                <div className="show-comment">
-                                                    <span>{updatedActions}</span>
-                                                </div>
-                                            }
-                                        </>
+                                    <>
+                                        {updatedActions === "" || updatedActions === null ?
+                                            <div className="actions">
+                                                <span className="action-taken">No Actions added yet!</span>
+                                            </div>
+                                            :
+                                            <div className="show-comment">
+                                                <span>{updatedActions}</span>
+                                            </div>
+                                        }
+                                    </>
                                 </div>
                                 <div className="actions-right">
                                     <div className="actions">
                                         <span className="item-title left">COMMENTS:</span>
                                     </div>
-                                        <>
-                                            {updateComments === "" || updateComments === null ?
-                                                <div className="actions">
-                                                    <span className="action-taken">No Comments added yet!</span>
-                                                </div>
-                                                :
-                                                <div className="show-comment">
-                                                    <span>{updateComments}</span>
-                                                </div>
-                                            }
+                                    <>
+                                        {updateComments === "" || updateComments === null ?
                                             <div className="actions">
-
+                                                <span className="action-taken">No Comments added yet!</span>
                                             </div>
-                                        </>
+                                            :
+                                            <div className="show-comment">
+                                                <span>{updateComments}</span>
+                                                <span className="material-icons icon c-delete" onClick={() => {
+                                                    handledDeleteCommet();
+                                                }}>delete_outline</span>
+                                            </div>
+
+                                        }
+                                        <div className="actions">
+
+                                        </div>
+                                    </>
                                 </div>
                             </div>
                             {userType === "Admin" &&
