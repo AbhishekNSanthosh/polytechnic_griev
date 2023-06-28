@@ -45,7 +45,24 @@ export default function ListModal({ modalOpen, getModalStatus, modalOpenBy, Toke
                 }}
             >
                 <Fade in={modalOpen === 'list'}>
-                    <Box sx={style}>
+                    <Box sx={{
+                         position: 'absolute',
+                         top: '50%',
+                         left: '50%',
+                         transform: 'translate(-50%, -50%)',
+                         maxWidth: 600,
+                         width:{
+                            xs:'80%'
+                         },
+                         bgcolor: '#fff',
+                         border: 'none',
+                         borderRadius: '10px',
+                         boxShadow: 24,
+                         p: {
+                            sm:4,
+                            xs:1
+                         },
+                    }}>
                         <div className="modal-box">
                             <div className="modal-box-col">
                                 <div className="modal-box-row">
