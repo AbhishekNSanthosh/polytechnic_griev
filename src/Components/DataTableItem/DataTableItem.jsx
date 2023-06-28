@@ -61,13 +61,13 @@ function DataTableItem({ item, userType, Token, index, getletterCall }) {
                         <td>{item?.created_on.slice(0, 10)}</td>
                         {userType === 'Admin' && <>
                             {item?.status === true ?
-                                <td><span class="material-icons done">mark_email_read</span></td>
+                                <td><span className="material-icons done">mark_email_read</span></td>
                                 :
-                                <td><span class="material-icons undone">mark_email_unread</span></td>
+                                <td><span className="material-icons undone">mark_email_unread</span></td>
                             }
                             <td>
                                 <div className="table-action">
-                                    <span class="material-icons icon" onClick={() => {
+                                    <span className="material-icons icon" onClick={() => {
                                         setModal(true);
                                     }}
                                     >delete_outline</span>

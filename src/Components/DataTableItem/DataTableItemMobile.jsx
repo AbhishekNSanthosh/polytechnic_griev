@@ -72,13 +72,13 @@ function DataTableItemMobile({ index, item, userType, Token, getletterCall }) {
                         <div className="mobile-row-right">
                             <div className="mobile-row-left-row">
                                 {item?.status === true ?
-                                    <span class="material-icons icon">mark_chat_read</span>
+                                    <span className="material-icons icon">mark_chat_read</span>
                                     :
-                                    <span class="material-icons green">mark_chat_unread</span>
+                                    <span className="material-icons green">mark_chat_unread</span>
                                 }
                             </div>
                             <div className="mobile-row-left-row">
-                                <span class="material-icons icon"
+                                <span className="material-icons icon"
                                     onClick={() => {
                                         setModal(true);
                                     }}

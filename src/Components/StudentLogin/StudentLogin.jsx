@@ -33,7 +33,7 @@ const StudentLogin = ({ getLoginPerson, handleLogin }) => {
             <div className='student-login'>
                 <div className="student-login-col">
                     <div className="nav-button-box">
-                        <span class="material-symbols-outlined  nav-button" onClick={() => getLoginPerson('noOne')}>
+                        <span className="material-symbols-outlined  nav-button" onClick={() => getLoginPerson('noOne')}>
                             keyboard_backspace
                         </span>
                     </div>

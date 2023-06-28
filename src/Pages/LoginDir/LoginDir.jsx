@@ -20,9 +20,6 @@ function LoginDir({ getCall2 }) {
   const getLoginPerson = (data) => {
     setLoginPerson(data)
   }
-
-
-
   const handleLogin = async (email, password) => {
     console.log('login called')
     try {

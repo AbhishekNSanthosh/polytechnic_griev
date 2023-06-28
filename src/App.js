@@ -36,7 +36,7 @@ function App() {
   const [reload, setReload] = useState(false);
   const [callUser, setCallUser] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [callReload,setCallReload]= useState(false)
+  const [callReload, setCallReload] = useState(false)
 
   // Simulating data loading using useEffect hook
   useEffect(() => {
@@ -76,7 +76,7 @@ function App() {
             secondary: '#FFFAEE',
           },
         });
-        localStorage.clear();
+        localStorage.clear()
         Cookies.remove('access_token');
         setTimeout(() => {
           window.location.reload()
@@ -87,6 +87,9 @@ function App() {
   useEffect(() => {
     if (token) {
       getUserDetails()
+    } else {
+      localStorage.clear()
+      Cookies.remove('access_token');
     }
   }, [callUser])
 
@@ -114,7 +117,7 @@ function App() {
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              <LoginDir getCall2={getCall2} getReloadCall={getReloadCall}/>
+              <LoginDir getCall2={getCall2} getReloadCall={getReloadCall} />
             </motion.div>}
           />
           <Route path="/dashboard" element={
@@ -123,29 +126,29 @@ function App() {
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              <Dashboard user={user} logCall={callUser} reload={reload} Token={token} getCall={getCall}/>
+              <Dashboard user={user} logCall={callUser} reload={reload} Token={token} getCall={getCall} />
             </motion.div>
           } />
           <Route path="/dashboard/view" element={
             <>
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 1 }}
-                >
-                  <ViewGriev user={user} Token={token} userType={userType}/>
-                </motion.div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+              >
+                <ViewGriev user={user} Token={token} userType={userType} />
+              </motion.div>
             </>
           } />
           <Route path="/dashboard/add-griev" element={
             <>
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 1 }}
-                >
-                  <AddGriev user={user} getCall={getCall} />
-                </motion.div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+              >
+                <AddGriev user={user} getCall={getCall} />
+              </motion.div>
             </>
           } />
           {/* <Route path="/404" element={<NotFoundPage />} />
