@@ -145,7 +145,14 @@ function ViewGriev({ Token, userType }) {
                 'x-access-token': Token
             }
         }).then((res) => {
-            console.log(res)
+           if(res){
+            toast.success(`Status updated: ${updateStatus}`, {
+                style: {
+                    backgroundColor: "black",
+                    color: '#fff'
+                }
+            })
+           }
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
@@ -163,12 +170,14 @@ function ViewGriev({ Token, userType }) {
                 'x-access-token': Token
             }
         }).then((res) => {
-            toast.success('Commented successfully', {
-                style: {
-                    backgroundColor: "black",
-                    color: '#fff'
-                }
-            })
+            if(res){
+                toast.success('Commented successfully', {
+                    style: {
+                        backgroundColor: "black",
+                        color: '#fff'
+                    }
+                })
+            }
             setUpdatedComments(comments)
         }).catch((err) => {
             if (err.response.status === 401) {
@@ -344,7 +353,7 @@ function ViewGriev({ Token, userType }) {
                                                 </div>
                                                 :
                                                 <div className="show-comment">
-                                                    <span>{updateComments}</span>
+                                                    <span>{updatedActions}</span>
                                                 </div>
                                             }
                                         </>
@@ -389,21 +398,21 @@ function ViewGriev({ Token, userType }) {
                                     {userType === 'Admin' ?
                                         <>
                                             <div className="actions">
-                                                <textarea onChange={(e) => {
+                                                <textarea value={actions} onChange={(e) => {
                                                     setActions(e.target.value);
                                                 }} disabled={userType != 'Admin'} className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
                                             </div>
                                             <div className="actions">
                                                 <button onClick={() => {
-                                                    if (comments !== "" && comments !== " ") {
-                                                        handleAction();
-                                                    } else {
+                                                    if (actions === "" && actions === " ") {
                                                         toast.error("Invalid Action!", {
                                                             style: {
                                                                 backgroundColor: 'black',
                                                                 color: '#fff'
                                                             }
                                                         })
+                                                    } else {
+                                                        handleAction();
                                                     }
                                                 }} className="action-submit">Add Action</button>
                                             </div>
