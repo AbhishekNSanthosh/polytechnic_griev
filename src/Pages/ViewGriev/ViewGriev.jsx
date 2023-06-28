@@ -203,8 +203,9 @@ function ViewGriev({ Token, userType }) {
                         color: '#fff'
                     }
                 })
+                setUpdatedComments(null);
+                setComments("");
             }
-            setUpdatedComments(null)
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
@@ -222,15 +223,42 @@ function ViewGriev({ Token, userType }) {
                 'x-access-token': Token
             }
         }).then((res) => {
-           if(res){
-            toast.success('Commented successfully', {
-                style: {
-                    backgroundColor: "black",
-                    color: '#fff'
-                }
-            })
-            setUpdatedActions(actions)
-           }
+            if (res) {
+                toast.success('Commented successfully', {
+                    style: {
+                        backgroundColor: "black",
+                        color: '#fff'
+                    }
+                })
+                setUpdatedActions(actions)
+            }
+        }).catch((err) => {
+            if (err.response.status === 401) {
+                localStorage.clear()
+                Cookies.remove('access_token')
+                navigate('/')
+            }
+        })
+    }
+
+    const handleDeleteAction = () => {
+        axios.put(`https://flask-production-37b2.up.railway.app/action_update/${receivedData}/`, {
+            actions: null
+        }, {
+            headers: {
+                'x-access-token': Token
+            }
+        }).then((res) => {
+            if (res) {
+                toast.success('Comment deleted successfully', {
+                    style: {
+                        backgroundColor: "black",
+                        color: '#fff'
+                    }
+                })
+                setUpdatedActions(null);
+                setActions("");
+            }
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
@@ -381,6 +409,9 @@ function ViewGriev({ Token, userType }) {
                                             :
                                             <div className="show-comment">
                                                 <span>{updatedActions}</span>
+                                                <span className="material-icons icon c-delete" onClick={() => {
+                                                    handleDeleteAction();
+                                                }}>delete_outline</span>
                                             </div>
                                         }
                                     </>
@@ -416,7 +447,7 @@ function ViewGriev({ Token, userType }) {
                                 {userType === 'Admin' &&
                                     <div className="actions-left">
                                         <div className="actions">
-                                            <span className="item-title left"> {actions === null ? "Add" : "Edit"} Action:</span>
+                                            <span className="item-title left"> {updatedActions === null ? "Add" : "Edit"} Action:</span>
                                         </div>
                                         <>
                                             <div className="actions">
@@ -444,7 +475,7 @@ function ViewGriev({ Token, userType }) {
                                 {userType === 'Admin' &&
                                     <div className="actions-right">
                                         <div className="actions">
-                                            <span className="item-title left">{comments === null ? "Add" : "Edit"} Comment:</span>
+                                            <span className="item-title left">{updateComments === null ? "Add" : "Edit"} Comment:</span>
                                         </div>
                                         <>
                                             <div className="actions">
