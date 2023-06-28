@@ -6,7 +6,7 @@
     flex-direction: column;
 }
 
-.modal-box-col{
+.modal-box-col {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,36 +14,61 @@
     gap: 20px;
 }
 
-.modal-box-row{
+.modal-box-row {
     display: flex;
     gap: 20px;
     width: 100%;
     align-items: center;
-    justify-content:center;
+    justify-content: center;
 }
 
-.modal-box-row-admin{
+@media only screen and (max-width: 767px) {
+    .modal-box-row {
+        display: flex;
+        gap: 20px;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.modal-box-row-admin {
     display: flex;
     gap: 20px;
     width: 100%;
     flex-direction: column;
     align-items: center;
-    justify-content:center;
+    justify-content: center;
 }
 
-.modal-box-row-left{
+.modal-box-row-left {
     display: flex;
     gap: 20px;
     width: 100%;
     align-items: center;
-    justify-content:start;
+    justify-content: start;
 }
 
-.modal-box-row-item{
+.modal-box-row-item {
     display: flex;
 }
 
-.modal-box-title{
+
+@media only screen and (max-width: 767px) {
+    .modal-box-row-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .text-box {
+        width: 100%;
+    }
+}
+
+.modal-box-title {
     font-size: 24px;
     text-transform: uppercase;
     display: flex;
@@ -51,7 +76,7 @@
 }
 
 
-.add-submit{
+.add-submit {
     display: flex;
     width: 100%;
     align-items: center;
@@ -59,12 +84,12 @@
     padding: 10px;
     font-size: 20px;
     border: none;
-    background-color:#ffe3e3;
+    background-color: #ffe3e3;
     cursor: pointer;
     border-radius: 10px;
 }
 
-.add-submit:hover{
+.add-submit:hover {
     color: #fff;
     background-color: red;
 }
