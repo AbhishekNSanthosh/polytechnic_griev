@@ -355,7 +355,7 @@ function ViewGriev({ Token, userType }) {
                                     </div>
                                     {userType === 'Admin' ?
                                         <>
-                                            {updateComments === "" ?
+                                            {updateComments === "" || updateComments === null ?
                                                 <div className="actions">
                                                     <span className="action-taken">No Comments added yet!</span>
                                                 </div>
