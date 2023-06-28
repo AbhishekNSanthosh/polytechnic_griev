@@ -22,6 +22,8 @@ function ViewGriev({ Token, userType }) {
     const [disabledButtons, setDisabledButtons] = useState([]);
     const [comments, setComments] = useState("");
     const [updateComments, setUpdatedComments] = useState("");
+    const [actions, setActions] = useState("");
+    const [updatedActions, setUpdatedActions] = useState("");
 
     const handleButtonClick = (index) => {
         setDisabledButtons((prevDisabledButtons) => {
@@ -51,8 +53,10 @@ function ViewGriev({ Token, userType }) {
             }, 1000)
             setLetter(res?.data)
             setUpdateStatus(res?.data?.issue_stat);
-            setComments(res?.data?.comments)
-            setUpdatedComments(res?.data?.comments)
+            setComments(res?.data?.comments);
+            setUpdatedComments(res?.data?.comments);
+            setUpdatedActions(res?.data?.actions);
+            setActions(res?.data?.actions)
         }).catch((err) => {
             setLoading(true);
             if (err.response.status === 401) {
@@ -141,9 +145,20 @@ function ViewGriev({ Token, userType }) {
                 'x-access-token': Token
             }
         }).then((res) => {
-            console.log(res)
+            if (res) {
+                toast.success(`Status updated: ${updateStatus}`, {
+                    style: {
+                        backgroundColor: "black",
+                        color: '#fff'
+                    }
+                })
+            }
         }).catch((err) => {
-            console.log(err)
+            if (err.response.status === 401) {
+                localStorage.clear()
+                Cookies.remove('access_token')
+                navigate('/')
+            }
         })
     }
 
@@ -155,12 +170,76 @@ function ViewGriev({ Token, userType }) {
                 'x-access-token': Token
             }
         }).then((res) => {
-            console.log(res);
+            if (res) {
+                toast.success('Commented successfully', {
+                    style: {
+                        backgroundColor: "black",
+                        color: '#fff'
+                    }
+                })
+            }
             setUpdatedComments(comments)
         }).catch((err) => {
-            console.log(err)
+            if (err.response.status === 401) {
+                localStorage.clear()
+                Cookies.remove('access_token')
+                navigate('/')
+            }
         })
     }
+
+    const handledDeleteCommet = () => {
+        axios.put(`https://flask-production-37b2.up.railway.app/comment_update/${receivedData}/`, {
+            comments: null
+        }, {
+            headers: {
+                'x-access-token': Token
+            }
+        }).then((res) => {
+            if (res) {
+                toast.success('Comment deleted successfully', {
+                    style: {
+                        backgroundColor: "black",
+                        color: '#fff'
+                    }
+                })
+            }
+            setUpdatedComments(null)
+        }).catch((err) => {
+            if (err.response.status === 401) {
+                localStorage.clear()
+                Cookies.remove('access_token')
+                navigate('/')
+            }
+        })
+    }
+
+    const handleAction = () => {
+        axios.put(`https://flask-production-37b2.up.railway.app/action_update/${receivedData}/`, {
+            actions
+        }, {
+            headers: {
+                'x-access-token': Token
+            }
+        }).then((res) => {
+           if(res){
+            toast.success('Commented successfully', {
+                style: {
+                    backgroundColor: "black",
+                    color: '#fff'
+                }
+            })
+            setUpdatedActions(actions)
+           }
+        }).catch((err) => {
+            if (err.response.status === 401) {
+                localStorage.clear()
+                Cookies.remove('access_token')
+                navigate('/')
+            }
+        })
+    }
+
     return (
         <div className='view-griev'>
             <div className="view-container">
@@ -294,73 +373,79 @@ function ViewGriev({ Token, userType }) {
                                     <div className="actions">
                                         <span className="item-title left">ACTIONS TAKEN:</span>
                                     </div>
-                                    {userType === 'Admin' ?
-                                        <>
+                                    <>
+                                        {updatedActions === "" || updatedActions === null ?
                                             <div className="actions">
-                                                <textarea disabled={userType != 'Admin'} className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
+                                                <span className="action-taken">No Actions added yet!</span>
                                             </div>
-                                            <div className="actions">
-                                                <button className="action-submit">Add Action</button>
+                                            :
+                                            <div className="show-comment">
+                                                <span>{updatedActions}</span>
                                             </div>
-                                        </>
-                                        :
-                                        <div className="actions">
-                                            <span className="action-taken">No actions taken yet!</span>
-                                        </div>
-                                    }
+                                        }
+                                    </>
                                 </div>
                                 <div className="actions-right">
                                     <div className="actions">
                                         <span className="item-title left">COMMENTS:</span>
                                     </div>
-                                    {userType === 'Admin' ?
-                                        <>
-                                            {updateComments === "" ?
-                                                <div className="actions">
-                                                    <span className="action-taken">No Comments added yet!</span>
-                                                </div>
-                                                :
-                                                <div className="show-comment">
-                                                    <span>{updateComments}</span>
-                                                </div>
-                                            }
+                                    <>
+                                        {updateComments === "" || updateComments === null ?
                                             <div className="actions">
-
+                                                <span className="action-taken">No Comments added yet!</span>
                                             </div>
-                                        </>
-                                        :
+                                            :
+                                            <div className="show-comment">
+                                                <span>{updateComments}</span>
+                                                <span className="material-icons icon c-delete" onClick={() => {
+                                                    handledDeleteCommet();
+                                                }}>delete_outline</span>
+                                            </div>
+
+                                        }
                                         <div className="actions">
-                                            <span className="action-taken">No Comments added yet!</span>
+
                                         </div>
-                                    }
+                                    </>
                                 </div>
                             </div>
-                            <hr className='hr-view' />
+                            {userType === "Admin" &&
+                                <hr className='hr-view' />
+                            }
                             <div className="actions-container">
-                                <div className="actions-left">
-                                    <div className="actions">
-                                        <span className="item-title left">ACTIONS TAKEN:</span>
-                                    </div>
-                                    {userType === 'Admin' ?
+                                {userType === 'Admin' &&
+                                    <div className="actions-left">
+                                        <div className="actions">
+                                            <span className="item-title left"> {actions === null ? "Add" : "Edit"} Action:</span>
+                                        </div>
                                         <>
                                             <div className="actions">
-                                                <textarea disabled={userType != 'Admin'} className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
+                                                <textarea value={actions} onChange={(e) => {
+                                                    setActions(e.target.value);
+                                                }} disabled={userType != 'Admin'} className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
                                             </div>
                                             <div className="actions">
-                                                <button className="action-submit">Add Action</button>
+                                                <button onClick={() => {
+                                                    if (actions === "" && actions === " ") {
+                                                        toast.error("Invalid Action!", {
+                                                            style: {
+                                                                backgroundColor: 'black',
+                                                                color: '#fff'
+                                                            }
+                                                        })
+                                                    } else {
+                                                        handleAction();
+                                                    }
+                                                }} className="action-submit">Add Action</button>
                                             </div>
                                         </>
-                                        :
-                                        <div className="actions">
-                                            <span className="action-taken">No actions taken yet!</span>
-                                        </div>
-                                    }
-                                </div>
-                                <div className="actions-right">
-                                    <div className="actions">
-                                        <span className="item-title left">COMMENTS:</span>
                                     </div>
-                                    {userType === 'Admin' ?
+                                }
+                                {userType === 'Admin' &&
+                                    <div className="actions-right">
+                                        <div className="actions">
+                                            <span className="item-title left">{comments === null ? "Add" : "Edit"} Comment:</span>
+                                        </div>
                                         <>
                                             <div className="actions">
                                                 <textarea value={comments} disabled={userType != 'Admin'} onChange={(e) => {
@@ -371,23 +456,19 @@ function ViewGriev({ Token, userType }) {
                                                 <button className="action-submit" onClick={() => {
                                                     if (comments !== "" && comments !== " ") {
                                                         handleComment();
-                                                    }else{
-                                                        toast.error("Invalid data!",{
-                                                            style:{
-                                                                backgroundColor:'black',
-                                                                color:'#fff'
+                                                    } else {
+                                                        toast.error("Invalid Comment!", {
+                                                            style: {
+                                                                backgroundColor: 'black',
+                                                                color: '#fff'
                                                             }
                                                         })
                                                     }
                                                 }}>Add Comment</button>
                                             </div>
                                         </>
-                                        :
-                                        <div className="actions">
-                                            <span className="action-taken">No Comments added yet!</span>
-                                        </div>
-                                    }
-                                </div>
+                                    </div>
+                                }
                             </div>
                         </>
                     }

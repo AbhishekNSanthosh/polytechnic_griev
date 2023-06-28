@@ -118,18 +118,19 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                 }, 900);
                 setLetters(res.data)
             }).catch((err) => {
-                setLoading(false);
                 if (err.response.status === 401) {
                     localStorage.clear()
                     Cookies.remove('access_token')
                 }
+                setLoading(false);
             })
         } catch (error) {
-            setLoading(false)
+            console.log(error)
             if (error.response.status === 401) {
                 localStorage.clear()
                 Cookies.remove('access_token')
             }
+            setLoading(false)
         }
     }
 
