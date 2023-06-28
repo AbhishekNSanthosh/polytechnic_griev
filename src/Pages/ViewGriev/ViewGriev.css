@@ -261,3 +261,11 @@
     border: none;
     border-radius: 10px;
 }
+
+.show-comment{
+    display: flex;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 0.5px solid rgb(211, 211, 211);
+}

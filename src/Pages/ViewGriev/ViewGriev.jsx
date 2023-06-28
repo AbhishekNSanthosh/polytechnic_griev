@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { GridLoader } from 'react-spinners';
+import { toast } from 'react-hot-toast';
 
 function ViewGriev({ Token, userType }) {
 
@@ -19,6 +20,8 @@ function ViewGriev({ Token, userType }) {
     const [access, setAccess] = useState("");
     const [clicked, setClicked] = useState(false);
     const [disabledButtons, setDisabledButtons] = useState([]);
+    const [comments, setComments] = useState("");
+    const [updateComments, setUpdatedComments] = useState("");
 
     const handleButtonClick = (index) => {
         setDisabledButtons((prevDisabledButtons) => {
@@ -47,7 +50,9 @@ function ViewGriev({ Token, userType }) {
                 setLoading(false)
             }, 1000)
             setLetter(res?.data)
-            setUpdateStatus(res?.data?.issue_stat)
+            setUpdateStatus(res?.data?.issue_stat);
+            setComments(res?.data?.comments)
+            setUpdatedComments(res?.data?.comments)
         }).catch((err) => {
             setLoading(true);
             if (err.response.status === 401) {
@@ -142,7 +147,20 @@ function ViewGriev({ Token, userType }) {
         })
     }
 
-    console.log(teachers)
+    const handleComment = () => {
+        axios.put(`https://flask-production-37b2.up.railway.app/comment_update/${receivedData}/`, {
+            comments
+        }, {
+            headers: {
+                'x-access-token': Token
+            }
+        }).then((res) => {
+            console.log(res);
+            setUpdatedComments(comments)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
     return (
         <div className='view-griev'>
             <div className="view-container">
@@ -271,7 +289,53 @@ function ViewGriev({ Token, userType }) {
                                     </div>
                                 </div>
                             } */}
-                            <hr className='hr-view'/>
+                            <div className="actions-container">
+                                <div className="actions-left">
+                                    <div className="actions">
+                                        <span className="item-title left">ACTIONS TAKEN:</span>
+                                    </div>
+                                    {userType === 'Admin' ?
+                                        <>
+                                            <div className="actions">
+                                                <textarea disabled={userType != 'Admin'} className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
+                                            </div>
+                                            <div className="actions">
+                                                <button className="action-submit">Add Action</button>
+                                            </div>
+                                        </>
+                                        :
+                                        <div className="actions">
+                                            <span className="action-taken">No actions taken yet!</span>
+                                        </div>
+                                    }
+                                </div>
+                                <div className="actions-right">
+                                    <div className="actions">
+                                        <span className="item-title left">COMMENTS:</span>
+                                    </div>
+                                    {userType === 'Admin' ?
+                                        <>
+                                            {updateComments === "" ?
+                                                <div className="actions">
+                                                    <span className="action-taken">No Comments added yet!</span>
+                                                </div>
+                                                :
+                                                <div className="show-comment">
+                                                    <span>{updateComments}</span>
+                                                </div>
+                                            }
+                                            <div className="actions">
+
+                                            </div>
+                                        </>
+                                        :
+                                        <div className="actions">
+                                            <span className="action-taken">No Comments added yet!</span>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <hr className='hr-view' />
                             <div className="actions-container">
                                 <div className="actions-left">
                                     <div className="actions">
@@ -299,15 +363,28 @@ function ViewGriev({ Token, userType }) {
                                     {userType === 'Admin' ?
                                         <>
                                             <div className="actions">
-                                                <textarea disabled={userType != 'Admin'} className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
+                                                <textarea value={comments} disabled={userType != 'Admin'} onChange={(e) => {
+                                                    setComments(e.target.value)
+                                                }} className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
                                             </div>
                                             <div className="actions">
-                                                <button className="action-submit">Add Action</button>
+                                                <button className="action-submit" onClick={() => {
+                                                    if (comments !== "" && comments !== " ") {
+                                                        handleComment();
+                                                    }else{
+                                                        toast.error("Invalid data!",{
+                                                            style:{
+                                                                backgroundColor:'black',
+                                                                color:'#fff'
+                                                            }
+                                                        })
+                                                    }
+                                                }}>Add Comment</button>
                                             </div>
                                         </>
                                         :
                                         <div className="actions">
-                                            <span className="action-taken">No actions taken yet!</span>
+                                            <span className="action-taken">No Comments added yet!</span>
                                         </div>
                                     }
                                 </div>
