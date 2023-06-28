@@ -21,7 +21,6 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     const [callLetter, setCallLetter] = useState(false);
 
     const navigate = useNavigate();
-
     const userType = localStorage.getItem('usertype')
     const userObj = localStorage.getItem('user')
     const userData = JSON.parse(userObj);
@@ -171,7 +170,6 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
             navigate('/')
         }
     }, [])
-
 
     useEffect(() => {
         if (userType === 'Admin') {
