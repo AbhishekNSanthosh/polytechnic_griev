@@ -222,7 +222,25 @@ export default function AddModal({ modalOpen, getModalStatus, modalOpenBy, Token
                 }}
             >
                 <Fade in={modalOpen === 'add'}>
-                    <Box sx={style}>
+                    <Box sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        maxWidth: 600,
+                        width:{
+                            sm:'100%',
+                            xs:'80%'
+                        },
+                        bgcolor: '#fff',
+                        border: 'none',
+                        borderRadius: '10px',
+                        boxShadow: 24,
+                        p: {
+                            sm:4,
+                            xs:1
+                        },
+                    }}>
                         <div className="modal-box">
                             <div className="modal-box-col">
                                 <div className="modal-box-row">
@@ -234,7 +252,7 @@ export default function AddModal({ modalOpen, getModalStatus, modalOpenBy, Token
                                 </div>
                                 <div className={modalOpenBy === 'add-admin' ? "modal-box-row-admin" : "modal-box-row"}>
                                     <div className="modal-box-row-item">
-                                        <TextField variant='outlined' label="Username" value={name} onChange={(e) => { setName(e.target.value) }} />
+                                        <TextField className='text-box' variant='outlined' label="Username" value={name} onChange={(e) => { setName(e.target.value) }} />
                                     </div>
                                     <div className="modal-box-row-item">
                                         <TextField variant='outlined' label="Email" onChange={(e) => { setEmail(e.target.value) }} />

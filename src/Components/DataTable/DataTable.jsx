@@ -19,7 +19,7 @@ const DataTable = ({ userType, data, loading, Token, getletterCall }) => {
 
                 {loading ?
                     <div className="loading">
-                        <GridLoader size={30} color="red" />
+                        <GridLoader size={22} color="red" />
                     </div>
                     :
                     <table className="product-table">
