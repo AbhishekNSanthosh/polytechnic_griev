@@ -22,6 +22,8 @@ function ViewGriev({ Token, userType }) {
     const [disabledButtons, setDisabledButtons] = useState([]);
     const [comments, setComments] = useState("");
     const [updateComments, setUpdatedComments] = useState("");
+    const [actions,setActions] = useState("");
+    const [updatedActions,setUpdatedActions] = useState("");
 
     const handleButtonClick = (index) => {
         setDisabledButtons((prevDisabledButtons) => {
@@ -143,7 +145,11 @@ function ViewGriev({ Token, userType }) {
         }).then((res) => {
             console.log(res)
         }).catch((err) => {
-            console.log(err)
+            if (err.response.status === 401) {
+                localStorage.clear()
+                Cookies.remove('access_token')
+                navigate('/')
+            }
         })
     }
 
@@ -155,12 +161,46 @@ function ViewGriev({ Token, userType }) {
                 'x-access-token': Token
             }
         }).then((res) => {
-            console.log(res);
+            toast.success('Commented successfully',{
+                style:{
+                    backgroundColor:"black",
+                    color:'#fff'
+                }
+            })
             setUpdatedComments(comments)
         }).catch((err) => {
-            console.log(err)
+            if (err.response.status === 401) {
+                localStorage.clear()
+                Cookies.remove('access_token')
+                navigate('/')
+            }
         })
     }
+
+    const handleAction = () => {
+        axios.put(`https://flask-production-37b2.up.railway.app/action_update/${receivedData}/`, {
+            comments
+        }, {
+            headers: {
+                'x-access-token': Token
+            }
+        }).then((res) => {
+            toast.success('Commented successfully',{
+                style:{
+                    backgroundColor:"black",
+                    color:'#fff'
+                }
+            })
+            setUpdatedComments(comments)
+        }).catch((err) => {
+            if (err.response.status === 401) {
+                localStorage.clear()
+                Cookies.remove('access_token')
+                navigate('/')
+            }
+        })
+    }
+
     return (
         <div className='view-griev'>
             <div className="view-container">
@@ -371,11 +411,11 @@ function ViewGriev({ Token, userType }) {
                                                 <button className="action-submit" onClick={() => {
                                                     if (comments !== "" && comments !== " ") {
                                                         handleComment();
-                                                    }else{
-                                                        toast.error("Invalid data!",{
-                                                            style:{
-                                                                backgroundColor:'black',
-                                                                color:'#fff'
+                                                    } else {
+                                                        toast.error("Invalid data!", {
+                                                            style: {
+                                                                backgroundColor: 'black',
+                                                                color: '#fff'
                                                             }
                                                         })
                                                     }
