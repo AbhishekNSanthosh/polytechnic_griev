@@ -145,14 +145,14 @@ function ViewGriev({ Token, userType }) {
                 'x-access-token': Token
             }
         }).then((res) => {
-           if(res){
-            toast.success(`Status updated: ${updateStatus}`, {
-                style: {
-                    backgroundColor: "black",
-                    color: '#fff'
-                }
-            })
-           }
+            if (res) {
+                toast.success(`Status updated: ${updateStatus}`, {
+                    style: {
+                        backgroundColor: "black",
+                        color: '#fff'
+                    }
+                })
+            }
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
@@ -170,7 +170,7 @@ function ViewGriev({ Token, userType }) {
                 'x-access-token': Token
             }
         }).then((res) => {
-            if(res){
+            if (res) {
                 toast.success('Commented successfully', {
                     style: {
                         backgroundColor: "black",
@@ -345,7 +345,6 @@ function ViewGriev({ Token, userType }) {
                                     <div className="actions">
                                         <span className="item-title left">ACTIONS TAKEN:</span>
                                     </div>
-                                    {userType === 'Admin' ?
                                         <>
                                             {updatedActions === "" || updatedActions === null ?
                                                 <div className="actions">
@@ -357,17 +356,11 @@ function ViewGriev({ Token, userType }) {
                                                 </div>
                                             }
                                         </>
-                                        :
-                                        <div className="actions">
-                                            <span className="action-taken">No actions taken yet!</span>
-                                        </div>
-                                    }
                                 </div>
                                 <div className="actions-right">
                                     <div className="actions">
                                         <span className="item-title left">COMMENTS:</span>
                                     </div>
-                                    {userType === 'Admin' ?
                                         <>
                                             {updateComments === "" || updateComments === null ?
                                                 <div className="actions">
@@ -382,20 +375,17 @@ function ViewGriev({ Token, userType }) {
 
                                             </div>
                                         </>
-                                        :
-                                        <div className="actions">
-                                            <span className="action-taken">No Comments added yet!</span>
-                                        </div>
-                                    }
                                 </div>
                             </div>
-                            <hr className='hr-view' />
+                            {userType === "Admin" &&
+                                <hr className='hr-view' />
+                            }
                             <div className="actions-container">
-                                <div className="actions-left">
-                                    <div className="actions">
-                                        <span className="item-title left">ACTIONS TAKEN:</span>
-                                    </div>
-                                    {userType === 'Admin' ?
+                                {userType === 'Admin' &&
+                                    <div className="actions-left">
+                                        <div className="actions">
+                                            <span className="item-title left"> {actions === null ? "Add" : "Edit"} Action:</span>
+                                        </div>
                                         <>
                                             <div className="actions">
                                                 <textarea value={actions} onChange={(e) => {
@@ -417,17 +407,13 @@ function ViewGriev({ Token, userType }) {
                                                 }} className="action-submit">Add Action</button>
                                             </div>
                                         </>
-                                        :
-                                        <div className="actions">
-                                            <span className="action-taken">No actions taken yet!</span>
-                                        </div>
-                                    }
-                                </div>
-                                <div className="actions-right">
-                                    <div className="actions">
-                                        <span className="item-title left">COMMENTS:</span>
                                     </div>
-                                    {userType === 'Admin' ?
+                                }
+                                {userType === 'Admin' &&
+                                    <div className="actions-right">
+                                        <div className="actions">
+                                            <span className="item-title left">{comments === null ? "Add" : "Edit"} Comment:</span>
+                                        </div>
                                         <>
                                             <div className="actions">
                                                 <textarea value={comments} disabled={userType != 'Admin'} onChange={(e) => {
@@ -449,12 +435,8 @@ function ViewGriev({ Token, userType }) {
                                                 }}>Add Comment</button>
                                             </div>
                                         </>
-                                        :
-                                        <div className="actions">
-                                            <span className="action-taken">No Comments added yet!</span>
-                                        </div>
-                                    }
-                                </div>
+                                    </div>
+                                }
                             </div>
                         </>
                     }
