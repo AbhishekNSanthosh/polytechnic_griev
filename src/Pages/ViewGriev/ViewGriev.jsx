@@ -22,8 +22,8 @@ function ViewGriev({ Token, userType }) {
     const [disabledButtons, setDisabledButtons] = useState([]);
     const [comments, setComments] = useState("");
     const [updateComments, setUpdatedComments] = useState("");
-    const [actions,setActions] = useState("");
-    const [updatedActions,setUpdatedActions] = useState("");
+    const [actions, setActions] = useState("");
+    const [updatedActions, setUpdatedActions] = useState("");
 
     const handleButtonClick = (index) => {
         setDisabledButtons((prevDisabledButtons) => {
@@ -53,8 +53,10 @@ function ViewGriev({ Token, userType }) {
             }, 1000)
             setLetter(res?.data)
             setUpdateStatus(res?.data?.issue_stat);
-            setComments(res?.data?.comments)
-            setUpdatedComments(res?.data?.comments)
+            setComments(res?.data?.comments);
+            setUpdatedComments(res?.data?.comments);
+            setUpdatedActions(res?.data?.actions);
+            setActions(res?.data?.actions)
         }).catch((err) => {
             setLoading(true);
             if (err.response.status === 401) {
@@ -161,10 +163,10 @@ function ViewGriev({ Token, userType }) {
                 'x-access-token': Token
             }
         }).then((res) => {
-            toast.success('Commented successfully',{
-                style:{
-                    backgroundColor:"black",
-                    color:'#fff'
+            toast.success('Commented successfully', {
+                style: {
+                    backgroundColor: "black",
+                    color: '#fff'
                 }
             })
             setUpdatedComments(comments)
@@ -179,19 +181,19 @@ function ViewGriev({ Token, userType }) {
 
     const handleAction = () => {
         axios.put(`https://flask-production-37b2.up.railway.app/action_update/${receivedData}/`, {
-            comments
+            actions
         }, {
             headers: {
                 'x-access-token': Token
             }
         }).then((res) => {
-            toast.success('Commented successfully',{
-                style:{
-                    backgroundColor:"black",
-                    color:'#fff'
+            toast.success('Commented successfully', {
+                style: {
+                    backgroundColor: "black",
+                    color: '#fff'
                 }
             })
-            setUpdatedComments(comments)
+            setUpdatedActions(actions)
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
@@ -336,12 +338,15 @@ function ViewGriev({ Token, userType }) {
                                     </div>
                                     {userType === 'Admin' ?
                                         <>
-                                            <div className="actions">
-                                                <textarea disabled={userType != 'Admin'} className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
-                                            </div>
-                                            <div className="actions">
-                                                <button className="action-submit">Add Action</button>
-                                            </div>
+                                            {updatedActions === "" || updatedActions === null ?
+                                                <div className="actions">
+                                                    <span className="action-taken">No Actions added yet!</span>
+                                                </div>
+                                                :
+                                                <div className="show-comment">
+                                                    <span>{updateComments}</span>
+                                                </div>
+                                            }
                                         </>
                                         :
                                         <div className="actions">
@@ -384,10 +389,23 @@ function ViewGriev({ Token, userType }) {
                                     {userType === 'Admin' ?
                                         <>
                                             <div className="actions">
-                                                <textarea disabled={userType != 'Admin'} className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
+                                                <textarea onChange={(e) => {
+                                                    setActions(e.target.value);
+                                                }} disabled={userType != 'Admin'} className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
                                             </div>
                                             <div className="actions">
-                                                <button className="action-submit">Add Action</button>
+                                                <button onClick={() => {
+                                                    if (comments !== "" && comments !== " ") {
+                                                        handleAction();
+                                                    } else {
+                                                        toast.error("Invalid Action!", {
+                                                            style: {
+                                                                backgroundColor: 'black',
+                                                                color: '#fff'
+                                                            }
+                                                        })
+                                                    }
+                                                }} className="action-submit">Add Action</button>
                                             </div>
                                         </>
                                         :
@@ -412,7 +430,7 @@ function ViewGriev({ Token, userType }) {
                                                     if (comments !== "" && comments !== " ") {
                                                         handleComment();
                                                     } else {
-                                                        toast.error("Invalid data!", {
+                                                        toast.error("Invalid Comment!", {
                                                             style: {
                                                                 backgroundColor: 'black',
                                                                 color: '#fff'
