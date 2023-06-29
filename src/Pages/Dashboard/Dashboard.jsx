@@ -137,6 +137,7 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     const getUserLetter = () => {
         setLoading(true)
         try {
+            console.log(Token)
             axios.get('https://flask-production-37b2.up.railway.app/student_letters/' + userData?.id + "/", {
                 headers: {
                     'x-access-token': Token

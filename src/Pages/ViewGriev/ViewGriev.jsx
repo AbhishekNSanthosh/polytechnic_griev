@@ -244,8 +244,30 @@ function ViewGriev({ Token, userType, teachers }) {
             }
         })
     }
+    const selectedTeachersString = JSON.stringify(selectedTeachers);
 
-    console.log("access", selectedTeachers)
+    const handleUpdateViewAccess = () => {
+        axios.put(`https://flask-production-37b2.up.railway.app/update_view_access_letter/${receivedData}/`, {
+            ids: selectedTeachersString
+        }, {
+            headers: {
+                'x-access-token': Token
+            }
+        }).then((res) => {
+            console.log(res)
+        }).catch((err) => {
+            if (err.response.status === 401) {
+                localStorage.clear()
+                Cookies.remove('access_token')
+                navigate('/')
+            }
+        })
+    }
+
+
+
+    console.log("access", selectedTeachersString)
+
     return (
         <div className='view-griev'>
             <div className="view-container">
@@ -385,6 +407,9 @@ function ViewGriev({ Token, userType, teachers }) {
                                     </div>
                                 </div>
                             } */}
+                            {userType === "Admin" &&
+                                <hr className='hr-view' />
+                            }
                             <div className="view-access-container">
                                 <div className="view-access-col">
                                     <div className="view-access-row left-row">
@@ -406,7 +431,7 @@ function ViewGriev({ Token, userType, teachers }) {
                                             {showTeachers ?
                                                 <>
                                                     <span className="show-more">HIDE ALL TEACHERS </span>
-                                                    <span class='material-icons'>expand_more</span>
+                                                    <span class="material-icons">expand_less</span>
                                                 </>
                                                 :
                                                 <>
@@ -434,6 +459,13 @@ function ViewGriev({ Token, userType, teachers }) {
                                                         </button>
                                                     ))}
                                                 </div>
+                                                {selectedTeachers.length !== 0 &&
+                                                    <div className="actions view-actions">
+                                                        <button className="action-submit" onClick={() => {
+                                                           handleUpdateViewAccess();
+                                                        }}>Give View Access</button>
+                                                    </div>
+                                                }
                                             </motion.div>
                                         }
                                     </div>
@@ -462,6 +494,9 @@ function ViewGriev({ Token, userType, teachers }) {
                                     }
                                 </div>
                             </div>
+                            {userType === "Admin" &&
+                                <hr className='hr-view' />
+                            }
                             <div className="actions-container">
                                 <div className="actions-left">
                                     <div className="actions">

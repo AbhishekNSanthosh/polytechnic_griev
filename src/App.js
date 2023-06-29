@@ -66,17 +66,17 @@ function App() {
             color: '#fff'
           }
         })
-        toast.error('Please Login', {
-          style: {
-            border: '1px solid #713200',
-            padding: '10px',
-            color: '#713200',
-          },
-          iconTheme: {
-            primary: '#713200',
-            secondary: '#FFFAEE',
-          },
-        });
+        // toast.error('Please Login', {
+        //   style: {
+        //     border: '1px solid #713200',
+        //     padding: '10px',
+        //     color: '#713200',
+        //   },
+        //   iconTheme: {
+        //     primary: '#713200',
+        //     secondary: '#FFFAEE',
+        //   },
+        // });
         localStorage.clear()
         Cookies.remove('access_token');
         setTimeout(() => {
@@ -111,9 +111,6 @@ function App() {
     if (token) {
       getUserDetails();
       getAllTeachers();
-    } else {
-      localStorage.clear()
-      Cookies.remove('access_token');
     }
   }, [callUser])
 
