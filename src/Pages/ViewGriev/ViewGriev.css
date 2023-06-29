@@ -283,3 +283,35 @@
 .c-delete:hover{
     transform: scale(1.05);
 }
+
+.view-access-container{
+    display: flex;
+    align-items: center;
+    background-color: aqua;
+}
+
+.view-access-col{
+    flex: 8;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+
+}
+
+
+.view-access-col-right{
+    flex: 4;
+    display: flex;
+}
+
+.button-div{
+    border: 1px solid rgb(184, 184, 184);
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    width: 300px;
+    font-size: 16px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}

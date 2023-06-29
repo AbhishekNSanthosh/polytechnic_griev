@@ -11,7 +11,7 @@ import Cookies from 'js-cookie';
 import { GridLoader } from 'react-spinners';
 import { toast } from 'react-hot-toast';
 
-function ViewGriev({ Token, userType ,teachers}) {
+function ViewGriev({ Token, userType, teachers }) {
 
     const [letter, setLetter] = useState({});
     const [loading, setLoading] = useState(false);
@@ -344,7 +344,7 @@ function ViewGriev({ Token, userType ,teachers}) {
                                 </div>
                             }
 
-                            {userType === 'Admin' &&
+                            {/* {userType === 'Admin' &&
                                 <div className="view-item">
                                     <div className="view-item-left">
                                         <div className="view-item-left-title">
@@ -382,7 +382,35 @@ function ViewGriev({ Token, userType ,teachers}) {
                                         </div>
                                     </div>
                                 </div>
-                            }
+                            } */}
+                            <div className="view-access-container">
+                                <div className="view-access-col">
+                                    <div className="view-access-row">
+                                        <span className="item-title left">CUSTOMIZE VIEW ACCESS:</span>
+                                    </div>
+                                    <div className="view-access-row">
+                                        <div className="button-div">
+                                            <span className="show-more">Show all teachers </span>
+                                            <span class='material-icons'>expand_more</span>
+                                        </div>
+                                        <div className="container-access">
+                                            {teachers.length !== 0 && teachers.map((teacher, index) => (
+                                                <button disabled={disabledButtons[index]} className="access-item">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={selectedTeachers.some(selected => selected.id === teacher.id)}
+                                                        onChange={() => handleTeacherSelection(teacher.id, teacher.email)}
+                                                    />
+                                                    <span className='access-name'>{teacher?.email}</span>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="view-access-col-right">
+                                    h
+                                </div>
+                            </div>
                             <div className="actions-container">
                                 <div className="actions-left">
                                     <div className="actions">
