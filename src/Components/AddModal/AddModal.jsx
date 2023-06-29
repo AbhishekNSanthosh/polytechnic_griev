@@ -7,7 +7,6 @@ import './AddModal.css'
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
-import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
 const style = {

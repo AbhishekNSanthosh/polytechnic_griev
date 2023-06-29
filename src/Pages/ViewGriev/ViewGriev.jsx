@@ -7,7 +7,6 @@ import Select from '@mui/material/Select';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect } from 'react';
-import Cookies from 'js-cookie';
 import { GridLoader } from 'react-spinners';
 import { toast } from 'react-hot-toast';
 import { motion } from 'framer-motion'

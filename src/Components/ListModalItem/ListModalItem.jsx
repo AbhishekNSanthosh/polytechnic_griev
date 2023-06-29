@@ -3,7 +3,6 @@ import './ListModalItem.css'
 import { Skeleton } from '@mui/material'
 
 export default function ListModalItem({ loading, student, index }) {
-  console.log(loading)
   return (
     <div className='list-item'>
       {!loading ?

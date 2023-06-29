@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import Backdrop from '@mui/material/Backdrop';
 import axios from 'axios'
 import { Box, Fade, Modal } from '@mui/material'
-import Cookies from 'js-cookie';
 import { toast } from 'react-hot-toast';
+
 const style = {
     position: 'absolute',
     top: '50%',

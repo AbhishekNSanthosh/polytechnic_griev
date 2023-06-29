@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Dashboard.css'
 import DataTable from '../../Components/DataTable/DataTable'
-import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Buttons from '../../Components/Buttons/Buttons';

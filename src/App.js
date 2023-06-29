@@ -12,7 +12,6 @@ import ViewGriev from "./Pages/ViewGriev/ViewGriev";
 import { toast, Toaster } from "react-hot-toast";
 import AddTool from "./Components/AddTool/AddTool";
 import AddGriev from "./Pages/AddGriev/AddGriev";
-import Cookies from "js-cookie";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { motion } from 'framer-motion'
@@ -27,9 +26,6 @@ const theme = createTheme({
     },
   },
 });
-
-
-
 
 function App() {
   const [user, setUser] = useState(null)
@@ -66,17 +62,17 @@ function App() {
             color: '#fff'
           }
         })
-        // toast.error('Please Login', {
-        //   style: {
-        //     border: '1px solid #713200',
-        //     padding: '10px',
-        //     color: '#713200',
-        //   },
-        //   iconTheme: {
-        //     primary: '#713200',
-        //     secondary: '#FFFAEE',
-        //   },
-        // });
+        toast.error('Please Login', {
+          style: {
+            border: '1px solid #713200',
+            padding: '10px',
+            color: '#713200',
+          },
+          iconTheme: {
+            primary: '#713200',
+            secondary: '#FFFAEE',
+          },
+        });
         localStorage.clear()
         setTimeout(() => {
           window.location.reload()
