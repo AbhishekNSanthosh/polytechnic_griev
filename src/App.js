@@ -46,7 +46,7 @@ function App() {
     }, 1000);
   }, []);
 
-  const token = Cookies.get('access_token');
+  const token = localStorage.getItem('access_token');
 
   const userType = localStorage.getItem('usertype')
   const getUserDetails = () => {
@@ -110,7 +110,7 @@ function App() {
   useEffect(() => {
     if (token) {
       getUserDetails();
-      getAllTeachers();
+      // getAllTeachers();
     }
   }, [callUser])
 

@@ -30,7 +30,7 @@ function LoginDir({ getCall2 }) {
         setUser(res.data.role)
         localStorage.setItem('usertype', res.data.role)
         getCall2(true)
-        Cookies.set('access_token', res.data.token);
+        localStorage.setItem('access_token', res.data.token);
         toast.success('Logged in successfully.', {
           position: 'bottom-center',
           style: {
