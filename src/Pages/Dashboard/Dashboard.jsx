@@ -165,6 +165,37 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
         }
     }
 
+    const getTeacherLetters = () => {
+        setLoading(true)
+        try {
+            console.log(Token)
+            axios.get('https://flask-production-37b2.up.railway.app/teacher_permitted_letters/', {
+                headers: {
+                    'x-access-token': Token
+                }
+            }).then((res) => {
+                setTimeout(() => {
+                    setLoading(false);
+                }, 2000);
+                setLetters(res.data);
+            }).catch((err) => {
+                setLoading(false);
+                if (err.response.status === 401) {
+                    localStorage.clear()
+                    Cookies.remove('access_token')
+                    navigate('/')
+                }
+            })
+        } catch (error) {
+            setLoading(false);
+            if (error.response.status === 401) {
+                localStorage.clear()
+                Cookies.remove('access_token')
+                navigate('/')
+            }
+        }
+    }
+
     useEffect(() => {
         if (!Token) {
             localStorage.clear()
@@ -182,6 +213,12 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     useEffect(() => {
         if (userType === 'Student') {
             getUserLetter();
+        }
+    }, [reload, logCall, callLetter])
+
+    useEffect(() => {
+        if (userType === 'Teacher') {
+            getTeacherLetters();
         }
     }, [reload, logCall, callLetter])
 
