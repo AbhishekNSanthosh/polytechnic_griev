@@ -405,19 +405,19 @@ function ViewGriev({ Token, userType, teachers }) {
                                         }}>
                                             {showTeachers ?
                                                 <>
-                                                    <span className="show-more">Hide all teachers </span>
+                                                    <span className="show-more">HIDE ALL TEACHERS </span>
                                                     <span class='material-icons'>expand_more</span>
                                                 </>
                                                 :
                                                 <>
-                                                    <span className="show-more">Show all teachers </span>
+                                                    <span className="show-more">SHOW ALL TEACHERS </span>
                                                     <span class='material-icons'>expand_more</span>
                                                 </>
                                             }
                                         </div>
                                         {showTeachers &&
                                             <motion.div
-                                            className='motion'
+                                                className='motion'
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
                                                 transition={{ duration: 1 }}
@@ -439,7 +439,23 @@ function ViewGriev({ Token, userType, teachers }) {
                                     </div>
                                 </div>
                                 <div className="view-access-col-right">
-                                    h
+                                        <div className="button-div-view-access">
+                                            <span className="permision left">VIEW ACCESS PERMISSIONS:</span>
+                                        </div>
+                                    <div className='view-access-permission'>
+                                        <ul>
+                                            {generateViewAccessPermissions().map(permission => (
+                                                // <li key={permission.id}>
+                                                //     {/* ID: {permission.id}, */}
+                                                //     Email: {permission.email}
+                                                // </li>
+
+                                                <button key={permission?.id} className="view-access-item">
+                                                    <span className='access-name'>Email: {permission.email}</span>
+                                                </button>
+                                            ))}
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                             <div className="actions-container">

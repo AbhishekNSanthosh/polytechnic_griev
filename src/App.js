@@ -110,17 +110,17 @@ function App() {
   useEffect(() => {
     if (token) {
       getUserDetails();
+      getAllTeachers();
     } else {
       localStorage.clear()
       Cookies.remove('access_token');
     }
   }, [callUser])
 
-  useEffect(() => {
-    if (token) {
-      getAllTeachers();
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (token) {
+  //   }
+  // }, [])
 
   const getCall = (data) => {
     setReload(data)

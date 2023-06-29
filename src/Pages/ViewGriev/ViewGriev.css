@@ -270,7 +270,9 @@
 
 .view-access-container{
     display: flex;
-    align-items: center;
+    align-items: start;
+    gap: 20px;
+    justify-content: space-between;
     padding: 10px 0px;
 }
 
@@ -282,11 +284,6 @@
 
 }
 
-
-.view-access-col-right{
-    flex: 4;
-    display: flex;
-}
 
 .button-div-view{
     border: 1px solid rgb(184, 184, 184);
@@ -335,4 +332,55 @@
 
 .motion{
     width: 100%;
+}
+
+
+.view-access-col-right{
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0px 20px;
+    align-items: start;
+    justify-content: center;
+}
+
+.view-access-permission{
+    display: flex;
+    flex-direction: column;
+    max-height: 250px;
+    overflow-y: auto;
+    box-shadow: 0px 1px 3px 3px rgb(235, 235, 235);
+    width: 100%;
+    border-radius: 7px;
+}
+
+.permision{
+    font-size: 17px;
+}
+
+.view-access-item{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 19px;
+    width: 100%;
+    gap: 10px;
+    background-color: #fff;
+    border:none;
+    border-bottom: 1px solid rgb(255, 203, 203);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.button-div-view-access{
+    border: 1px solid rgb(184, 184, 184);
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    width: 300px;
+    font-size: 15px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
