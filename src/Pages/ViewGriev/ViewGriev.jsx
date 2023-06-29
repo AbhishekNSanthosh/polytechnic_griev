@@ -61,7 +61,13 @@ function ViewGriev({ Token, userType }) {
             setUpdatedActions(res?.data?.actions);
             setActions(res?.data?.actions);
             let recievedIds = JSON.parse(res.data.view_access_ids);
-            setSelectedTeachers(recievedIds)
+            if (recievedIds === null) {
+                setSelectedTeachers([])
+                console.log('null case',selectedTeachers);
+            } else {
+                setSelectedTeachers(recievedIds);
+                console.log(selectedTeachers);
+            }
         }).catch((err) => {
             setLoading(true);
             if (err.response.status === 401) {
@@ -455,7 +461,7 @@ function ViewGriev({ Token, userType }) {
                                         </div>
                                     </div>
                                     <div className="view-access-col-right">
-                                        {selectedTeachers.length !== 0 &&
+                                        {selectedTeachers !== null &&
                                             <>
                                                 <div className="button-div-view-access">
                                                     <span className="permision left">VIEW ACCESS PERMISSIONS:</span>
