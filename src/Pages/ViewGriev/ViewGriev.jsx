@@ -66,7 +66,6 @@ function ViewGriev({ Token, userType, teachers }) {
             setLoading(true);
             if (err.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         })
@@ -92,7 +91,6 @@ function ViewGriev({ Token, userType, teachers }) {
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         })
@@ -133,7 +131,6 @@ function ViewGriev({ Token, userType, teachers }) {
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         })
@@ -159,7 +156,6 @@ function ViewGriev({ Token, userType, teachers }) {
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         })
@@ -186,7 +182,6 @@ function ViewGriev({ Token, userType, teachers }) {
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         })
@@ -212,7 +207,6 @@ function ViewGriev({ Token, userType, teachers }) {
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         })
@@ -239,7 +233,6 @@ function ViewGriev({ Token, userType, teachers }) {
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         })
@@ -258,7 +251,6 @@ function ViewGriev({ Token, userType, teachers }) {
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         })

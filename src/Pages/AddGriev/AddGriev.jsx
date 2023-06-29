@@ -19,7 +19,6 @@ function AddGriev({ user, getCall }) {
     useEffect(() => {
         if (!Token) {
             localStorage.clear()
-            Cookies.remove('access_token')
             toast.error('Session Expired!.', {
                 position: 'bottom-center',
                 style: {
@@ -54,7 +53,6 @@ function AddGriev({ user, getCall }) {
             }).catch((err) => {
                 if (err.response.status === 401) {
                     localStorage.clear()
-                    Cookies.remove('access_token')
                     navigate('/')
                 }
                 toast.error('Something went wrong!.', {

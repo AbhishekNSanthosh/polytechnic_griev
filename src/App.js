@@ -78,7 +78,6 @@ function App() {
         //   },
         // });
         localStorage.clear()
-        Cookies.remove('access_token');
         setTimeout(() => {
           window.location.reload()
         }, 900);
@@ -97,13 +96,11 @@ function App() {
       }).catch((err) => {
         if (err.response.status === 401) {
           localStorage.clear();
-          Cookies.remove('access_token');
         }
       })
     } catch (error) {
       if (error.response.status === 401) {
         localStorage.clear()
-        Cookies.remove('access_token')
       }
     }
   }

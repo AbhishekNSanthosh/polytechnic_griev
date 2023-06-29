@@ -35,7 +35,6 @@ const Navbar = () => {
                                 </div>
                                 <div className="nav-account">
                                     <span className="material-symbols-outlined logout" onClick={() => {
-                                        Cookies.remove('access_token');
                                         localStorage.clear();
                                         toast.success("Redirecting to login page.", {
                                             position: 'bottom-center',

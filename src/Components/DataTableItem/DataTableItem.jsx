@@ -47,7 +47,6 @@ function DataTableItem({ item, userType, Token, index, getletterCall }) {
             setModal(false);
             if (error.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
             }
         })
     }
