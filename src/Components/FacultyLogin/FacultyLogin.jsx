@@ -59,7 +59,7 @@ const FacultyLogin = ({ getLoginPerson, handleLogin }) => {
                             <div className="faculty-login-input-row">
                                 <button onClick={e => {
                                     e.preventDefault();
-                                    if (email != "" && password != "") {
+                                    if (email !== "" && password !== "") {
                                         callLogin()
                                     }
                                 }} className="faculty-login-button">LOGIN</button>

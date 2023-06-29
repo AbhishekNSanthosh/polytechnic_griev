@@ -32,7 +32,7 @@
 
 @media only screen and (max-width: 767px) {
     .table-row {
-        height: 90vh;
+        height: 88vh;
     }
 }
 
@@ -45,15 +45,45 @@
 
 }
 
+@media only screen and (max-width: 767px) {
+    .not-found {
+        padding: 40px;
+        height: 80vh;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+
+    }
+}
+
 .not-found-img {
     margin-top: 1rem;
     height: 13rem;
+}
+
+@media only screen and (max-width: 767px) {
+    .not-found-img {
+        /* margin-top: 2rem; */
+        align-self: center;
+        justify-self: center;
+        height: 8rem;
+    }
 }
 
 .not-found-tag {
     margin-top: 1rem;
     font-size: 2em;
     color: rgb(92, 92, 92);
+}
+
+@media only screen and (max-width: 767px) {
+    .not-found-tag {
+        margin-top: 1rem;
+        font-size: 1em;
+        color: rgb(92, 92, 92);
+    }
+
 }
 
 .info {

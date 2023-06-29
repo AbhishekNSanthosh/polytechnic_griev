@@ -12,7 +12,7 @@ const DataTable = ({ userType, data, loading, Token, getletterCall }) => {
 
                 {loading ?
                     <div className="loading">
-                        <GridLoader size={20} color="red" />
+                        <GridLoader size={18} color="red" />
                     </div>
                     :
                     <table className="product-table">
@@ -38,7 +38,7 @@ const DataTable = ({ userType, data, loading, Token, getletterCall }) => {
             {loading ?
                 <div className="mobile-loading">
                     <div className="loading-spinner">
-                        <GridLoader size={30} color="red" className='loading' />
+                        <GridLoader size={18} color="red" className='loading-square' />
                     </div>
                 </div>
                 :

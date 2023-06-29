@@ -18,7 +18,7 @@ function AddTool() {
         <div className='add-griev'>
             <Tooltip title="Add Griev" sx={{ position: 'absolute', bottom:{sm: '50px',xs:'20px'}, right: {sm:'70px',xs:'20px'} }}>
                 <Fab onClick={() => navigate('/dashboard/add-griev')} color='error'>
-                    <span class="material-icons add-icon">add</span>
+                    <span className="material-icons add-icon">add</span>
                 </Fab>
             </Tooltip>
         </div>
