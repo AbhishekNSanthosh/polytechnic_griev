@@ -100,7 +100,7 @@
 }
 
 .name {
-    margin-top: 33px;
+    margin-top: 0px;
 }
 
 .view-item-left-title {
@@ -263,6 +263,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 15px;
+    width: 90%;
     margin-top: 10px;
     border-radius: 10px;
     border: 0.5px solid rgb(211, 211, 211);

@@ -60,7 +60,9 @@ function ViewGriev({ Token, userType, teachers }) {
             setComments(res?.data?.comments);
             setUpdatedComments(res?.data?.comments);
             setUpdatedActions(res?.data?.actions);
-            setActions(res?.data?.actions)
+            setActions(res?.data?.actions);
+            let recievedIds = JSON.parse(res.data.view_access_ids);
+            setSelectedTeachers(recievedIds)
         }).catch((err) => {
             setLoading(true);
             if (err.response.status === 401) {
@@ -69,6 +71,7 @@ function ViewGriev({ Token, userType, teachers }) {
             }
         })
     }
+
 
     useEffect(() => {
         if (receivedData != "" && receivedData != undefined) {
@@ -86,7 +89,7 @@ function ViewGriev({ Token, userType, teachers }) {
                 'x-access-token': Token
             }
         }).then((res) => {
-            console.log(res)
+
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
@@ -94,6 +97,8 @@ function ViewGriev({ Token, userType, teachers }) {
             }
         })
     }
+
+
 
     const navigate = useNavigate()
     useEffect(() => {
@@ -246,12 +251,21 @@ function ViewGriev({ Token, userType, teachers }) {
                 'x-access-token': Token
             }
         }).then((res) => {
-            console.log(res)
-        }).catch((err) => {
-            if (err.response.status === 401) {
-                localStorage.clear()
-                navigate('/')
+            if (res) {
+                toast.success('View access updated.', {
+                    style: {
+                        backgroundColor: 'black',
+                        color: '#fff'
+                    }
+                })
+                setShowTeachers(false)
             }
+        }).catch((err) => {
+            console.log(err)
+            // if (err.response.status === 401) {
+            //     localStorage.clear()
+            //     navigate('/')
+            // }
         })
     }
 
@@ -411,13 +425,13 @@ function ViewGriev({ Token, userType, teachers }) {
                                                             </button>
                                                         ))}
                                                     </div>
-                                                    {selectedTeachers.length !== 0 &&
-                                                        <div className="actions view-actions">
-                                                            <button className="action-submit" onClick={() => {
-                                                                handleUpdateViewAccess();
-                                                            }}>Give View Access</button>
-                                                        </div>
-                                                    }
+
+                                                    <div className="actions view-actions">
+                                                        <button className="action-submit" onClick={() => {
+                                                            handleUpdateViewAccess();
+                                                        }}>Give View Access</button>
+                                                    </div>
+
                                                 </motion.div>
                                             }
                                         </div>
@@ -471,9 +485,11 @@ function ViewGriev({ Token, userType, teachers }) {
                                             :
                                             <div className="show-comment">
                                                 <span>{updatedActions}</span>
-                                                <span className="material-icons icon c-delete" onClick={() => {
-                                                    handleDeleteAction();
-                                                }}>delete_outline</span>
+                                                {userType === "Admin" &&
+                                                    <span className="material-icons icon c-delete" onClick={() => {
+                                                        handleDeleteAction();
+                                                    }}>delete_outline</span>
+                                                }
                                             </div>
                                         }
                                     </>
@@ -490,9 +506,11 @@ function ViewGriev({ Token, userType, teachers }) {
                                             :
                                             <div className="show-comment">
                                                 <span>{updateComments}</span>
-                                                <span className="material-icons icon c-delete" onClick={() => {
-                                                    handledDeleteCommet();
-                                                }}>delete_outline</span>
+                                                {userType === "Admin" &&
+                                                    <span className="material-icons icon c-delete" onClick={() => {
+                                                        handledDeleteCommet();
+                                                    }}>delete_outline</span>
+                                                }
                                             </div>
 
                                         }

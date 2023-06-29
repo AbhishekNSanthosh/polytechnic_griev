@@ -100,17 +100,20 @@ function App() {
       }
     }
   }
+
   useEffect(() => {
     if (token) {
       getUserDetails();
-      // getAllTeachers();
+    } else {
+      localStorage.clear()
     }
   }, [callUser])
 
-  // useEffect(() => {
-  //   if (token) {
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (userType === 'Admin') {
+      getAllTeachers();
+    }
+  }, [])
 
   const getCall = (data) => {
     setReload(data)
