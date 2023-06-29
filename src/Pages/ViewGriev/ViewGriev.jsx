@@ -60,7 +60,9 @@ function ViewGriev({ Token, userType, teachers }) {
             setComments(res?.data?.comments);
             setUpdatedComments(res?.data?.comments);
             setUpdatedActions(res?.data?.actions);
-            setActions(res?.data?.actions)
+            setActions(res?.data?.actions);
+            let recievedIds = JSON.parse(res.data.view_access_ids);
+            setSelectedTeachers(recievedIds)
         }).catch((err) => {
             setLoading(true);
             if (err.response.status === 401) {
@@ -69,6 +71,7 @@ function ViewGriev({ Token, userType, teachers }) {
             }
         })
     }
+
 
     useEffect(() => {
         if (receivedData != "" && receivedData != undefined) {
@@ -86,7 +89,7 @@ function ViewGriev({ Token, userType, teachers }) {
                 'x-access-token': Token
             }
         }).then((res) => {
-            console.log(res)
+
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
@@ -94,6 +97,8 @@ function ViewGriev({ Token, userType, teachers }) {
             }
         })
     }
+
+
 
     const navigate = useNavigate()
     useEffect(() => {
@@ -246,12 +251,21 @@ function ViewGriev({ Token, userType, teachers }) {
                 'x-access-token': Token
             }
         }).then((res) => {
-            console.log(res)
-        }).catch((err) => {
-            if (err.response.status === 401) {
-                localStorage.clear()
-                navigate('/')
+            if (res) {
+                toast.success('View access updated.', {
+                    style: {
+                        backgroundColor: 'black',
+                        color: '#fff'
+                    }
+                })
+                setShowTeachers(false)
             }
+        }).catch((err) => {
+            console.log(err)
+            // if (err.response.status === 401) {
+            //     localStorage.clear()
+            //     navigate('/')
+            // }
         })
     }
 
@@ -358,136 +372,106 @@ function ViewGriev({ Token, userType, teachers }) {
                                     </div>
                                 </div>
                             }
-
-                            {/* {userType === 'Admin' &&
-                                <div className="view-item">
-                                    <div className="view-item-left">
-                                        <div className="view-item-left-title">
-                                            <span className="item-title left">VIEW ACCESS:</span>
-                                        </div>
-                                    </div>
-                                    <div className="view-item-right">
-                                        <div className="view-item-left-title">
-                                            <div className="container-access">
-                                                {teachers.length !== 0 && teachers.map((teacher, index) => (
-                                                    <button disabled={disabledButtons[index]} className="access-item">
-                                                        <input
-                                                            type="checkbox"
-                                                            checked={selectedTeachers.some(selected => selected.id === teacher.id)}
-                                                            onChange={() => handleTeacherSelection(teacher.id, teacher.email)}
-                                                        />
-                                                        <span onClick={() => {
-                                                            // handleButtonClick(index)
-                                                            // setClicked(true)
-                                                            // setAccess(teacher?.email + ',' + teacher?.id)
-                                                        }} className='access-name'>{teacher?.email}</span>
-                                                    </button>
-                                                ))}
-                                            </div>
-                                            <div>
-                                                <h3>View Access Permissions:</h3>
-                                                <ul>
-                                                    {generateViewAccessPermissions().map(permission => (
-                                                        <li key={permission.id}>
-                                                            ID: {permission.id}, Email: {permission.email}
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            } */}
                             {userType === "Admin" &&
                                 <hr className='hr-view' />
                             }
-                            <div className="view-access-container">
-                                <div className="view-access-col">
-                                    <div className="view-access-row left-row">
-                                        <span className="item-title custom left">CUSTOMIZE VIEW ACCESS:</span>
-                                    </div>
-                                    <div className="view-access-row">
-                                        <div className="button-div-view" onClick={() => {
-                                            if (teachers.length !== 0) {
-                                                setShowTeachers(!showTeachers);
-                                            } else {
-                                                toast.error('No teachers to show!', {
-                                                    style: {
-                                                        backgroundColor: 'black',
-                                                        color: '#fff'
-                                                    }
-                                                })
-                                            }
-                                        }}>
-                                            {showTeachers ?
-                                                <>
-                                                    <span className="show-more">HIDE ALL TEACHERS </span>
-                                                    <span class="material-icons">expand_less</span>
-                                                </>
-                                                :
-                                                <>
-                                                    <span className="show-more">SHOW ALL TEACHERS </span>
-                                                    <span class='material-icons'>expand_more</span>
-                                                </>
-                                            }
+                            {userType === 'Admin' &&
+                                <div className="view-access-container">
+                                    <div className="view-access-col">
+                                        <div className="view-access-row left-row">
+                                            <span className="item-title custom left">CUSTOMIZE VIEW ACCESS:</span>
                                         </div>
-                                        {showTeachers &&
-                                            <motion.div
-                                                className='motion'
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                transition={{ duration: 1 }}
-                                            >
-                                                <div className="container-access">
-                                                    {teachers.length !== 0 && teachers.map((teacher, index) => (
-                                                        <button disabled={disabledButtons[index]} className="access-item">
-                                                            <input
-                                                                type="checkbox"
-                                                                checked={selectedTeachers.some(selected => selected.id === teacher.id)}
-                                                                onChange={() => handleTeacherSelection(teacher.id, teacher.email)}
-                                                            />
-                                                            <span className='access-name'>{teacher?.email}</span>
-                                                        </button>
-                                                    ))}
-                                                </div>
-                                                {selectedTeachers.length !== 0 &&
+                                        <div className="view-access-row">
+                                            <div className="button-div-view" onClick={() => {
+                                                if (teachers.length !== 0) {
+                                                    setShowTeachers(!showTeachers);
+                                                } else {
+                                                    toast.error('No teachers to show!', {
+                                                        style: {
+                                                            backgroundColor: 'black',
+                                                            color: '#fff'
+                                                        }
+                                                    })
+                                                }
+                                            }}>
+                                                {showTeachers ?
+                                                    <>
+                                                        <span className="show-more">HIDE ALL TEACHERS </span>
+                                                        <span class="material-icons">expand_less</span>
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <span className="show-more">SHOW ALL TEACHERS </span>
+                                                        <span class='material-icons'>expand_more</span>
+                                                    </>
+                                                }
+                                            </div>
+                                            {showTeachers &&
+                                                <motion.div
+                                                    className='motion'
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    transition={{ duration: 1 }}
+                                                >
+                                                    <div className="container-access">
+                                                        {teachers.length !== 0 && teachers.map((teacher, index) => (
+                                                            <button disabled={disabledButtons[index]} className="access-item">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    checked={selectedTeachers.some(selected => selected.id === teacher.id)}
+                                                                    onChange={() => handleTeacherSelection(teacher.id, teacher.email)}
+                                                                />
+                                                                <span className='access-name'>{teacher?.email}</span>
+                                                            </button>
+                                                        ))}
+                                                    </div>
+
                                                     <div className="actions view-actions">
                                                         <button className="action-submit" onClick={() => {
-                                                           handleUpdateViewAccess();
+                                                            handleUpdateViewAccess();
                                                         }}>Give View Access</button>
                                                     </div>
-                                                }
-                                            </motion.div>
+
+                                                </motion.div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className="view-access-col-right">
+                                        {selectedTeachers.length !== 0 &&
+                                            <>
+                                                <div className="button-div-view-access">
+                                                    <span className="permision left">VIEW ACCESS PERMISSIONS:</span>
+                                                </div>
+                                                <div className='view-access-permission'>
+                                                    <ul>
+                                                        {generateViewAccessPermissions().map(permission => (
+                                                            // <li key={permission.id}>
+                                                            //     {/* ID: {permission.id}, */}
+                                                            //     Email: {permission.email}
+                                                            // </li>
+
+                                                            <button key={permission?.id} className="view-access-item">
+                                                                <span className='access-name'>Email: {permission.email}</span>
+                                                            </button>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            </>
                                         }
                                     </div>
                                 </div>
-                                <div className="view-access-col-right">
-                                    {selectedTeachers.length !== 0 &&
-                                        <>
-                                            <div className="button-div-view-access">
-                                                <span className="permision left">VIEW ACCESS PERMISSIONS:</span>
-                                            </div>
-                                            <div className='view-access-permission'>
-                                                <ul>
-                                                    {generateViewAccessPermissions().map(permission => (
-                                                        // <li key={permission.id}>
-                                                        //     {/* ID: {permission.id}, */}
-                                                        //     Email: {permission.email}
-                                                        // </li>
-
-                                                        <button key={permission?.id} className="view-access-item">
-                                                            <span className='access-name'>Email: {permission.email}</span>
-                                                        </button>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        </>
-                                    }
-                                </div>
-                            </div>
-                            {userType === "Admin" &&
-                                <hr className='hr-view' />
                             }
+
+                            <hr className='hr-view' />
+                            {userType !== "Admin" &&
+                                <div className="status-container">
+                                    <div className="status-left">
+                                        <span className="item-title left">STATUS: </span>
+                                        <span className="issue-status">{letter?.issue_stat}</span>
+                                    </div>
+                                </div>
+                            }
+
                             <div className="actions-container">
                                 <div className="actions-left">
                                     <div className="actions">
@@ -501,9 +485,11 @@ function ViewGriev({ Token, userType, teachers }) {
                                             :
                                             <div className="show-comment">
                                                 <span>{updatedActions}</span>
-                                                <span className="material-icons icon c-delete" onClick={() => {
-                                                    handleDeleteAction();
-                                                }}>delete_outline</span>
+                                                {userType === "Admin" &&
+                                                    <span className="material-icons icon c-delete" onClick={() => {
+                                                        handleDeleteAction();
+                                                    }}>delete_outline</span>
+                                                }
                                             </div>
                                         }
                                     </>
@@ -520,9 +506,11 @@ function ViewGriev({ Token, userType, teachers }) {
                                             :
                                             <div className="show-comment">
                                                 <span>{updateComments}</span>
-                                                <span className="material-icons icon c-delete" onClick={() => {
-                                                    handledDeleteCommet();
-                                                }}>delete_outline</span>
+                                                {userType === "Admin" &&
+                                                    <span className="material-icons icon c-delete" onClick={() => {
+                                                        handledDeleteCommet();
+                                                    }}>delete_outline</span>
+                                                }
                                             </div>
 
                                         }

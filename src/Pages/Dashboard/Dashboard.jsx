@@ -137,7 +137,7 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                 setTimeout(() => {
                     setLoading(false);
                 }, 2000);
-                setLetters(res.data);
+                setLetters(res?.data);
             }).catch((err) => {
                 setLoading(false);
                 if (err.response.status === 401) {
@@ -166,7 +166,7 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                 setTimeout(() => {
                     setLoading(false);
                 }, 2000);
-                setLetters(res.data);
+                setLetters(res?.data);
             }).catch((err) => {
                 setLoading(false);
                 if (err.response.status === 401) {
@@ -182,13 +182,6 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
             }
         }
     }
-
-    useEffect(() => {
-        if (!Token) {
-            localStorage.clear()
-            navigate('/')
-        }
-    }, [])
 
     useEffect(() => {
         if (userType === 'Admin') {
