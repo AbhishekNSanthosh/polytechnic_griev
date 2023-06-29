@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react'
 import './OptLogin.css'
 import { useNavigate } from 'react-router-dom'
-import Cookies from 'js-cookie'
 import {motion} from 'framer-motion';
 
 function OptLogin({getLoginPerson}) {
 
     const navigate = useNavigate()
 
-    const token = Cookies.get('access_token')
+    const token = localStorage.getItem('access_token')
     useEffect(() => {
         if (token) {
             navigate('/dashboard')

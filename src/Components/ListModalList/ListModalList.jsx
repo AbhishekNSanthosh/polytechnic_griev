@@ -1,7 +1,6 @@
 import React from 'react'
 import './ListModalList.css'
 import ListModalItem from '../ListModalItem/ListModalItem'
-import { Skeleton } from '@mui/material'
 
 export default function ListModalList({ students, modalOpenBy, teachers, admins, loading }) {
   return (

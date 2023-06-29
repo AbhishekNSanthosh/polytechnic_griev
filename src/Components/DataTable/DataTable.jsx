@@ -1,17 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './DataTable.css'
-import { useNavigate } from 'react-router-dom'
-import { GridLoader, HashLoader } from 'react-spinners'
-import Backdrop from '@mui/material/Backdrop';
-import axios from 'axios'
-import { Box, Fade, Modal } from '@mui/material'
+import { GridLoader} from 'react-spinners'
 import DataTableItem from '../DataTableItem/DataTableItem';
 import DataTableItemMobile from '../DataTableItem/DataTableItemMobile';
 
 const DataTable = ({ userType, data, loading, Token, getletterCall }) => {
-    const navigate = useNavigate();
-
-    console.log(data.length)
     return (
         <div className='table-container'>
             {/* <span>{data.length}</span> */}
@@ -19,7 +12,7 @@ const DataTable = ({ userType, data, loading, Token, getletterCall }) => {
 
                 {loading ?
                     <div className="loading">
-                        <GridLoader size={22} color="red" />
+                        <GridLoader size={20} color="red" />
                     </div>
                     :
                     <table className="product-table">

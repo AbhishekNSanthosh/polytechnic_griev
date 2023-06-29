@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Dashboard.css'
 import DataTable from '../../Components/DataTable/DataTable'
-import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Buttons from '../../Components/Buttons/Buttons';
@@ -39,14 +38,12 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                 setModalLoading(false)
                 if (err.response.status === 401) {
                     localStorage.clear()
-                    Cookies.remove('access_token')
                 }
             })
         } catch (error) {
             setModalLoading(false)
             if (error.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
             }
         }
     }
@@ -67,13 +64,11 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                 setModalLoading(false)
                 if (err.response.status === 401) {
                     localStorage.clear()
-                    Cookies.remove('access_token')
                 }
             })
         } catch (error) {
             if (error.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
             }
         }
     }
@@ -92,14 +87,12 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                 setModalLoading(false)
                 if (err.response.status === 401) {
                     localStorage.clear()
-                    Cookies.remove('access_token')
                 }
             })
         } catch (error) {
             setModalLoading(false)
             if (error.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
             }
         }
     }
@@ -120,7 +113,6 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
             }).catch((err) => {
                 if (err.response.status === 401) {
                     localStorage.clear()
-                    Cookies.remove('access_token')
                 }
                 setLoading(false);
             })
@@ -128,7 +120,6 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
             console.log(error)
             if (error.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
             }
             setLoading(false)
         }
@@ -151,7 +142,6 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                 setLoading(false);
                 if (err.response.status === 401) {
                     localStorage.clear()
-                    Cookies.remove('access_token')
                     navigate('/')
                 }
             })
@@ -159,7 +149,6 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
             setLoading(false);
             if (error.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         }
@@ -182,7 +171,6 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                 setLoading(false);
                 if (err.response.status === 401) {
                     localStorage.clear()
-                    Cookies.remove('access_token')
                     navigate('/')
                 }
             })
@@ -190,7 +178,6 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
             setLoading(false);
             if (error.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         }
@@ -199,7 +186,6 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     useEffect(() => {
         if (!Token) {
             localStorage.clear()
-            Cookies.remove('access_token');
             navigate('/')
         }
     }, [])

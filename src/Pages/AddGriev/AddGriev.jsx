@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import './AddGriev.css'
 import { TextField } from '@mui/material'
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,13 +12,12 @@ function AddGriev({ user, getCall }) {
 
     const navigate = useNavigate()
 
-    const Token = Cookies.get('access_token')
+    const Token = localStorage.getItem('access_token')
     const userType = localStorage.getItem('usertype');
 
     useEffect(() => {
         if (!Token) {
             localStorage.clear()
-            Cookies.remove('access_token')
             toast.error('Session Expired!.', {
                 position: 'bottom-center',
                 style: {
@@ -54,7 +52,6 @@ function AddGriev({ user, getCall }) {
             }).catch((err) => {
                 if (err.response.status === 401) {
                     localStorage.clear()
-                    Cookies.remove('access_token')
                     navigate('/')
                 }
                 toast.error('Something went wrong!.', {

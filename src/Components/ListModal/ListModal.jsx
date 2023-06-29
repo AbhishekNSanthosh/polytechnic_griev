@@ -4,10 +4,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import './ListModal.css'
-import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import ListModalList from '../ListModalList/ListModalList';
-import axios from 'axios';
-import { useEffect } from 'react';
 
 const style = {
     position: 'absolute',

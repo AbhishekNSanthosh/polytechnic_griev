@@ -3,7 +3,6 @@ import './Navbar.css'
 import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../Assets/poly_logo.svg'
 import { toast } from 'react-hot-toast';
-import Cookies from 'js-cookie';
 
 const Navbar = () => {
     const hideNavbar = ["/"];
@@ -35,7 +34,6 @@ const Navbar = () => {
                                 </div>
                                 <div className="nav-account">
                                     <span className="material-symbols-outlined logout" onClick={() => {
-                                        Cookies.remove('access_token');
                                         localStorage.clear();
                                         toast.success("Redirecting to login page.", {
                                             position: 'bottom-center',

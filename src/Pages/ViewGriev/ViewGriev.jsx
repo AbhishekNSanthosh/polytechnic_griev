@@ -7,7 +7,6 @@ import Select from '@mui/material/Select';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect } from 'react';
-import Cookies from 'js-cookie';
 import { GridLoader } from 'react-spinners';
 import { toast } from 'react-hot-toast';
 import { motion } from 'framer-motion'
@@ -66,7 +65,6 @@ function ViewGriev({ Token, userType, teachers }) {
             setLoading(true);
             if (err.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         })
@@ -92,7 +90,6 @@ function ViewGriev({ Token, userType, teachers }) {
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         })
@@ -133,7 +130,6 @@ function ViewGriev({ Token, userType, teachers }) {
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         })
@@ -159,7 +155,6 @@ function ViewGriev({ Token, userType, teachers }) {
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         })
@@ -186,7 +181,6 @@ function ViewGriev({ Token, userType, teachers }) {
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         })
@@ -212,7 +206,6 @@ function ViewGriev({ Token, userType, teachers }) {
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         })
@@ -239,7 +232,6 @@ function ViewGriev({ Token, userType, teachers }) {
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         })
@@ -258,7 +250,6 @@ function ViewGriev({ Token, userType, teachers }) {
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
-                Cookies.remove('access_token')
                 navigate('/')
             }
         })

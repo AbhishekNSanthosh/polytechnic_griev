@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import './StudentLogin.css'
 import { TextField } from '@mui/material'
 import { motion } from "framer-motion"
-import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 
@@ -16,7 +15,7 @@ const StudentLogin = ({ getLoginPerson, handleLogin }) => {
 
     const navigate = useNavigate()
 
-    const token = Cookies.get('access_token')
+    const token = localStorage.getItem('access_token')
     useEffect(() => {
         if (token) {
             navigate('/dashboard')

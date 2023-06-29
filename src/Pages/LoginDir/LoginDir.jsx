@@ -8,25 +8,20 @@ import StudentLogin from '../../Components/StudentLogin/StudentLogin';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import Cookies from 'js-cookie';
 
 function LoginDir({ getCall2 }) {
-
   const [loginPerson, setLoginPerson] = useState("noOne");
   const [user, setUser] = useState(null)
   const navigate = useNavigate()
-  console.log(user)
 
   const getLoginPerson = (data) => {
     setLoginPerson(data)
   }
   const handleLogin = async (email, password) => {
-    console.log('login called')
     try {
       axios.post('https://flask-production-37b2.up.railway.app/' + loginPerson + '_login/', {
         email, password
       }).then((res) => {
-        console.log(res)
         setUser(res.data.role)
         localStorage.setItem('usertype', res.data.role)
         getCall2(true)
