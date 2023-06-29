@@ -324,6 +324,20 @@
     cursor: pointer;
 }
 
+@media only screen and (max-width: 767px) {
+    .button-div-view {
+        border: 1px solid rgb(184, 184, 184);
+        border-radius: 10px;
+        padding: 10px;
+        display: flex;
+        width: 100%;
+        font-size: 16px;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+}
+
 .view-access-row {
     display: flex;
     gap: 15px;
@@ -410,4 +424,8 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+
+.view-actions{
+    margin-top: 20px;
 }
