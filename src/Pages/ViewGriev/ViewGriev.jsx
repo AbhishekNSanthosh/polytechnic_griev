@@ -134,7 +134,7 @@ function ViewGriev({ Token, userType }) {
         day: "numeric",
         month: "long",
         year: "numeric",
-    });
+    }); 
 
 
     const handleUpdateStatus = () => {
@@ -403,7 +403,7 @@ function ViewGriev({ Token, userType }) {
                                     </div>
                                     <>
                                         {updatedActions === "" || updatedActions === null ?
-                                            <div className="actions">
+                                            <div className="actions-no">
                                                 <span className="action-taken">No Actions added yet!</span>
                                             </div>
                                             :
@@ -422,7 +422,7 @@ function ViewGriev({ Token, userType }) {
                                     </div>
                                     <>
                                         {updateComments === "" || updateComments === null ?
-                                            <div className="actions">
+                                            <div className="actions-no">
                                                 <span className="action-taken">No Comments added yet!</span>
                                             </div>
                                             :
