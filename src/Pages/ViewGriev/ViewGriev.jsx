@@ -22,6 +22,7 @@ function ViewGriev({ Token, userType, teachers }) {
     const [actions, setActions] = useState("");
     const [updatedActions, setUpdatedActions] = useState("");
     const [selectedTeachers, setSelectedTeachers] = useState([]);
+    const [showTeachers, setShowTeachers] = useState(false);
 
     const location = useLocation();
     const receivedData = location.state;
@@ -385,26 +386,39 @@ function ViewGriev({ Token, userType, teachers }) {
                             } */}
                             <div className="view-access-container">
                                 <div className="view-access-col">
-                                    <div className="view-access-row">
-                                        <span className="item-title left">CUSTOMIZE VIEW ACCESS:</span>
+                                    <div className="view-access-row left-row">
+                                        <span className="item-title custom left">CUSTOMIZE VIEW ACCESS:</span>
                                     </div>
                                     <div className="view-access-row">
-                                        <div className="button-div">
+                                        <div className="button-div-view" onClick={() => {
+                                            if (teachers.length !== 0) {
+                                                setShowTeachers(true);
+                                            } else {
+                                                toast.error('No teachers to show!', {
+                                                    style: {
+                                                        backgroundColor: 'black',
+                                                        color: '#fff'
+                                                    }
+                                                })
+                                            }
+                                        }}>
                                             <span className="show-more">Show all teachers </span>
                                             <span class='material-icons'>expand_more</span>
                                         </div>
-                                        <div className="container-access">
-                                            {teachers.length !== 0 && teachers.map((teacher, index) => (
-                                                <button disabled={disabledButtons[index]} className="access-item">
-                                                    <input
-                                                        type="checkbox"
-                                                        checked={selectedTeachers.some(selected => selected.id === teacher.id)}
-                                                        onChange={() => handleTeacherSelection(teacher.id, teacher.email)}
-                                                    />
-                                                    <span className='access-name'>{teacher?.email}</span>
-                                                </button>
-                                            ))}
-                                        </div>
+                                        {showTeachers &&
+                                            <div className="container-access">
+                                                {teachers.length !== 0 && teachers.map((teacher, index) => (
+                                                    <button disabled={disabledButtons[index]} className="access-item">
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={selectedTeachers.some(selected => selected.id === teacher.id)}
+                                                            onChange={() => handleTeacherSelection(teacher.id, teacher.email)}
+                                                        />
+                                                        <span className='access-name'>{teacher?.email}</span>
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                                 <div className="view-access-col-right">
