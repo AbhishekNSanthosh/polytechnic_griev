@@ -10,35 +10,40 @@ import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { GridLoader } from 'react-spinners';
 import { toast } from 'react-hot-toast';
+import { motion } from 'framer-motion'
 
-function ViewGriev({ Token, userType }) {
+function ViewGriev({ Token, userType, teachers }) {
 
     const [letter, setLetter] = useState({});
     const [loading, setLoading] = useState(false);
     const [updateStatus, setUpdateStatus] = useState("")
-    const [teachers, setTeachers] = useState([]);
-    const [access, setAccess] = useState("");
-    const [clicked, setClicked] = useState(false);
     const [disabledButtons, setDisabledButtons] = useState([]);
     const [comments, setComments] = useState("");
     const [updateComments, setUpdatedComments] = useState("");
     const [actions, setActions] = useState("");
     const [updatedActions, setUpdatedActions] = useState("");
-
-    const handleButtonClick = (index) => {
-        setDisabledButtons((prevDisabledButtons) => {
-            const updatedDisabledButtons = [...prevDisabledButtons];
-            updatedDisabledButtons[index] = true; // Disable the clicked button
-            return updatedDisabledButtons;
-        });
-    };
+    const [selectedTeachers, setSelectedTeachers] = useState([]);
+    const [showTeachers, setShowTeachers] = useState(false);
 
     const location = useLocation();
     const receivedData = location.state;
 
-    console.log(receivedData)
+    const handleTeacherSelection = (teacherId, teacherEmail) => {
+        const selectedTeacher = { id: teacherId, email: teacherEmail };
 
-    console.log(letter?.issue_stat)
+        if (selectedTeachers.some(teacher => teacher.id === teacherId)) {
+            setSelectedTeachers(selectedTeachers.filter(teacher => teacher.id !== teacherId));
+        } else {
+            setSelectedTeachers([...selectedTeachers, selectedTeacher]);
+        }
+    };
+
+    // Generate the array of {id, name} objects for view access permission
+    const generateViewAccessPermissions = () => {
+        return selectedTeachers.map(teacher => ({ id: teacher.id, email: teacher.email }));
+    };
+
+    //API CALLS
     const getLetter = () => {
         setLoading(true);
         console.log(Token)
@@ -67,33 +72,6 @@ function ViewGriev({ Token, userType }) {
         })
     }
 
-    const getAllTeachers = () => {
-        try {
-            axios.get('https://flask-production-37b2.up.railway.app/all_teachers/', {
-                headers: {
-                    'x-access-token': Token
-                }
-            }).then((res) => {
-                setTeachers(res.data);
-            }).catch((err) => {
-                if (err.response.status === 401) {
-                    localStorage.clear();
-                    Cookies.remove('access_token');
-                }
-            })
-        } catch (error) {
-            if (error.response.status === 401) {
-                localStorage.clear()
-                Cookies.remove('access_token')
-            }
-        }
-    }
-
-    useEffect(() => {
-        getAllTeachers();
-    }, [])
-
-
     useEffect(() => {
         if (receivedData != "" && receivedData != undefined) {
             getLetter();
@@ -111,7 +89,6 @@ function ViewGriev({ Token, userType }) {
             }
         }).then((res) => {
             console.log(res)
-            setTeachers(res.data)
         }).catch((err) => {
             if (err.response.status === 401) {
                 localStorage.clear()
@@ -134,7 +111,7 @@ function ViewGriev({ Token, userType }) {
         day: "numeric",
         month: "long",
         year: "numeric",
-    }); 
+    });
 
 
     const handleUpdateStatus = () => {
@@ -268,6 +245,7 @@ function ViewGriev({ Token, userType }) {
         })
     }
 
+    console.log("access", selectedTeachers)
     return (
         <div className='view-griev'>
             <div className="view-container">
@@ -378,24 +356,112 @@ function ViewGriev({ Token, userType }) {
                                     <div className="view-item-right">
                                         <div className="view-item-left-title">
                                             <div className="container-access">
-                                                {teachers && teachers.map((teacher, index) => (
+                                                {teachers.length !== 0 && teachers.map((teacher, index) => (
                                                     <button disabled={disabledButtons[index]} className="access-item">
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={selectedTeachers.some(selected => selected.id === teacher.id)}
+                                                            onChange={() => handleTeacherSelection(teacher.id, teacher.email)}
+                                                        />
                                                         <span onClick={() => {
-                                                            handleButtonClick(index)
-                                                            setClicked(true)
-                                                            setAccess(access + teacher?.id + ',')
+                                                            // handleButtonClick(index)
+                                                            // setClicked(true)
+                                                            // setAccess(teacher?.email + ',' + teacher?.id)
                                                         }} className='access-name'>{teacher?.email}</span>
                                                     </button>
                                                 ))}
                                             </div>
-                                            {access != "" &&
-                                                <div className="acces-row">
-                                                    <span className='access-name'>{access}</span>
-                                                </div>}
+                                            <div>
+                                                <h3>View Access Permissions:</h3>
+                                                <ul>
+                                                    {generateViewAccessPermissions().map(permission => (
+                                                        <li key={permission.id}>
+                                                            ID: {permission.id}, Email: {permission.email}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             } */}
+                            <div className="view-access-container">
+                                <div className="view-access-col">
+                                    <div className="view-access-row left-row">
+                                        <span className="item-title custom left">CUSTOMIZE VIEW ACCESS:</span>
+                                    </div>
+                                    <div className="view-access-row">
+                                        <div className="button-div-view" onClick={() => {
+                                            if (teachers.length !== 0) {
+                                                setShowTeachers(!showTeachers);
+                                            } else {
+                                                toast.error('No teachers to show!', {
+                                                    style: {
+                                                        backgroundColor: 'black',
+                                                        color: '#fff'
+                                                    }
+                                                })
+                                            }
+                                        }}>
+                                            {showTeachers ?
+                                                <>
+                                                    <span className="show-more">HIDE ALL TEACHERS </span>
+                                                    <span class='material-icons'>expand_more</span>
+                                                </>
+                                                :
+                                                <>
+                                                    <span className="show-more">SHOW ALL TEACHERS </span>
+                                                    <span class='material-icons'>expand_more</span>
+                                                </>
+                                            }
+                                        </div>
+                                        {showTeachers &&
+                                            <motion.div
+                                                className='motion'
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ duration: 1 }}
+                                            >
+                                                <div className="container-access">
+                                                    {teachers.length !== 0 && teachers.map((teacher, index) => (
+                                                        <button disabled={disabledButtons[index]} className="access-item">
+                                                            <input
+                                                                type="checkbox"
+                                                                checked={selectedTeachers.some(selected => selected.id === teacher.id)}
+                                                                onChange={() => handleTeacherSelection(teacher.id, teacher.email)}
+                                                            />
+                                                            <span className='access-name'>{teacher?.email}</span>
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            </motion.div>
+                                        }
+                                    </div>
+                                </div>
+                                <div className="view-access-col-right">
+                                    {selectedTeachers.length !== 0 &&
+                                        <>
+                                            <div className="button-div-view-access">
+                                                <span className="permision left">VIEW ACCESS PERMISSIONS:</span>
+                                            </div>
+                                            <div className='view-access-permission'>
+                                                <ul>
+                                                    {generateViewAccessPermissions().map(permission => (
+                                                        // <li key={permission.id}>
+                                                        //     {/* ID: {permission.id}, */}
+                                                        //     Email: {permission.email}
+                                                        // </li>
+
+                                                        <button key={permission?.id} className="view-access-item">
+                                                            <span className='access-name'>Email: {permission.email}</span>
+                                                        </button>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        </>
+                                    }
+                                </div>
+                            </div>
                             <div className="actions-container">
                                 <div className="actions-left">
                                     <div className="actions">

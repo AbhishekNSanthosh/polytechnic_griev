@@ -10,14 +10,14 @@
     }
 }
 
-.acces-row{
+.acces-row {
     padding: 20px;
     border: 1px solid rgb(255, 198, 198);
     border-radius: 10px;
 }
 
-.access-name{
-    font-size: 20px;
+.access-name {
+    font-size: 17px;
 }
 
 .view-container {
@@ -44,14 +44,6 @@
     font-size: 25px;
     letter-spacing: 2.1;
     font-weight: 400;
-}
-
-.container-access{
-    height: 200px;
-    box-shadow: 0px 1px 3px 5px rgb(255, 224, 224);
-    width: 300px;
-    padding: 2px;
-    border-radius: 10px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -84,19 +76,7 @@
     gap: 30px;
 }
 
-.access-item{
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    padding: 19px;
-    width: 100%;
-    border:none;
-    border-bottom: 1px solid rgb(255, 161, 161);
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.status{
+.status {
     display: flex;
     align-items: center;
     justify-content: start;
@@ -195,6 +175,7 @@
         flex: 6;
         width: 100%;
         align-items: center;
+        padding: 0px 15px 0px 0px;
         gap: 20px;
         justify-content: start;
     }
@@ -213,6 +194,7 @@
         flex: 6;
         align-items: center;
         gap: 20px;
+        padding: 0px 15px 0px 0px;
         width: 100%;
         justify-content: start;
     }
@@ -251,7 +233,7 @@
     cursor: pointer;
 }
 
-.update-status{
+.update-status {
     display: flex;
     padding: 10px 20px;
     margin-left: 10px;
@@ -263,7 +245,7 @@
     border-radius: 10px;
 }
 
-.show-comment{
+.show-comment {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -273,13 +255,159 @@
     border: 0.5px solid rgb(211, 211, 211);
 }
 
-.c-delete{
+.custom {
+    margin-top: 15px;
+}
+
+.c-delete {
     display: flex;
     font-size: 23px;
     cursor: pointer;
     transition: all ease 0.03s;
 }
 
-.c-delete:hover{
+.c-delete:hover {
     transform: scale(1.05);
+}
+
+.view-access-container {
+    display: flex;
+    align-items: start;
+    gap: 20px;
+    justify-content: space-between;
+    padding: 10px 0px;
+}
+
+@media only screen and (max-width: 767px) {
+    .view-access-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        justify-content: space-between;
+        padding: 10px 0px;
+    }
+}
+
+.view-access-col {
+    flex: 8;
+    align-items: start;
+    justify-content: space-between;
+    display: flex;
+}
+
+@media only screen and (max-width: 767px) {
+    .view-access-col {
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        gap: 17px;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .custom {
+        margin-left:-20px ;
+    }
+}
+
+
+.button-div-view {
+    border: 1px solid rgb(184, 184, 184);
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    width: 300px;
+    font-size: 16px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.view-access-row {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+    width: 320px;
+    justify-content: center;
+}
+
+.container-access {
+    display: flex;
+    flex-direction: column;
+    max-height: 250px;
+    overflow-y: auto;
+    box-shadow: 0px 1px 3px 3px rgb(235, 235, 235);
+    width: 100%;
+    border-radius: 7px;
+}
+
+.access-item {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 19px;
+    width: 100%;
+    gap: 10px;
+    background-color: #fff;
+    border: none;
+    border-bottom: 1px solid rgb(255, 203, 203);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.motion {
+    width: 100%;
+}
+
+
+.view-access-col-right {
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0px 20px;
+    align-items: start;
+    justify-content: center;
+}
+
+.view-access-permission {
+    display: flex;
+    flex-direction: column;
+    max-height: 250px;
+    overflow-y: auto;
+    box-shadow: 0px 1px 3px 3px rgb(235, 235, 235);
+    width: 100%;
+    border-radius: 7px;
+}
+
+.permision {
+    font-size: 17px;
+}
+
+.view-access-item {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 19px;
+    width: 100%;
+    gap: 10px;
+    background-color: #fff;
+    border: none;
+    border-bottom: 1px solid rgb(255, 203, 203);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.button-div-view-access {
+    border: 1px solid rgb(184, 184, 184);
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    width: 300px;
+    font-size: 15px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
