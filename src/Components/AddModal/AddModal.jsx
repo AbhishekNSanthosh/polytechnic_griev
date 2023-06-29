@@ -45,7 +45,6 @@ export default function AddModal({ modalOpen, getModalStatus, modalOpenBy, Token
                         'x-access-token': Token
                     },
                 }).then((res) => {
-                    console.log(res.data.error);
                     if(!res.data?.error){              setDepartment('')
                         setEmail('')
                         setName('')
@@ -258,7 +257,7 @@ export default function AddModal({ modalOpen, getModalStatus, modalOpenBy, Token
                                         </div>
                                     }
                                 </div>
-                                {modalOpenBy != 'add-admin' &&
+                                {modalOpenBy !== 'add-admin' &&
 
                                     <div className="modal-box-row">
                                         <div className="modal-box-row-item">
@@ -317,7 +316,7 @@ export default function AddModal({ modalOpen, getModalStatus, modalOpenBy, Token
                                 <div className="modal-box-row">
                                     <button className="add-submit" onClick={(e) => {
                                         e.preventDefault();
-                                        if (name != "" && email != "" && password != "") {
+                                        if (name !== "" && email !== "" && password !== "") {
                                             handleAdd();
                                         }
                                     }}>Submit</button>

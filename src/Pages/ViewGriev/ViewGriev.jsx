@@ -45,13 +45,11 @@ function ViewGriev({ Token, userType, teachers }) {
     //API CALLS
     const getLetter = () => {
         setLoading(true);
-        console.log(Token)
         axios.get('https://flask-production-37b2.up.railway.app/get_letter/' + receivedData + '/', {
             headers: {
                 'x-access-token': Token
             }
         }).then((res) => {
-            console.log(res.data);
             setTimeout(() => {
                 setLoading(false)
             }, 1000)
@@ -74,7 +72,7 @@ function ViewGriev({ Token, userType, teachers }) {
 
 
     useEffect(() => {
-        if (receivedData != "" && receivedData != undefined) {
+        if (receivedData !== "" && receivedData !== undefined) {
             getLetter();
         } else {
             navigate('/dashboard')
@@ -261,18 +259,12 @@ function ViewGriev({ Token, userType, teachers }) {
                 setShowTeachers(false)
             }
         }).catch((err) => {
-            console.log(err)
             // if (err.response.status === 401) {
             //     localStorage.clear()
             //     navigate('/')
             // }
         })
     }
-
-
-
-    console.log("access", selectedTeachersString)
-
     return (
         <div className='view-griev'>
             <div className="view-container">
@@ -284,7 +276,7 @@ function ViewGriev({ Token, userType, teachers }) {
                 <div className="view-bottom">
                     {loading ?
                         <div className="loader-view">
-                            <GridLoader size={22} color="red" />
+                            <GridLoader size={18} color="red" />
                         </div>
                         :
                         <>
@@ -397,12 +389,12 @@ function ViewGriev({ Token, userType, teachers }) {
                                                 {showTeachers ?
                                                     <>
                                                         <span className="show-more">HIDE ALL TEACHERS </span>
-                                                        <span class="material-icons">expand_less</span>
+                                                        <span className="material-icons">expand_less</span>
                                                     </>
                                                     :
                                                     <>
                                                         <span className="show-more">SHOW ALL TEACHERS </span>
-                                                        <span class='material-icons'>expand_more</span>
+                                                        <span className='material-icons'>expand_more</span>
                                                     </>
                                                 }
                                             </div>
@@ -415,21 +407,21 @@ function ViewGriev({ Token, userType, teachers }) {
                                                 >
                                                     <div className="container-access">
                                                         {teachers.length !== 0 && teachers.map((teacher, index) => (
-                                                            <button disabled={disabledButtons[index]} className="access-item">
+                                                            <div className="access-item" key={index}>
                                                                 <input
                                                                     type="checkbox"
                                                                     checked={selectedTeachers.some(selected => selected.id === teacher.id)}
                                                                     onChange={() => handleTeacherSelection(teacher.id, teacher.email)}
                                                                 />
                                                                 <span className='access-name'>{teacher?.email}</span>
-                                                            </button>
+                                                            </div>
                                                         ))}
                                                     </div>
 
                                                     <div className="actions view-actions">
                                                         <button className="action-submit" onClick={() => {
                                                             handleUpdateViewAccess();
-                                                        }}>Give View Access</button>
+                                                        }}>Update View Access</button>
                                                     </div>
 
                                                 </motion.div>
@@ -533,7 +525,7 @@ function ViewGriev({ Token, userType, teachers }) {
                                             <div className="actions">
                                                 <textarea value={actions} onChange={(e) => {
                                                     setActions(e.target.value);
-                                                }} disabled={userType != 'Admin'} className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
+                                                }} disabled={userType !== 'Admin'} className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
                                             </div>
                                             <div className="actions">
                                                 <button onClick={() => {
@@ -559,7 +551,7 @@ function ViewGriev({ Token, userType, teachers }) {
                                         </div>
                                         <>
                                             <div className="actions">
-                                                <textarea value={comments} disabled={userType != 'Admin'} onChange={(e) => {
+                                                <textarea value={comments} disabled={userType !== 'Admin'} onChange={(e) => {
                                                     setComments(e.target.value)
                                                 }} className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
                                             </div>

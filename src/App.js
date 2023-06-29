@@ -1,6 +1,6 @@
 import LoginDir from "./Pages/LoginDir/LoginDir";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { green, purple, red } from '@mui/material/colors';
+import { green, red } from '@mui/material/colors';
 import {
   HashRouter as Router,
   Routes,
@@ -110,7 +110,7 @@ function App() {
   }, [callUser])
 
   useEffect(() => {
-    if (userType === 'Admin') {
+    if (token && userType === "Admin") {
       getAllTeachers();
     }
   }, [])

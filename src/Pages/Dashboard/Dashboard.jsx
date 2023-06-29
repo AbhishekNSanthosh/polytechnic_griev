@@ -117,7 +117,6 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                 setLoading(false);
             })
         } catch (error) {
-            console.log(error)
             if (error.response.status === 401) {
                 localStorage.clear()
             }
@@ -128,7 +127,6 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     const getUserLetter = () => {
         setLoading(true)
         try {
-            console.log(Token)
             axios.get('https://flask-production-37b2.up.railway.app/student_letters/' + userData?.id + "/", {
                 headers: {
                     'x-access-token': Token
@@ -157,7 +155,6 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     const getTeacherLetters = () => {
         setLoading(true)
         try {
-            console.log(Token)
             axios.get('https://flask-production-37b2.up.railway.app/teacher_permitted_letters/', {
                 headers: {
                     'x-access-token': Token

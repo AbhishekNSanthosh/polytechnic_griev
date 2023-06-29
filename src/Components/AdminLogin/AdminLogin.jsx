@@ -60,7 +60,7 @@ const AdminLogin = ({ getLoginPerson, handleLogin }) => {
                             <div className="admin-login-input-row">
                                 <button className="admin-login-button" onClick={e => {
                                     e.preventDefault();
-                                    if (email != "" && password != "") {
+                                    if (email !== "" && password !== "") {
                                         callLogin()
                                     }
                                 }}>LOGIN</button>
