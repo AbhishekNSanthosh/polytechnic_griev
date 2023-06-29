@@ -167,7 +167,7 @@
 .actions-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     padding: 10px;
 }
@@ -183,7 +183,7 @@
 }
 
 .actions-left {
-    flex: 5;
+    flex: 6;
     padding: 10px;
     width: 100%;
     align-items: center;
@@ -201,7 +201,7 @@
 }
 
 .actions-right {
-    flex: 5;
+    flex: 6;
     align-items: center;
     gap: 20px;
     width: 100%;
@@ -230,9 +230,10 @@
     border-radius: 8px;
     padding: 5px;
     font-size: 18px;
+    margin: 20px 0px;
 }
 
-.actions {
+.actions-no {
     margin-top: 20px;
 }
 
