@@ -48,7 +48,7 @@
 @media only screen and (max-width: 767px) {
     .not-found {
         padding: 40px;
-        height: 80vh;
+        height: 71vh;
         align-items: center;
         justify-content: center;
         display: flex;
