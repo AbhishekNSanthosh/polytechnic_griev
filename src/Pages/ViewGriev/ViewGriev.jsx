@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { GridLoader } from 'react-spinners';
 import { toast } from 'react-hot-toast';
+import { motion } from 'framer-motion'
 
 function ViewGriev({ Token, userType, teachers }) {
 
@@ -392,7 +393,7 @@ function ViewGriev({ Token, userType, teachers }) {
                                     <div className="view-access-row">
                                         <div className="button-div-view" onClick={() => {
                                             if (teachers.length !== 0) {
-                                                setShowTeachers(true);
+                                                setShowTeachers(!showTeachers);
                                             } else {
                                                 toast.error('No teachers to show!', {
                                                     style: {
@@ -402,22 +403,38 @@ function ViewGriev({ Token, userType, teachers }) {
                                                 })
                                             }
                                         }}>
-                                            <span className="show-more">Show all teachers </span>
-                                            <span class='material-icons'>expand_more</span>
+                                            {showTeachers ?
+                                                <>
+                                                    <span className="show-more">Hide all teachers </span>
+                                                    <span class='material-icons'>expand_more</span>
+                                                </>
+                                                :
+                                                <>
+                                                    <span className="show-more">Show all teachers </span>
+                                                    <span class='material-icons'>expand_more</span>
+                                                </>
+                                            }
                                         </div>
                                         {showTeachers &&
-                                            <div className="container-access">
-                                                {teachers.length !== 0 && teachers.map((teacher, index) => (
-                                                    <button disabled={disabledButtons[index]} className="access-item">
-                                                        <input
-                                                            type="checkbox"
-                                                            checked={selectedTeachers.some(selected => selected.id === teacher.id)}
-                                                            onChange={() => handleTeacherSelection(teacher.id, teacher.email)}
-                                                        />
-                                                        <span className='access-name'>{teacher?.email}</span>
-                                                    </button>
-                                                ))}
-                                            </div>
+                                            <motion.div
+                                            className='motion'
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ duration: 1 }}
+                                            >
+                                                <div className="container-access">
+                                                    {teachers.length !== 0 && teachers.map((teacher, index) => (
+                                                        <button disabled={disabledButtons[index]} className="access-item">
+                                                            <input
+                                                                type="checkbox"
+                                                                checked={selectedTeachers.some(selected => selected.id === teacher.id)}
+                                                                onChange={() => handleTeacherSelection(teacher.id, teacher.email)}
+                                                            />
+                                                            <span className='access-name'>{teacher?.email}</span>
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            </motion.div>
                                         }
                                     </div>
                                 </div>

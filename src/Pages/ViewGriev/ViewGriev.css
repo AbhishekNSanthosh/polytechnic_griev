@@ -17,7 +17,7 @@
 }
 
 .access-name{
-    font-size: 20px;
+    font-size: 17px;
 }
 
 .view-container {
@@ -254,7 +254,7 @@
 }
 
 .custom{
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .c-delete{
@@ -331,4 +331,8 @@
     border-bottom: 1px solid rgb(255, 203, 203);
     border-radius: 10px;
     cursor: pointer;
+}
+
+.motion{
+    width: 100%;
 }
