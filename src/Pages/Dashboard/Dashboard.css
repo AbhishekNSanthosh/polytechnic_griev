@@ -89,3 +89,10 @@
 .info {
     font-size: 1em;
 }
+
+@media only screen and (max-width: 767px) {
+.info {
+    font-size: 0.9em;
+}
+
+}
