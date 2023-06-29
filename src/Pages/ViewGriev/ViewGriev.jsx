@@ -63,10 +63,8 @@ function ViewGriev({ Token, userType }) {
             let recievedIds = JSON.parse(res.data.view_access_ids);
             if (recievedIds === null) {
                 setSelectedTeachers([])
-                console.log('null case',selectedTeachers);
             } else {
                 setSelectedTeachers(recievedIds);
-                console.log(selectedTeachers);
             }
         }).catch((err) => {
             setLoading(true);
