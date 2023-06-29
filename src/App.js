@@ -33,7 +33,6 @@ function App() {
   const [callUser, setCallUser] = useState(false);
   const [loading, setLoading] = useState(true);
   const [callReload, setCallReload] = useState(false)
-  const [teachers, setTeachers] = useState([]);
 
   // Simulating data loading using useEffect hook
   useEffect(() => {
@@ -81,25 +80,6 @@ function App() {
     })
   }
 
-  const getAllTeachers = () => {
-    try {
-      axios.get('https://flask-production-37b2.up.railway.app/all_teachers/', {
-        headers: {
-          'x-access-token': token
-        }
-      }).then((res) => {
-        setTeachers(res.data);
-      }).catch((err) => {
-        if (err.response.status === 401) {
-          localStorage.clear();
-        }
-      })
-    } catch (error) {
-      if (error.response.status === 401) {
-        localStorage.clear()
-      }
-    }
-  }
 
   useEffect(() => {
     if (token) {
@@ -108,12 +88,6 @@ function App() {
       localStorage.clear()
     }
   }, [callUser])
-
-  useEffect(() => {
-    if (token && userType === "Admin") {
-      getAllTeachers();
-    }
-  }, [])
 
   const getCall = (data) => {
     setReload(data)
@@ -157,7 +131,7 @@ function App() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
               >
-                <ViewGriev user={user} Token={token} userType={userType} teachers={teachers} />
+                <ViewGriev user={user} Token={token} userType={userType} />
               </motion.div>
             </>
           } />

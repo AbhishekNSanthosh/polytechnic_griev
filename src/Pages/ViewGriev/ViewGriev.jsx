@@ -11,7 +11,7 @@ import { GridLoader } from 'react-spinners';
 import { toast } from 'react-hot-toast';
 import { motion } from 'framer-motion'
 
-function ViewGriev({ Token, userType, teachers }) {
+function ViewGriev({ Token, userType }) {
 
     const [letter, setLetter] = useState({});
     const [loading, setLoading] = useState(false);
@@ -23,6 +23,7 @@ function ViewGriev({ Token, userType, teachers }) {
     const [updatedActions, setUpdatedActions] = useState("");
     const [selectedTeachers, setSelectedTeachers] = useState([]);
     const [showTeachers, setShowTeachers] = useState(false);
+    const [teachers, setTeachers] = useState([]);
 
     const location = useLocation();
     const receivedData = location.state;
@@ -70,6 +71,31 @@ function ViewGriev({ Token, userType, teachers }) {
         })
     }
 
+    const getAllTeachers = () => {
+        try {
+            axios.get('https://flask-production-37b2.up.railway.app/all_teachers/', {
+                headers: {
+                    'x-access-token': Token
+                }
+            }).then((res) => {
+                setTeachers(res.data);
+            }).catch((err) => {
+                if (err.response.status === 401) {
+                    localStorage.clear();
+                }
+            })
+        } catch (error) {
+            if (error.response.status === 401) {
+                localStorage.clear()
+            }
+        }
+    }
+
+    useEffect(() => {
+        if (Token && userType === "Admin") {
+            getAllTeachers();
+        }
+    }, [])
 
     useEffect(() => {
         if (receivedData !== "" && receivedData !== undefined) {
