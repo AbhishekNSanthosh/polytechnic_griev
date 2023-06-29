@@ -439,23 +439,27 @@ function ViewGriev({ Token, userType, teachers }) {
                                     </div>
                                 </div>
                                 <div className="view-access-col-right">
-                                        <div className="button-div-view-access">
-                                            <span className="permision left">VIEW ACCESS PERMISSIONS:</span>
-                                        </div>
-                                    <div className='view-access-permission'>
-                                        <ul>
-                                            {generateViewAccessPermissions().map(permission => (
-                                                // <li key={permission.id}>
-                                                //     {/* ID: {permission.id}, */}
-                                                //     Email: {permission.email}
-                                                // </li>
+                                    {selectedTeachers.length !== 0 &&
+                                        <>
+                                            <div className="button-div-view-access">
+                                                <span className="permision left">VIEW ACCESS PERMISSIONS:</span>
+                                            </div>
+                                            <div className='view-access-permission'>
+                                                <ul>
+                                                    {generateViewAccessPermissions().map(permission => (
+                                                        // <li key={permission.id}>
+                                                        //     {/* ID: {permission.id}, */}
+                                                        //     Email: {permission.email}
+                                                        // </li>
 
-                                                <button key={permission?.id} className="view-access-item">
-                                                    <span className='access-name'>Email: {permission.email}</span>
-                                                </button>
-                                            ))}
-                                        </ul>
-                                    </div>
+                                                        <button key={permission?.id} className="view-access-item">
+                                                            <span className='access-name'>Email: {permission.email}</span>
+                                                        </button>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        </>
+                                    }
                                 </div>
                             </div>
                             <div className="actions-container">
