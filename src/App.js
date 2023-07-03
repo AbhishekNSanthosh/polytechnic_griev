@@ -149,7 +149,7 @@ function App() {
           {/* <Route path="/404" element={<NotFoundPage />} />
       <Route path="*" element={<Navigate to="/404" />} /> */}
         </Routes>
-        {userType === 'Student' &&
+        {userType !== 'Admin' &&
           <AddTool />
         }
       </Router>

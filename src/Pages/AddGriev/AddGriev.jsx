@@ -33,7 +33,7 @@ function AddGriev({ user, getCall }) {
 
 
     const handleSubmit = () => {
-        if (userType === 'Student') {
+        if (userType !== 'Admin') {
             axios.post('https://flask-production-37b2.up.railway.app/add_letter/', { title, body }, {
                 headers: {
                     'x-access-token': Token

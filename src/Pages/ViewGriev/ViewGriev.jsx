@@ -68,7 +68,7 @@ function ViewGriev({ Token, userType }) {
             }
         }).catch((err) => {
             setLoading(true);
-            if (err.response.status === 401) {
+            if (err.response?.data?.status === 401) {
                 localStorage.clear()
                 navigate('/')
             }
@@ -318,7 +318,7 @@ function ViewGriev({ Token, userType }) {
                                 </div>
                                 <div className="view-item-right name">
                                     <div className="view-item-left-title">
-                                        <span className="item-title">{letter?.student?.name}</span>
+                                        <span className="item-title">{letter?.student?.name ? letter?.student?.name : letter?.teacher?.name}</span>
                                     </div>
                                     <div className="view-item-left-title">
                                         <span className="item-title">{letter?.dept_code}</span>
