@@ -445,7 +445,7 @@ function ViewGriev({ Token, userType }) {
                                                                     checked={selectedTeachers.some(selected => selected.id === teacher.id)}
                                                                     onChange={() => handleTeacherSelection(teacher.id, teacher.email)}
                                                                 />
-                                                                <span className='access-name'>{teacher?.email}</span>
+                                                                <span className='access-name'>{teacher?.name}</span>
                                                             </div>
                                                         ))}
                                                     </div>
