@@ -24,9 +24,10 @@ function DataTableItemMobile({ index, item, userType, Token, getletterCall }) {
     const handleClose = () => {
         setModal(false)
     }
-
+    const url = 'https://flask-production-37b2.up.railway.app'
+    //Function to delete 
     const handleDetele = (data) => {
-        axios.delete(`https://flask-production-37b2.up.railway.app/delete_letter/${data}/`, {
+        axios.delete(`${url}/delete_letter/${data}/`, {
             headers: {
                 'x-access-token': Token
             }
@@ -38,16 +39,19 @@ function DataTableItemMobile({ index, item, userType, Token, getletterCall }) {
                     color: '#fff'
                 }
             });
-            getletterCall(true)
+            if (res) {
+                getletterCall(true)
+            }
             setModal(false)
         }).catch((error) => {
             setModal(false);
-            if (error.response.status === 401) {
+            if (error?.response?.data?.status === 401) {
                 localStorage.clear()
             }
         })
     }
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
     return (
         <>
             <div className="mobile-container" key={index}>

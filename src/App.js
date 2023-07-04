@@ -34,6 +34,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [callReload, setCallReload] = useState(false)
 
+  const url = 'https://flask-production-37b2.up.railway.app'
   // Simulating data loading using useEffect hook
   useEffect(() => {
     setTimeout(() => {
@@ -45,7 +46,8 @@ function App() {
 
   const userType = localStorage.getItem('usertype')
   const getUserDetails = () => {
-    axios.get('https://flask-production-37b2.up.railway.app/user_details/', {
+
+    axios.get(`${url}/user_details/`, {
       headers: {
         'x-access-token': token
       }
@@ -53,7 +55,7 @@ function App() {
       setUser(res.data)
       localStorage.setItem('user', JSON.stringify(res.data))
     }).catch((err) => {
-      if (err.response.status === 401) {
+      if (err?.response?.data?.status === 401) {
         toast.error('Token Expired', {
           position: 'top-center',
           style: {
@@ -61,17 +63,6 @@ function App() {
             color: '#fff'
           }
         })
-        toast.error('Please Login', {
-          style: {
-            border: '1px solid #713200',
-            padding: '10px',
-            color: '#713200',
-          },
-          iconTheme: {
-            primary: '#713200',
-            secondary: '#FFFAEE',
-          },
-        });
         localStorage.clear()
         setTimeout(() => {
           window.location.reload()

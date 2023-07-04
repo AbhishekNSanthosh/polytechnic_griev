@@ -27,6 +27,8 @@ function ViewGriev({ Token, userType }) {
 
     const location = useLocation();
     const receivedData = location.state;
+    
+    const url = 'https://flask-production-37b2.up.railway.app'
 
     const handleTeacherSelection = (teacherId, teacherEmail) => {
         const selectedTeacher = { id: teacherId, email: teacherEmail };
@@ -46,7 +48,7 @@ function ViewGriev({ Token, userType }) {
     //API CALLS
     const getLetter = () => {
         setLoading(true);
-        axios.get('https://flask-production-37b2.up.railway.app/get_letter/' + receivedData + '/', {
+        axios.get(`${url}/get_letter/${receivedData}/`, {
             headers: {
                 'x-access-token': Token
             }
@@ -77,7 +79,7 @@ function ViewGriev({ Token, userType }) {
 
     const getAllTeachers = () => {
         try {
-            axios.get('https://flask-production-37b2.up.railway.app/all_teachers/', {
+            axios.get(`${url}/all_teachers/`, {
                 headers: {
                     'x-access-token': Token
                 }
@@ -110,7 +112,7 @@ function ViewGriev({ Token, userType }) {
     }, [receivedData])
 
     const updateRead = () => {
-        axios.put('https://flask-production-37b2.up.railway.app/status_update/' + receivedData + '/', {
+        axios.put(`${url}/status_update/${receivedData}/`, {
             status: 1
         }, {
             headers: {
@@ -145,7 +147,7 @@ function ViewGriev({ Token, userType }) {
 
 
     const handleUpdateStatus = () => {
-        axios.put(`https://flask-production-37b2.up.railway.app/issue_status_update/${receivedData}/`, {
+        axios.put(`${url}/issue_status_update/${receivedData}/`, {
             status: updateStatus
         }, {
             headers: {
@@ -169,7 +171,7 @@ function ViewGriev({ Token, userType }) {
     }
 
     const handleComment = () => {
-        axios.put(`https://flask-production-37b2.up.railway.app/comment_update/${receivedData}/`, {
+        axios.put(`${url}/comment_update/${receivedData}/`, {
             comments
         }, {
             headers: {
@@ -194,7 +196,7 @@ function ViewGriev({ Token, userType }) {
     }
 
     const handledDeleteCommet = () => {
-        axios.put(`https://flask-production-37b2.up.railway.app/comment_update/${receivedData}/`, {
+        axios.put(`${url}/comment_update/${receivedData}/`, {
             comments: null
         }, {
             headers: {
@@ -220,7 +222,7 @@ function ViewGriev({ Token, userType }) {
     }
 
     const handleAction = () => {
-        axios.put(`https://flask-production-37b2.up.railway.app/action_update/${receivedData}/`, {
+        axios.put(`${url}/action_update/${receivedData}/`, {
             actions
         }, {
             headers: {
@@ -245,7 +247,7 @@ function ViewGriev({ Token, userType }) {
     }
 
     const handleDeleteAction = () => {
-        axios.put(`https://flask-production-37b2.up.railway.app/action_update/${receivedData}/`, {
+        axios.put(`${url}/action_update/${receivedData}/`, {
             actions: null
         }, {
             headers: {
@@ -272,7 +274,7 @@ function ViewGriev({ Token, userType }) {
     const selectedTeachersString = JSON.stringify(selectedTeachers);
 
     const handleUpdateViewAccess = () => {
-        axios.put(`https://flask-production-37b2.up.railway.app/update_view_access_letter/${receivedData}/`, {
+        axios.put(`${url}/update_view_access_letter/${receivedData}/`, {
             ids: selectedTeachersString
         }, {
             headers: {

@@ -14,6 +14,8 @@ function LoginDir({ getCall2 }) {
   const [user, setUser] = useState(null)
   const navigate = useNavigate()
 
+  const url = 'https://flask-production-37b2.up.railway.app'
+
   const getLoginPerson = (data) => {
     setLoginPerson(data)
   }
@@ -21,7 +23,7 @@ function LoginDir({ getCall2 }) {
   //Function to login
   const handleLogin = async (email, password) => {
     try {
-      axios.post('https://flask-production-37b2.up.railway.app/' + loginPerson + '_login/', {
+      axios.post(`${url}/${loginPerson}_login/`, {
         email, password
       }).then((res) => {
         setUser(res.data.role)
