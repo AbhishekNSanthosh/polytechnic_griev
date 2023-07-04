@@ -45,7 +45,7 @@ function DataTableItemMobile({ index, item, userType, Token, getletterCall }) {
             setModal(false)
         }).catch((error) => {
             setModal(false);
-            if (error?.response?.data?.status === 401) {
+            if (error?.response?.status === 401) {
                 localStorage.clear()
             }
         })

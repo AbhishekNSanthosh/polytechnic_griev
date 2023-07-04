@@ -55,7 +55,7 @@ function App() {
       setUser(res.data)
       localStorage.setItem('user', JSON.stringify(res.data))
     }).catch((err) => {
-      if (err?.response?.data?.status === 401) {
+      if (err?.response?.status === 401) {
         toast.error('Token Expired', {
           position: 'top-center',
           style: {
@@ -140,7 +140,7 @@ function App() {
           {/* <Route path="/404" element={<NotFoundPage />} />
       <Route path="*" element={<Navigate to="/404" />} /> */}
         </Routes>
-        {userType !== 'Admin' &&
+        {userType !== 'Admin' && token &&
           <AddTool />
         }
       </Router>
