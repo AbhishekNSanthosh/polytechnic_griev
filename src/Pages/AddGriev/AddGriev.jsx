@@ -10,8 +10,9 @@ function AddGriev({ user, getCall }) {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
 
-    const navigate = useNavigate()
-    const Token = localStorage.getItem('access_token')
+    const url = 'https://flask-production-37b2.up.railway.app';
+    const navigate = useNavigate();
+    const Token = localStorage.getItem('access_token');
     const userType = localStorage.getItem('usertype');
 
     useEffect(() => {
@@ -21,12 +22,12 @@ function AddGriev({ user, getCall }) {
                 navigate('/')
             }, 900)
         }
-    }, [])
+    }, []);
 
     //Fucntion to submit the letters -- roles : Student, Teacher
     const handleSubmit = () => {
         if (userType !== 'Admin') {
-            axios.post('https://flask-production-37b2.up.railway.app/add_letter/', { title, body }, {
+            axios.post(`${url}/add_letter/`, { title, body }, {
                 headers: {
                     'x-access-token': Token
                 }

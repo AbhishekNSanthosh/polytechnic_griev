@@ -22,6 +22,7 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     const [callLetter, setCallLetter] = useState(false);
     const [value, setValue] = React.useState('one');
 
+    const url = 'https://flask-production-37b2.up.railway.app'
     const navigate = useNavigate();
     const userType = localStorage.getItem('usertype')
     const userObj = localStorage.getItem('user')
@@ -36,7 +37,7 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     const getAllStudents = () => {
         setModalLoading(true)
         try {
-            axios.get('https://flask-production-37b2.up.railway.app/all_students/', {
+            axios.get(`${url}/all_students/`, {
                 headers: {
                     'x-access-token': Token
                 }
@@ -61,7 +62,7 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     const getAllTeachers = () => {
         setModalLoading(true);
         try {
-            axios.get('https://flask-production-37b2.up.railway.app/all_teachers/', {
+            axios.get(`${url}/all_teachers/`, {
                 headers: {
                     'x-access-token': Token
                 }
@@ -85,7 +86,7 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     const getAllAdmins = () => {
         setModalLoading(true)
         try {
-            axios.get('https://flask-production-37b2.up.railway.app/all_admins/', {
+            axios.get(`${url}/all_admins/`, {
                 headers: {
                     'x-access-token': Token
                 }
@@ -110,7 +111,7 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     const getAllLetters = () => {
         setLoading(true)
         try {
-            axios.get('https://flask-production-37b2.up.railway.app/all_letters/', {
+            axios.get(`${url}/all_letters/`, {
                 headers: {
                     'x-access-token': Token
                 }
@@ -135,7 +136,7 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     const getUserLetter = () => {
         setLoading(true)
         try {
-            axios.get('https://flask-production-37b2.up.railway.app/student_letters/' + userData?.id + "/", {
+            axios.get(`${url}/student_letters/${userData?.id}/`, {
                 headers: {
                     'x-access-token': Token
                 }
@@ -163,7 +164,7 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
         setLoading(true)
         if (value === "one") {
             try {
-                axios.get('https://flask-production-37b2.up.railway.app/teacher_permitted_letters/', {
+                axios.get(`${url}/teacher_permitted_letters/`, {
                     headers: {
                         'x-access-token': Token
                     }
@@ -193,7 +194,7 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     const teacherLetter = () => {
         setLoading(true)
         try {
-            axios.get('https://flask-production-37b2.up.railway.app/teacher_letters/' + userData?.id + '/', {
+            axios.get(`${url}/teacher_letters/${userData?.id}/`, {
                 headers: {
                     'x-access-token': Token
                 }
