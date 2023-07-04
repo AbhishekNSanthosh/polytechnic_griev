@@ -7,6 +7,9 @@ import Buttons from '../../Components/Buttons/Buttons';
 import AddModal from '../../Components/AddModal/AddModal';
 import ListModal from '../../Components/ListModal/ListModal';
 import notfoundimg from '../../Assets/notfound1.svg'
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import { Tabs } from '@mui/material';
 
 const Dashboard = ({ user, reload, Token, logCall }) => {
     const [letters, setLetters] = useState([]);
@@ -18,6 +21,11 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     const [teachers, setTeachers] = useState([])
     const [admins, setAdmins] = useState([]);
     const [callLetter, setCallLetter] = useState(false);
+    const [value, setValue] = React.useState('one');
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     const navigate = useNavigate();
     const userType = localStorage.getItem('usertype')
@@ -58,7 +66,7 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
             }).then((res) => {
                 setTimeout(() => {
                     setModalLoading(false)
-                }, 900);
+                }, 100);
                 setTeachers(res?.data)
             }).catch((err) => {
                 setModalLoading(false)
@@ -108,7 +116,7 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
             }).then((res) => {
                 setTimeout(() => {
                     setLoading(false);
-                }, 900);
+                }, 100);
                 setLetters(res.data)
             }).catch((err) => {
                 if (err.response?.data?.status === 401) {
@@ -134,7 +142,7 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
             }).then((res) => {
                 setTimeout(() => {
                     setLoading(false);
-                }, 2000);
+                }, 100);
                 setLetters(res?.data);
             }).catch((err) => {
                 setLoading(false);
@@ -154,15 +162,47 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
 
     const getTeacherLetters = () => {
         setLoading(true)
+        if (value === "one") {
+            try {
+                axios.get('https://flask-production-37b2.up.railway.app/teacher_permitted_letters/', {
+                    headers: {
+                        'x-access-token': Token
+                    }
+                }).then((res) => {
+                    setTimeout(() => {
+                        setLoading(false);
+                    }, 100);
+                    setLetters(res?.data);
+                }).catch((err) => {
+                    setLoading(false);
+                    if (err?.response?.data?.status === 401) {
+                        localStorage.clear()
+                        navigate('/')
+                    }
+                })
+            } catch (error) {
+                setLoading(false);
+                if (error?.response?.data?.status === 401) {
+                    localStorage.clear()
+                    navigate('/')
+                }
+            }
+        } else {
+
+        }
+
+    }
+    const teacherLetter = () => {
+        setLoading(true)
         try {
-            axios.get('https://flask-production-37b2.up.railway.app/teacher_permitted_letters/', {
+            axios.get('https://flask-production-37b2.up.railway.app/teacher_letters/' + userData?.id + '/', {
                 headers: {
                     'x-access-token': Token
                 }
             }).then((res) => {
                 setTimeout(() => {
                     setLoading(false);
-                }, 2000);
+                }, 100);
                 setLetters(res?.data);
             }).catch((err) => {
                 setLoading(false);
@@ -187,14 +227,14 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     }, [reload, logCall, callLetter])
 
     useEffect(() => {
-        if (userType !== 'Admin') {
+        if (userType === 'Student') {
             getUserLetter();
         }
     }, [reload, logCall, callLetter])
 
     useEffect(() => {
         if (userType === 'Teacher') {
-            getTeacherLetters();
+            teacherLetter()
         }
     }, [reload, logCall, callLetter])
 
@@ -220,7 +260,24 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
             {userType === 'Admin' &&
                 <div className="buttons-row">
                     <Buttons getAllAdmins={getAllAdmins} getAllTeachers={getAllTeachers} getAllStudents={getAllStudents} getModalStatus={getModalStatus} getModalStatusOpenBy={getModalStatusOpenBy} Token={Token} />
-                </div>}
+                </div>
+            }
+            <div className="buttons_row_teacher">
+                <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    textColor="primary"
+                    indicatorColor="primary"
+                    aria-label="secondary tabs example"
+                >
+                    <Tab onClick={() => {
+                        teacherLetter();
+                    }} value="one" label="My Grievanes" />
+                    <Tab onClick={() => {
+                        getTeacherLetters();
+                    }} value="two" label="Permitted Grievance" />
+                </Tabs>
+            </div>
             {letters.length === 0 ?
                 <>
                     <div className="not-found">

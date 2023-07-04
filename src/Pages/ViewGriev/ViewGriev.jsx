@@ -289,10 +289,10 @@ function ViewGriev({ Token, userType }) {
                 setShowTeachers(false)
             }
         }).catch((err) => {
-            // if (err.response.status === 401) {
-            //     localStorage.clear()
-            //     navigate('/')
-            // }
+            if (err.response.data.status === 401) {
+                localStorage.clear()
+                navigate('/')
+            }
         })
     }
     return (
