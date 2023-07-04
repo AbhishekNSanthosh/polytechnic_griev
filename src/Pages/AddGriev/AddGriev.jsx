@@ -11,27 +11,19 @@ function AddGriev({ user, getCall }) {
     const [body, setBody] = useState("");
 
     const navigate = useNavigate()
-
     const Token = localStorage.getItem('access_token')
     const userType = localStorage.getItem('usertype');
 
     useEffect(() => {
         if (!Token) {
             localStorage.clear()
-            toast.error('Session Expired!.', {
-                position: 'bottom-center',
-                style: {
-                    backgroundColor: 'black',
-                    color: '#fff'
-                }
-            })
             setTimeout(() => {
                 navigate('/')
-            }, 2000)
+            }, 900)
         }
     }, [])
 
-
+    //Fucntion to submit the letters -- roles : Student, Teacher
     const handleSubmit = () => {
         if (userType !== 'Admin') {
             axios.post('https://flask-production-37b2.up.railway.app/add_letter/', { title, body }, {
@@ -50,7 +42,7 @@ function AddGriev({ user, getCall }) {
                     navigate('/dashboard')
                 }, 300);
             }).catch((err) => {
-                if (err.response.status === 401) {
+                if (err?.response?.data?.status === 401) {
                     localStorage.clear()
                     navigate('/')
                 }
@@ -107,4 +99,4 @@ function AddGriev({ user, getCall }) {
     )
 }
 
-export default AddGriev
+export default AddGriev;
