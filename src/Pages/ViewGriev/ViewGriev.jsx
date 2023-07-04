@@ -27,7 +27,7 @@ function ViewGriev({ Token, userType }) {
 
     const location = useLocation();
     const receivedData = location.state;
-    
+
     const url = 'https://flask-production-37b2.up.railway.app'
 
     const handleTeacherSelection = (teacherId, teacherEmail) => {
@@ -70,7 +70,7 @@ function ViewGriev({ Token, userType }) {
             }
         }).catch((err) => {
             setLoading(true);
-            if (err.response?.data?.status === 401) {
+            if (err?.response?.status === 401) {
                 localStorage.clear()
                 navigate('/')
             }
@@ -86,12 +86,12 @@ function ViewGriev({ Token, userType }) {
             }).then((res) => {
                 setTeachers(res.data);
             }).catch((err) => {
-                if (err.response.status === 401) {
+                if (err?.response?.status === 401) {
                     localStorage.clear();
                 }
             })
         } catch (error) {
-            if (error.response.status === 401) {
+            if (error?.response?.status === 401) {
                 localStorage.clear()
             }
         }

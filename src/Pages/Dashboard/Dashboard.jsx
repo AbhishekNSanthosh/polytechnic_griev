@@ -46,13 +46,13 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                 setStudents(res?.data)
             }).catch((err) => {
                 setModalLoading(false)
-                if (err?.response?.data?.status === 401) {
+                if (err?.response?.status === 401) {
                     localStorage.clear()
                 }
             })
         } catch (error) {
             setModalLoading(false)
-            if (error?.response?.data?.status === 401) {
+            if (error?.response?.status === 401) {
                 localStorage.clear()
             }
         }
@@ -71,12 +71,12 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                 setTeachers(res?.data)
             }).catch((err) => {
                 setModalLoading(false)
-                if (err?.response?.data?.status === 401) {
+                if (err?.response?.status === 401) {
                     localStorage.clear()
                 }
             })
         } catch (error) {
-            if (error?.response?.data?.status === 401) {
+            if (error?.response?.status === 401) {
                 localStorage.clear()
             }
         }
@@ -95,13 +95,13 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                 setAdmins(res?.data)
             }).catch((err) => {
                 setModalLoading(false)
-                if (err?.response?.data?.status === 401) {
+                if (err?.response?.status === 401) {
                     localStorage.clear()
                 }
             })
         } catch (error) {
             setModalLoading(false)
-            if (error?.response?.data?.status === 401) {
+            if (error?.response?.status === 401) {
                 localStorage.clear()
             }
         }
@@ -119,13 +119,13 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                 setLoading(false);
                 setLetters(res.data)
             }).catch((err) => {
-                if (err?.response?.data?.status === 401) {
+                if (err?.response?.status === 401) {
                     localStorage.clear()
                 }
                 setLoading(false);
             })
         } catch (error) {
-            if (error?.response?.data?.status === 401) {
+            if (error?.response?.status === 401) {
                 localStorage.clear()
             }
             setLoading(false)
@@ -145,14 +145,14 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                 setLetters(res?.data);
             }).catch((err) => {
                 setLoading(false);
-                if (err?.response?.data?.status === 401) {
+                if (err?.response?.status === 401) {
                     localStorage.clear()
                     navigate('/')
                 }
             })
         } catch (error) {
             setLoading(false);
-            if (error?.response?.data?.status === 401) {
+            if (error?.response?.status === 401) {
                 localStorage.clear()
                 navigate('/')
             }
@@ -173,14 +173,14 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                     setLetters(res?.data);
                 }).catch((err) => {
                     setLoading(false);
-                    if (err?.response?.data?.status === 401) {
+                    if (err?.response?.status === 401) {
                         localStorage.clear()
                         navigate('/')
                     }
                 })
             } catch (error) {
                 setLoading(false);
-                if (error?.response?.data?.status === 401) {
+                if (error?.response?.status === 401) {
                     localStorage.clear()
                     navigate('/')
                 }
@@ -203,14 +203,14 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                 setLetters(res?.data);
             }).catch((err) => {
                 setLoading(false);
-                if (err?.response?.data?.status === 401) {
+                if (err?.response?.status === 401) {
                     localStorage.clear()
                     navigate('/')
                 }
             })
         } catch (error) {
             setLoading(false);
-            if (error?.response?.data?.status === 401) {
+            if (error?.response?.status === 401) {
                 localStorage.clear()
                 navigate('/')
             }

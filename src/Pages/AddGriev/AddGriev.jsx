@@ -43,7 +43,7 @@ function AddGriev({ user, getCall }) {
                     navigate('/dashboard')
                 }, 300);
             }).catch((err) => {
-                if (err?.response?.data?.status === 401) {
+                if (err?.response?.status === 401) {
                     localStorage.clear()
                     navigate('/')
                 }

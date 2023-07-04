@@ -45,7 +45,7 @@ function DataTableItem({ item, userType, Token, index, getletterCall }) {
             setModal(false)
         }).catch((error) => {
             setModal(false);
-            if (error.response.status === 401) {
+            if (error?.response?.status === 401) {
                 localStorage.clear()
             }
         })
