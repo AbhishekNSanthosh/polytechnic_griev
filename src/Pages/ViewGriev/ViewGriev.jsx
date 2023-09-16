@@ -28,7 +28,7 @@ function ViewGriev({ Token, userType }) {
     const location = useLocation();
     const receivedData = location.state;
 
-    const url = 'https://flask-production-37b2.up.railway.app'
+    const url = 'https://poly-backend-64o7.onrender.com'
 
     const handleTeacherSelection = (teacherId, teacherEmail) => {
         const selectedTeacher = { id: teacherId, email: teacherEmail };
@@ -104,7 +104,7 @@ function ViewGriev({ Token, userType }) {
     }, [])
 
     useEffect(() => {
-        if (receivedData !== "" && receivedData !== undefined) {
+        if (receivedData !== "" && receivedData !== undefined && Token) {
             getLetter();
         } else {
             navigate('/dashboard')
@@ -576,14 +576,14 @@ function ViewGriev({ Token, userType }) {
                                         </>
                                     </div>
                                 }
-                                {userType === 'Admin' &&
+                                {userType !== 'Student' &&
                                     <div className="actions-right">
                                         <div className="actions">
                                             <span className="item-title left">{updateComments === null ? "Add" : "Edit"} Comment:</span>
                                         </div>
                                         <>
                                             <div className="actions">
-                                                <textarea value={comments} disabled={userType !== 'Admin'} onChange={(e) => {
+                                                <textarea value={comments} disabled={userType === 'Student'} onChange={(e) => {
                                                     setComments(e.target.value)
                                                 }} className='textarea' name="actions" id="" cols="30" rows="6"></textarea>
                                             </div>

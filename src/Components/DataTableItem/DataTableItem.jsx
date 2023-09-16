@@ -27,7 +27,7 @@ function DataTableItem({ item, userType, Token, index, getletterCall }) {
     const handleClose = () => {
         setModal(false)
     }
-    const url = 'https://flask-production-37b2.up.railway.app'
+    const url = 'https://poly-backend-64o7.onrender.com'
     const handleDetele = (data) => {
         axios.delete(`${url}/delete_letter/${data}/`, {
             headers: {
