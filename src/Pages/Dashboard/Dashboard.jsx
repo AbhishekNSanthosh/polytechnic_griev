@@ -22,7 +22,7 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     const [callLetter, setCallLetter] = useState(false);
     const [value, setValue] = React.useState('one');
 
-    const url = 'https://flask-production-37b2.up.railway.app'
+    const url = 'https://poly-backend-64o7.onrender.com'
     const navigate = useNavigate();
     const userType = localStorage.getItem('usertype')
     const userObj = localStorage.getItem('user')

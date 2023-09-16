@@ -10,7 +10,7 @@ function AddGriev({ user, getCall }) {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
 
-    const url = 'https://flask-production-37b2.up.railway.app';
+    const url = 'https://poly-backend-64o7.onrender.com';
     const navigate = useNavigate();
     const Token = localStorage.getItem('access_token');
     const userType = localStorage.getItem('usertype');

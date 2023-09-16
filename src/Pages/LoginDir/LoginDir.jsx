@@ -14,7 +14,7 @@ function LoginDir({ getCall2 }) {
   const [user, setUser] = useState(null)
   const navigate = useNavigate()
 
-  const url = 'https://flask-production-37b2.up.railway.app'
+  const url = 'https://poly-backend-64o7.onrender.com'
 
   const getLoginPerson = (data) => {
     setLoginPerson(data)

@@ -34,7 +34,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [callReload, setCallReload] = useState(false)
 
-  const url = 'https://flask-production-37b2.up.railway.app'
+  const url = 'https://poly-backend-64o7.onrender.com'
   // Simulating data loading using useEffect hook
   useEffect(() => {
     setTimeout(() => {
