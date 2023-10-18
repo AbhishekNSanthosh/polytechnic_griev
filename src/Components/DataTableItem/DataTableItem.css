@@ -11,6 +11,11 @@
     
 }
 
+.data{
+    font-size: 18px;
+    text-transform: capitalize;
+}
+
 .read-status {
     padding: 3px;
     border-radius: 8px;
