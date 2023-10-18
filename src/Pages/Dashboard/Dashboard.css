@@ -92,23 +92,31 @@
 }
 
 @media only screen and (max-width: 767px) {
-.info {
-    font-size: 0.7em;
-}
+    .info {
+        font-size: 0.7em;
+    }
 
 }
 
-.buttons_row_teacher{
+.buttons_row_teacher {
     padding: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.teacher_letter_button{
-    padding: 10px;border: none;
+.teacher_letter_button {
+    padding: 10px;
+    border: none;
     border-radius: 10px;
     font-size: 17px;
     margin-right: 10px;
     background-color: red;
+}
+
+.loadingDiv {
+    display: flex;
+    height: 75vh;
+    align-items: center;
+    justify-content: center;
 }
