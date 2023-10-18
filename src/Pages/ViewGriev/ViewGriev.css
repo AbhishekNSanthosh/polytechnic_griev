@@ -106,7 +106,8 @@
 .view-item-left-title {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
+    width: 100%;
 }
 
 
@@ -114,7 +115,7 @@
 .item-title-sub {
     font-size: 20px;
     letter-spacing: 1.1px;
-    font-weight: 600;
+    font-weight: 500;
     text-transform: capitalize;
     color: rgb(49, 49, 49);
 }
@@ -125,11 +126,12 @@
     .item-title-sub {
         font-size: 17px;
         letter-spacing: 1.1px;
-        font-weight: 600;
+        font-weight: 500;
         text-transform: capitalize;
         color: rgb(49, 49, 49);
     }
 }
+
 
 .left {
     font-size: 19px;
@@ -240,7 +242,7 @@
     border-radius: 10px;
     background-color: red;
     border: none;
-    font-size: 19px;
+    font-size: 17px;
     color: #fff;
     cursor: pointer;
 }
