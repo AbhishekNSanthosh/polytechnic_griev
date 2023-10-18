@@ -81,7 +81,7 @@ function AddGriev({ user, getCall }) {
                 <div className="add-box-row-submit">
                     <button className="submit" onClick={e => {
                         e.preventDefault();
-                        if (body === "" && title === "") {
+                        if (body === "" || title === "") {
                             toast.error('Fields cannot be empty..', {
                                 position: 'bottom-center',
                                 style: {
