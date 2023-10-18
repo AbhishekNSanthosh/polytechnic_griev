@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 
-const StudentLogin = ({ getLoginPerson, handleLogin }) => {
+const StudentLogin = ({ getLoginPerson, handleLogin, loading }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
 
@@ -58,8 +58,8 @@ const StudentLogin = ({ getLoginPerson, handleLogin }) => {
                                 <TextField className='student-login-input' label='Password' type='password' onChange={(e) => { setPassword(e.target.value) }} />
                             </div>
                             <div className="student-login-input-row">
-                                <button className="student-login-button" onClick={()=>{
-                                    if(email === "" || password === ""){
+                                <button className="student-login-button" onClick={() => {
+                                    if (email === "" || password === "") {
                                         toast.error('Fields cannot be empty..', {
                                             position: 'bottom-center',
                                             style: {
@@ -69,7 +69,9 @@ const StudentLogin = ({ getLoginPerson, handleLogin }) => {
                                         })
                                     }
                                     callLogin();
-                                }}>LOGIN</button>
+                                }}
+                                    disabled={loading}
+                                >{loading ? "Please Wait..." : "LOGIN"}</button>
                             </div>
                         </div>
                     </div>

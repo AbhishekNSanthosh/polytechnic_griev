@@ -11,7 +11,8 @@ import { toast } from 'react-hot-toast';
 
 function LoginDir({ getCall2 }) {
   const [loginPerson, setLoginPerson] = useState("noOne");
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
 
   const url = 'https://poly-backend-64o7.onrender.com'
@@ -22,10 +23,12 @@ function LoginDir({ getCall2 }) {
 
   //Function to login
   const handleLogin = async (email, password) => {
+    setLoading(true);
     try {
       axios.post(`${url}/${loginPerson}_login/`, {
         email, password
       }).then((res) => {
+        setLoading(false);
         setUser(res.data.role)
         localStorage.setItem('usertype', res.data.role)
         getCall2(true)
@@ -51,6 +54,7 @@ function LoginDir({ getCall2 }) {
           );
         }, 900);
       }).catch((err) => {
+        setLoading(false)
         toast.error('Ivalid Credentials', {
           position: 'bottom-center',
           style: {
@@ -60,6 +64,7 @@ function LoginDir({ getCall2 }) {
         })
       })
     } catch (error) {
+      setLoading(false)
       toast.error('Something went wrong', {
         position: 'bottom-center',
         style: {
@@ -80,10 +85,10 @@ function LoginDir({ getCall2 }) {
         </div>
         <div className="login-right">
           <div className="login-right-container">
-            {loginPerson === 'noOne' && <OptLogin getLoginPerson={getLoginPerson} />}
-            {loginPerson === 'admin' && <AdminLogin getLoginPerson={getLoginPerson} handleLogin={handleLogin} />}
-            {loginPerson === 'teacher' && <FacultyLogin getLoginPerson={getLoginPerson} handleLogin={handleLogin} />}
-            {loginPerson === 'student' && <StudentLogin getLoginPerson={getLoginPerson} handleLogin={handleLogin} />}
+            {loginPerson === 'noOne' && <OptLogin getLoginPerson={getLoginPerson} loading={loading} />}
+            {loginPerson === 'admin' && <AdminLogin getLoginPerson={getLoginPerson} handleLogin={handleLogin} loading={loading} />}
+            {loginPerson === 'teacher' && <FacultyLogin getLoginPerson={getLoginPerson} handleLogin={handleLogin} loading={loading} />}
+            {loginPerson === 'student' && <StudentLogin getLoginPerson={getLoginPerson} handleLogin={handleLogin} loading={loading} />}
           </div>
         </div>
       </div>

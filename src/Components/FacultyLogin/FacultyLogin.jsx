@@ -4,7 +4,7 @@ import { TextField } from '@mui/material'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 
-const FacultyLogin = ({ getLoginPerson, handleLogin }) => {
+const FacultyLogin = ({ getLoginPerson, handleLogin,loading }) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
@@ -62,7 +62,9 @@ const FacultyLogin = ({ getLoginPerson, handleLogin }) => {
                                     if (email !== "" && password !== "") {
                                         callLogin()
                                     }
-                                }} className="faculty-login-button">LOGIN</button>
+                                }} className="faculty-login-button"
+                                    disabled={loading}
+                                >{loading ? "Please Wait..." : "LOGIN"}</button>
                             </div>
                         </div>
                     </div>

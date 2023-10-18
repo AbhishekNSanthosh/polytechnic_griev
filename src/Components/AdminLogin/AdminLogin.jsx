@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 
 
-const AdminLogin = ({ getLoginPerson, handleLogin }) => {
+const AdminLogin = ({ getLoginPerson, handleLogin, loading }) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
@@ -63,7 +63,9 @@ const AdminLogin = ({ getLoginPerson, handleLogin }) => {
                                     if (email !== "" && password !== "") {
                                         callLogin()
                                     }
-                                }}>LOGIN</button>
+                                }}
+                                    disabled={loading}
+                                >{loading ? "Please Wait..." : "LOGIN"}</button>
                             </div>
                         </div>
                     </div>
