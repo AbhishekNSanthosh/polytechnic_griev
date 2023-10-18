@@ -138,40 +138,20 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     const getUserLetter = () => {
         setLoading(true)
         try {
-            if (userData?.id === undefined) {
-                console.log(undefined)
-                setTimeout(() => {
-                    axios.get(`${url}/student_letters/${userData?.id}/`, {
-                        headers: {
-                            'x-access-token': Token
-                        }
-                    }).then((res) => {
-                        setLoading(false);
-                        setLetters(res?.data);
-                    }).catch((err) => {
-                        setLoading(false);
-                        if (err?.response?.status === 401) {
-                            localStorage.clear()
-                            navigate('/')
-                        }
-                    })
-                }, 900);
-            } else {
-                axios.get(`${url}/student_letters/${userData?.id}/`, {
-                    headers: {
-                        'x-access-token': Token
-                    }
-                }).then((res) => {
-                    setLoading(false);
-                    setLetters(res?.data);
-                }).catch((err) => {
-                    setLoading(false);
-                    if (err?.response?.status === 401) {
-                        localStorage.clear()
-                        navigate('/')
-                    }
-                })
-            }
+            axios.get(`${url}/student_letters/${userData?.id}/`, {
+                headers: {
+                    'x-access-token': Token
+                }
+            }).then((res) => {
+                setLoading(false);
+                setLetters(res?.data);
+            }).catch((err) => {
+                setLoading(false);
+                if (err?.response?.status === 401) {
+                    localStorage.clear()
+                    navigate('/')
+                }
+            })
         } catch (error) {
             setLoading(false);
             if (error?.response?.status === 401) {
@@ -262,23 +242,20 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                             setLoading(true)
                             try {
                                 if (!userData?.id) {
-                                    console.log(!userData?.id);
-                                    setTimeout(() => {
-                                        axios.get(`${url}/student_letters/${res.data?.id}/`, {
-                                            headers: {
-                                                'x-access-token': Token
-                                            }
-                                        }).then((res) => {
-                                            setLoading(false);
-                                            setLetters(res?.data);
-                                        }).catch((err) => {
-                                            setLoading(false);
-                                            if (err?.response?.status === 401) {
-                                                localStorage.clear()
-                                                navigate('/')
-                                            }
-                                        })
-                                    }, 900);
+                                    axios.get(`${url}/student_letters/${res.data?.id}/`, {
+                                        headers: {
+                                            'x-access-token': Token
+                                        }
+                                    }).then((res) => {
+                                        setLoading(false);
+                                        setLetters(res?.data);
+                                    }).catch((err) => {
+                                        setLoading(false);
+                                        if (err?.response?.status === 401) {
+                                            localStorage.clear()
+                                            navigate('/')
+                                        }
+                                    })
                                 } else {
                                     axios.get(`${url}/student_letters/${userData?.id}/`, {
                                         headers: {

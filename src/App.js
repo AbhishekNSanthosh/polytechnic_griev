@@ -36,11 +36,6 @@ function App() {
 
   const url = 'https://poly-backend-64o7.onrender.com'
   // Simulating data loading using useEffect hook
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
 
   const token = localStorage.getItem('access_token');
 

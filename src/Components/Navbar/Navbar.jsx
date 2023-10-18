@@ -15,6 +15,7 @@ const Navbar = () => {
     }
 
     const userObj = localStorage.getItem('user')
+    const role = localStorage.getItem('usertype')
     const userData = JSON.parse(userObj);
 
     return (
@@ -24,13 +25,13 @@ const Navbar = () => {
                     <div className="navbar-container">
                         <div className="nav-left">
                             <div className="nav-left-container">
-                                <img src={logo} alt="" className="nav-logo" onClick={()=>navigate('/dashboard')} />
+                                <img src={logo} alt="" className="nav-logo" onClick={() => navigate('/dashboard')} />
                             </div>
                         </div>
                         <div className="nav-right">
                             <div className="nav-right-item">
                                 <div className="nav-account title">
-                                    <span className="nav-account-name">Welcome, {userData?.email}</span>
+                                    <span className="nav-account-name">Welcome, {userData?.name} <span className="role">({role})</span></span>
                                 </div>
                                 <div className="nav-account">
                                     <span className="material-symbols-outlined logout" onClick={() => {
@@ -53,7 +54,7 @@ const Navbar = () => {
                         </div>
                     </div>
                 </div>
-                <hr className='hr-nav'/>
+                <hr className='hr-nav' />
             </div>
         </>
     )

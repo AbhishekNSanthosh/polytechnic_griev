@@ -13,9 +13,9 @@
 
 @media only screen and (max-width: 767px) {
     .nav {
-         padding: 20px 20px;
+        padding: 20px 20px;
     }
-  }
+}
 
 .navbar-container {
     display: flex;
@@ -57,6 +57,12 @@
     justify-content: center;
 }
 
+.role {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+
 .nav-account-name {
     font-family: 'Zilla Slab';
     font-style: normal;
@@ -65,6 +71,7 @@
     line-height: 30px;
     text-align: center;
     letter-spacing: 4px;
+    text-transform: capitalize;
     /* text-transform: capitalize; */
     color: #101010;
 }
@@ -81,17 +88,17 @@
 }
 
 @media only screen and (max-width: 767px) {
-    .title{
+    .title {
         display: none;
     }
 
-    .logout{
+    .logout {
         font-size: 22px;
     }
-  }
+}
 
-  @media only screen and (max-width: 767px) {
+@media only screen and (max-width: 767px) {
     .nav-logo {
         height: 30px;
     }
-  }
+}
