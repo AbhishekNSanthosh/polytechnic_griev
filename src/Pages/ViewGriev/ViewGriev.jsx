@@ -15,6 +15,7 @@ function ViewGriev({ Token, userType }) {
 
     const [letter, setLetter] = useState({});
     const [loading, setLoading] = useState(false);
+    const [apiLoading, setApiLoading] = useState("")
     const [updateStatus, setUpdateStatus] = useState("")
     const [disabledButtons, setDisabledButtons] = useState([]);
     const [comments, setComments] = useState("");
@@ -171,6 +172,7 @@ function ViewGriev({ Token, userType }) {
     }
 
     const handleComment = () => {
+        setApiLoading("comment")
         axios.put(`${url}/comment_update/${receivedData}/`, {
             comments
         }, {
@@ -186,8 +188,10 @@ function ViewGriev({ Token, userType }) {
                     }
                 })
             }
+            setApiLoading("")
             setUpdatedComments(comments)
         }).catch((err) => {
+            setApiLoading("")
             if (err.response.status === 401) {
                 localStorage.clear()
                 navigate('/')
@@ -222,6 +226,7 @@ function ViewGriev({ Token, userType }) {
     }
 
     const handleAction = () => {
+        setApiLoading("action")
         axios.put(`${url}/action_update/${receivedData}/`, {
             actions
         }, {
@@ -236,9 +241,11 @@ function ViewGriev({ Token, userType }) {
                         color: '#fff'
                     }
                 })
+                setApiLoading("")
                 setUpdatedActions(actions)
             }
         }).catch((err) => {
+            setApiLoading("")
             if (err.response.status === 401) {
                 localStorage.clear()
                 navigate('/')
@@ -361,7 +368,7 @@ function ViewGriev({ Token, userType }) {
                                         <br /><br />
                                         With Regards,
                                         <br /><br />
-                                        <i>{letter?.student?.name}</i></span>
+                                        {letter?.student?.name}</span>
                                 </div>
                             </div>
 
@@ -571,7 +578,14 @@ function ViewGriev({ Token, userType }) {
                                                     } else {
                                                         handleAction();
                                                     }
-                                                }} className="action-submit">Add Action</button>
+                                                }} className="action-submit"
+                                                    style={{
+                                                        backgroundColor: apiLoading === "action" ? '#fcfcfc' : 'red',
+                                                        border: apiLoading === "action" ? '1px solid red' : 'none',
+                                                        color: apiLoading === "action" && 'red',
+                                                    }}
+                                                    disabled={apiLoading === "action" ? true : false}
+                                                >{apiLoading !== "action" ? <>{updatedActions === null ? "Add" : "Edit"} Actions</> : "Updating..."}</button>
                                             </div>
                                         </>
                                     </div>
@@ -599,7 +613,14 @@ function ViewGriev({ Token, userType }) {
                                                             }
                                                         })
                                                     }
-                                                }}>Add Comment</button>
+                                                }}
+                                                    style={{
+                                                        backgroundColor: apiLoading === "comment" ? '#fcfcfc' : 'red',
+                                                        border: apiLoading === "comment" ? '1px solid red' : 'none',
+                                                        color: apiLoading === "comment" && 'red',
+                                                    }}
+                                                    disabled={apiLoading === "comment" ? true : false}
+                                                >{apiLoading !== "comment" ? <>{updateComments === null ? "Add" : "Edit"} Comment</> : "Updating..."}</button>
                                             </div>
                                         </>
                                     </div>
