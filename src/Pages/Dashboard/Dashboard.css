@@ -26,8 +26,9 @@
 }
 
 .table-row {
-    height: 62vh;
+    height: 75vh;
     overflow-y: scroll;
+    margin-top: 1rem;
 }
 
 @media only screen and (max-width: 767px) {
