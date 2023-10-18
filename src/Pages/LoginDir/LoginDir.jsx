@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './LoginDir.css'
 import logo from '../../Assets/poly_logo.svg'
 import OptLogin from '../../Components/OptLogin/OptLogin'
@@ -8,12 +8,18 @@ import StudentLogin from '../../Components/StudentLogin/StudentLogin';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import Aos from 'aos';
+import 'aos/dist/aos.css'
 
 function LoginDir({ getCall2 }) {
   const [loginPerson, setLoginPerson] = useState("noOne");
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
+  useEffect(() => {
+    Aos.init({ duration: 800 });
+  }, [])
+
 
   const url = 'https://poly-backend-64o7.onrender.com'
 
@@ -78,12 +84,12 @@ function LoginDir({ getCall2 }) {
   return (
     <div className='loginDir'>
       <div className="login-container">
-        <div className="login-left">
+        <div className="login-left" data-aos="fade-right">
           <div className="logo-box">
             <img src={logo} alt="" className="logo" />
           </div>
         </div>
-        <div className="login-right">
+        <div className="login-right" data-aos="fade-left">
           <div className="login-right-container">
             {loginPerson === 'noOne' && <OptLogin getLoginPerson={getLoginPerson} loading={loading} />}
             {loginPerson === 'admin' && <AdminLogin getLoginPerson={getLoginPerson} handleLogin={handleLogin} loading={loading} />}

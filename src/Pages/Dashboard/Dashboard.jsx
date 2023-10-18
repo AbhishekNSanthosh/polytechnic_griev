@@ -11,6 +11,8 @@ import Tab from '@mui/material/Tab';
 import { Tabs } from '@mui/material';
 import { GridLoader } from 'react-spinners';
 import toast from 'react-hot-toast';
+import Aos from 'aos';
+import 'aos/dist/aos.css'
 
 const Dashboard = ({ user, reload, Token, logCall }) => {
     const [letters, setLetters] = useState([]);
@@ -29,6 +31,10 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     const userType = localStorage.getItem('usertype')
     const userObj = localStorage.getItem('user')
     const userData = JSON.parse(userObj);
+
+    useEffect(() => {
+        Aos.init({ duration: 800 });
+      }, [])
 
     //Sets tabs value for teacher letters.
     const handleChange = (event, newValue) => {
@@ -380,7 +386,7 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                                     </div>
                                 </>
                                 :
-                                <div className="table-row">
+                                <div className="table-row" data-aos="fade-up">
                                     <DataTable getletterCall={getletterCall} userType={userType} data={letters} loading={loading} Token={Token} />
                                 </div>
                         }
