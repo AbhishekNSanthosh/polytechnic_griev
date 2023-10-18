@@ -9,10 +9,12 @@ import ListModal from '../../Components/ListModal/ListModal';
 import notfoundimg from '../../Assets/notfound1.svg'
 import Tab from '@mui/material/Tab';
 import { Tabs } from '@mui/material';
+import { GridLoader } from 'react-spinners';
+import toast from 'react-hot-toast';
 
 const Dashboard = ({ user, reload, Token, logCall }) => {
     const [letters, setLetters] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [modalLoading, setModalLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState('');
     const [modalOpenBy, setModalOpenBy] = useState("");
@@ -136,20 +138,40 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     const getUserLetter = () => {
         setLoading(true)
         try {
-            axios.get(`${url}/student_letters/${userData?.id}/`, {
-                headers: {
-                    'x-access-token': Token
-                }
-            }).then((res) => {
-                setLoading(false);
-                setLetters(res?.data);
-            }).catch((err) => {
-                setLoading(false);
-                if (err?.response?.status === 401) {
-                    localStorage.clear()
-                    navigate('/')
-                }
-            })
+            if (userData?.id === undefined) {
+                console.log(undefined)
+                setTimeout(() => {
+                    axios.get(`${url}/student_letters/${userData?.id}/`, {
+                        headers: {
+                            'x-access-token': Token
+                        }
+                    }).then((res) => {
+                        setLoading(false);
+                        setLetters(res?.data);
+                    }).catch((err) => {
+                        setLoading(false);
+                        if (err?.response?.status === 401) {
+                            localStorage.clear()
+                            navigate('/')
+                        }
+                    })
+                }, 900);
+            } else {
+                axios.get(`${url}/student_letters/${userData?.id}/`, {
+                    headers: {
+                        'x-access-token': Token
+                    }
+                }).then((res) => {
+                    setLoading(false);
+                    setLetters(res?.data);
+                }).catch((err) => {
+                    setLoading(false);
+                    if (err?.response?.status === 401) {
+                        localStorage.clear()
+                        navigate('/')
+                    }
+                })
+            }
         } catch (error) {
             setLoading(false);
             if (error?.response?.status === 401) {
@@ -227,7 +249,81 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
     //Fetches all letters when the page loads & when a change happens -- Student role required.
     useEffect(() => {
         if (userType === 'Student') {
-            getUserLetter();
+            if (userData?.id === undefined) {
+                const getUserDetails = () => {
+
+                    axios.get(`${url}/user_details/`, {
+                        headers: {
+                            'x-access-token': Token
+                        }
+                    }).then((res) => {
+                        localStorage.setItem('user', JSON.stringify(res.data))
+                        const getUserLetter = () => {
+                            setLoading(true)
+                            try {
+                                if (!userData?.id) {
+                                    console.log(!userData?.id);
+                                    setTimeout(() => {
+                                        axios.get(`${url}/student_letters/${res.data?.id}/`, {
+                                            headers: {
+                                                'x-access-token': Token
+                                            }
+                                        }).then((res) => {
+                                            setLoading(false);
+                                            setLetters(res?.data);
+                                        }).catch((err) => {
+                                            setLoading(false);
+                                            if (err?.response?.status === 401) {
+                                                localStorage.clear()
+                                                navigate('/')
+                                            }
+                                        })
+                                    }, 900);
+                                } else {
+                                    axios.get(`${url}/student_letters/${userData?.id}/`, {
+                                        headers: {
+                                            'x-access-token': Token
+                                        }
+                                    }).then((res) => {
+                                        setLoading(false);
+                                        setLetters(res?.data);
+                                    }).catch((err) => {
+                                        setLoading(false);
+                                        if (err?.response?.status === 401) {
+                                            localStorage.clear()
+                                            navigate('/')
+                                        }
+                                    })
+                                }
+                            } catch (error) {
+                                setLoading(false);
+                                if (error?.response?.status === 401) {
+                                    localStorage.clear()
+                                    navigate('/')
+                                }
+                            }
+                        }
+                        getUserLetter();
+                    }).catch((err) => {
+                        if (err?.response?.status === 401) {
+                            toast.error('Token Expired', {
+                                position: 'top-center',
+                                style: {
+                                    backgroundColor: 'black',
+                                    color: '#fff'
+                                }
+                            })
+                            localStorage.clear()
+                            setTimeout(() => {
+                                window.location.reload()
+                            }, 900);
+                        }
+                    })
+                }
+                getUserDetails();
+            } else {
+                getUserLetter();
+            }
         }
     }, [reload, logCall, callLetter])
 
@@ -287,19 +383,32 @@ const Dashboard = ({ user, reload, Token, logCall }) => {
                     </Tabs>
                 </div>
             }
+
             {
-                letters.length === 0 ?
-                    <>
-                        <div className="not-found">
-                            <img src={notfoundimg} alt="" className="not-found-img" />
-                            <span className="not-found-tag">No messages yet!</span>
-                            {userType === 'Student' && <span className="not-found-tag info">To add a new grievence , click on button on your right.</span>}
-                        </div>
-                    </>
-                    :
-                    <div className="table-row">
-                        <DataTable getletterCall={getletterCall} userType={userType} data={letters} loading={loading} Token={Token} />
+
+                loading ?
+                    <div className="loadingDiv">
+                        <GridLoader size={18} color="red" />
                     </div>
+
+                    :
+                    <>
+                        {
+                            letters.length === 0 ?
+                                <>
+                                    <div className="not-found">
+                                        <img src={notfoundimg} alt="" className="not-found-img" />
+                                        <span className="not-found-tag">No messages yet!</span>
+                                        {userType === 'Student' && <span className="not-found-tag info">To add a new grievence , click on button on your right.</span>}
+                                    </div>
+                                </>
+                                :
+                                <div className="table-row">
+                                    <DataTable getletterCall={getletterCall} userType={userType} data={letters} loading={loading} Token={Token} />
+                                </div>
+                        }
+                    </>
+
             }
             <AddModal userType={userType} modalOpen={modalOpen} getModalStatus={getModalStatus} modalOpenBy={modalOpenBy} Token={Token} students={students} />
             <ListModal userType={userType} loading={loading} modalOpen={modalOpen} getModalStatus={getModalStatus} modalOpenBy={modalOpenBy} Token={Token} teachers={teachers} students={students} admins={admins} />

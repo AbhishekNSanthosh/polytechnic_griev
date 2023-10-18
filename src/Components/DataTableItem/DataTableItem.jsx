@@ -57,7 +57,7 @@ function DataTableItem({ item, userType, Token, index, getletterCall }) {
                     <tr key={index} style={{ cursor: 'pointer' }}>
                         <td>{index + 1}</td>
                         <td className='t-data-body data' onClick={() => navigate('/dashboard/view', { state: item?.id })}>
-                            {item?.title.length > 18 ? item?.title.slice(0, 18) + "....." : item?.title}
+                            {item?.title.length > 18 ? item?.title.slice(0, 90) + "....." : item?.title}
                         </td>
                         <td>{item?.created_on.slice(0, 10)}</td>
                         {userType === 'Admin' && <>
