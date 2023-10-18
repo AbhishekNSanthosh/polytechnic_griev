@@ -9,7 +9,9 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { GridLoader } from 'react-spinners';
 import { toast } from 'react-hot-toast';
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
+import Aos from 'aos';
+import 'aos/dist/aos.css'
 
 function ViewGriev({ Token, userType }) {
 
@@ -28,6 +30,10 @@ function ViewGriev({ Token, userType }) {
 
     const location = useLocation();
     const receivedData = location.state;
+
+    useEffect(() => {
+        Aos.init({ duration: 800 });
+    }, [])
 
     const url = 'https://poly-backend-64o7.onrender.com'
 
@@ -54,7 +60,7 @@ function ViewGriev({ Token, userType }) {
                 'x-access-token': Token
             }
         }).then((res) => {
-                setLoading(false)
+            setLoading(false)
             setLetter(res?.data)
             setUpdateStatus(res?.data?.issue_stat);
             setComments(res?.data?.comments);
@@ -303,10 +309,9 @@ function ViewGriev({ Token, userType }) {
         })
     }
 
-    console.log(selectedTeachers)
     return (
         <div className='view-griev'>
-            <div className="view-container">
+            <div className="view-container" data-aos="fade-up">
                 <div className="view-top">
                     <div className="view-top-title-con">
                         <span className="title-name">REGISTERED GRIEVANCE</span>
@@ -522,7 +527,7 @@ function ViewGriev({ Token, userType }) {
                             }
 
                             <div className="actions-container">
-                                <div className="actions-left">
+                                <div className="actions-left" data-aos="fade-right">
                                     <div className="actions">
                                         <span className="item-title left">ACTIONS TAKEN:</span>
                                     </div>
@@ -543,7 +548,7 @@ function ViewGriev({ Token, userType }) {
                                         }
                                     </>
                                 </div>
-                                <div className="actions-right">
+                                <div className="actions-right" data-aos="fade-left">
                                     <div className="actions">
                                         <span className="item-title left">COMMENTS:</span>
                                     </div>
@@ -574,7 +579,7 @@ function ViewGriev({ Token, userType }) {
                             }
                             <div className="actions-container">
                                 {userType === 'Admin' &&
-                                    <div className="actions-left">
+                                    <div className="actions-left" data-aos="fade-right">
                                         <div className="actions">
                                             <span className="item-title left"> {updatedActions === null ? "Add" : "Edit"} Action:</span>
                                         </div>
@@ -609,7 +614,7 @@ function ViewGriev({ Token, userType }) {
                                     </div>
                                 }
                                 {userType === 'Admin' &&
-                                    <div className="actions-right">
+                                    <div className="actions-right" data-aos="fade-left">
                                         <div className="actions">
                                             <span className="item-title left">{updateComments === null ? "Add" : "Edit"} Comment:</span>
                                         </div>
