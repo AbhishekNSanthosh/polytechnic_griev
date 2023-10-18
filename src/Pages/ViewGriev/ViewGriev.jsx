@@ -54,9 +54,7 @@ function ViewGriev({ Token, userType }) {
                 'x-access-token': Token
             }
         }).then((res) => {
-            setTimeout(() => {
                 setLoading(false)
-            }, 1000)
             setLetter(res?.data)
             setUpdateStatus(res?.data?.issue_stat);
             setComments(res?.data?.comments);
@@ -304,6 +302,8 @@ function ViewGriev({ Token, userType }) {
             }
         })
     }
+
+    console.log(selectedTeachers)
     return (
         <div className='view-griev'>
             <div className="view-container">
@@ -468,23 +468,41 @@ function ViewGriev({ Token, userType }) {
                                         </div>
                                     </div>
                                     <div className="view-access-col-right">
-                                        {selectedTeachers !== null &&
+                                        {selectedTeachers.length !== 0 ?
                                             <>
                                                 <div className="button-div-view-access">
                                                     <span className="permision left">VIEW ACCESS PERMISSIONS:</span>
                                                 </div>
                                                 <div className='view-access-permission'>
-                                                    <ul>
-                                                        {generateViewAccessPermissions().map(permission => (
-                                                            // <li key={permission.id}>
-                                                            //     {/* ID: {permission.id}, */}
-                                                            //     Email: {permission.email}
-                                                            // </li>
+                                                    {selectedTeachers.length ?
+                                                        <ul>
+                                                            {generateViewAccessPermissions().map(permission => (
+                                                                // <li key={permission.id}>
+                                                                //     {/* ID: {permission.id}, */}
+                                                                //     Email: {permission.email}
+                                                                // </li>
 
-                                                            <button key={permission?.id} className="view-access-item">
-                                                                <span className='access-name'>Email: {permission.email}</span>
-                                                            </button>
-                                                        ))}
+                                                                <button key={permission?.id} className="view-access-item">
+                                                                    <span className='access-name'>Email: {permission.email}</span>
+                                                                </button>
+                                                            ))}
+                                                        </ul>
+                                                        :
+                                                        <button className="view-access-item">
+                                                            <span className='access-name'>Email</span>
+                                                        </button>
+                                                    }
+                                                </div>
+                                            </>
+                                            : <>
+                                                <div className="button-div-view-access">
+                                                    <span className="permision left">VIEW ACCESS PERMISSIONS:</span>
+                                                </div>
+                                                <div className='view-access-permission'>
+                                                    <ul>
+                                                        <button className="view-access-item">
+                                                            <span className='access-name'>No teachers were selected!!</span>
+                                                        </button>
                                                     </ul>
                                                 </div>
                                             </>
@@ -590,7 +608,7 @@ function ViewGriev({ Token, userType }) {
                                         </>
                                     </div>
                                 }
-                                {userType !== 'Student' &&
+                                {userType === 'Admin' &&
                                     <div className="actions-right">
                                         <div className="actions">
                                             <span className="item-title left">{updateComments === null ? "Add" : "Edit"} Comment:</span>

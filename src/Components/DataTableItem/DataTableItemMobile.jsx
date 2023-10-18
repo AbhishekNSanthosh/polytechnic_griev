@@ -32,6 +32,7 @@ function DataTableItemMobile({ index, item, userType, Token, getletterCall }) {
                 'x-access-token': Token
             }
         }).then((res) => {
+            getletterCall(true)
             toast.success('Deleted successfully.', {
                 position: 'bottom-center',
                 style: {
@@ -39,9 +40,6 @@ function DataTableItemMobile({ index, item, userType, Token, getletterCall }) {
                     color: '#fff'
                 }
             });
-            if (res) {
-                getletterCall(true)
-            }
             setModal(false)
         }).catch((error) => {
             setModal(false);
