@@ -112,23 +112,26 @@ function AddGriev({ user, getCall }) {
                     }} className='desc'
                     placeholder='Enter your content here...'
                 />
-                <button className="submitBtn" onClick={e => {
-                    e.preventDefault();
-                    if (body === "" || title === "") {
-                        toast.error('Fields cannot be empty..', {
-                            position: 'bottom-center',
-                            style: {
-                                backgroundColor: 'black',
-                                color: '#fff'
-                            }
-                        })
-                    } else {
-                        handleSubmit();
-                        getCall(true)
-                    }
-                }}
-                    disabled={loading}
-                >Submit</button>
+                <div className="btnRow">
+                    <button className="submitBtn" onClick={e => {
+                        e.preventDefault();
+                        if (body === "" || title === "") {
+                            toast.error('Please enter something..', {
+                            })
+                        } else {
+                            handleSubmit();
+                            getCall(true)
+                        }
+                    }}
+                        disabled={loading}
+                    >Submit</button>
+                    <button className="cancelBtn" onClick={e => {
+                        e.preventDefault();
+                        navigate('/')
+                    }}
+                        disabled={loading}
+                    >Cancel</button>
+                </div>
             </div>
         </div>
     )

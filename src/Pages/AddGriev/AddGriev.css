@@ -115,6 +115,7 @@
     justify-content: center;
     width: 100%;
     height: 100%;
+    margin-top: 1rem;
 }
 
 .inputBox {
@@ -143,8 +144,16 @@
     font-size: 17px;
 }
 
+.btnRow {
+    width: 100%;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    display: flex;
+}
+
 .submitBtn {
-    width: 80%;
+    width: 39.4%;
     margin-top: 0.8rem;
     height: 3rem;
     border-radius: 10px;
@@ -157,4 +166,99 @@
     padding: 5px;
     cursor: pointer;
     border: 0.5px solid rgb(255, 0, 0);
+}
+
+.cancelBtn {
+    width: 39.4%;
+    margin-top: 0.8rem;
+    height: 3rem;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: #fff;
+    text-transform: uppercase;
+    color: red;
+    font-size: 18px;
+    padding: 5px;
+    cursor: pointer;
+    border: 0.5px solid rgb(255, 0, 0);
+}
+
+@media only screen and (max-width: 767px) {
+    .btnRow {
+        width: 100%;
+        align-items: center;
+        gap: 0.6rem;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .submitBtn {
+        width: 90%;
+        margin-top: 0.8rem;
+        height: 3rem;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        background-color: #ff0000;
+        text-transform: uppercase;
+        color: #fff;
+        font-size: 18px;
+        padding: 5px;
+        cursor: pointer;
+        border: 0.5px solid rgb(255, 0, 0);
+    }
+
+    .cancelBtn {
+        width: 90%;
+        margin-top: 0.8rem;
+        height: 3rem;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        background-color: #fff;
+        text-transform: uppercase;
+        color: red;
+        font-size: 18px;
+        padding: 5px;
+        cursor: pointer;
+        border: 0.5px solid rgb(255, 0, 0);
+    }
+
+    .inputBox {
+        width: 88%;
+        height: 2.6rem;
+        border-radius: 10px;
+        border: 0.5px solid rgb(218, 218, 218);
+        outline: none;
+        font-size: 19px;
+        padding: 2px;
+    }
+
+    .desc {
+        width: 88%;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 26px;
+        border: 0.5px solid rgb(218, 218, 218);
+        padding: 2px;
+    }
+
+    .desc,
+    .inputBox::placeholder {
+        font-size: 15px;
+    }
+
+    .addGrievBox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .8rem;
+        margin-top: 1rem;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
 }
