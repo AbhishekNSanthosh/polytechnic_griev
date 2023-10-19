@@ -36,16 +36,18 @@ export default function AddModal({ modalOpen, getModalStatus, modalOpenBy, Token
     const navigate = useNavigate();
 
     const handleAdd = () => {
+        const url = 'https://poly-backend-64o7.onrender.com'
         if (modalOpenBy === 'add-student') {
             try {
-                axios.post('https://flask-production-37b2.up.railway.app/add_student/', {
+                axios.post(url + '/add_student/', {
                     name, email, password, sem: semester, dept: department
                 }, {
                     headers: {
                         'x-access-token': Token
                     },
                 }).then((res) => {
-                    if(!res.data?.error){              setDepartment('')
+                    if (!res.data?.error) {
+                        setDepartment('')
                         setEmail('')
                         setName('')
                         setSemester('')
@@ -60,7 +62,7 @@ export default function AddModal({ modalOpen, getModalStatus, modalOpenBy, Token
                         setTimeout(() => {
                             handleClose()
                         }, 300);
-                    }else{
+                    } else {
                         toast.error(res.data?.error, {
                             position: 'bottom-center',
                             style: {
@@ -99,7 +101,7 @@ export default function AddModal({ modalOpen, getModalStatus, modalOpenBy, Token
 
         if (modalOpenBy === 'add-teacher') {
             try {
-                axios.post('https://flask-production-37b2.up.railway.app/add_teacher/', {
+                axios.post(url + '/add_teacher/', {
                     name, email, password, dept: department
                 }, {
                     headers: {
@@ -152,7 +154,7 @@ export default function AddModal({ modalOpen, getModalStatus, modalOpenBy, Token
 
         if (modalOpenBy === 'add-admin') {
             try {
-                axios.post('https://flask-production-37b2.up.railway.app/add_admin/', {
+                axios.post(url + '/add_admin/', {
                     name, email, password,
                 }, {
                     headers: {
@@ -221,17 +223,17 @@ export default function AddModal({ modalOpen, getModalStatus, modalOpenBy, Token
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
                         maxWidth: 600,
-                        width:{
-                            sm:'100%',
-                            xs:'80%'
+                        width: {
+                            sm: '100%',
+                            xs: '80%'
                         },
                         bgcolor: '#fff',
                         border: 'none',
                         borderRadius: '10px',
                         boxShadow: 24,
                         p: {
-                            sm:4,
-                            xs:1
+                            sm: 4,
+                            xs: 1
                         },
                     }}>
                         <div className="modal-box">
