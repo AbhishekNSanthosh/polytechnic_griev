@@ -17,6 +17,10 @@
     text-transform: capitalize;
 }
 
+.mobileData{
+    font-size: 15px;
+}
+
 .read-status {
     padding: 3px;
     border-radius: 8px;

@@ -34,6 +34,7 @@
 @media only screen and (max-width: 767px) {
     .table-row {
         height: 88vh;
+        margin-top: 0rem;
     }
 }
 
@@ -99,7 +100,6 @@
 }
 
 .buttons_row_teacher {
-    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
